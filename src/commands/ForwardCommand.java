@@ -11,7 +11,10 @@ public class ForwardCommand extends Command {
 	@Override
 	public Integer execute() {
 		super.getModel().getTurtle().forward(myDistance);
+<<<<<<< HEAD:src/commands/ForwardCommand.java
 		System.out.println(myDistance);
+=======
+>>>>>>> SLOGO First Merged Draft:src/commands/ForwardCommand.java
 		return myDistance;
 	}
 }

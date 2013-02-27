@@ -1,23 +1,17 @@
 package model;
 
 import java.awt.Dimension;
-
 import java.awt.Graphics2D;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-
-import commands.Command;
 import commands.CommandCreator;
+import commands.ForwardCreator;
+import commands.MakeCreator;
 import commands.RepeatCreator;
 import commands.SumCreator;
-import commands.MapCommands.MakeCreator;
-import commands.MapCommands.ToCreator;
-import commands.MapCommands.VariableInput;
-import commands.TurtleCommands.BackwardCreator;
-import commands.TurtleCommands.ForwardCreator;
 import util.Parser;
 import view.Canvas;
 
@@ -35,25 +29,47 @@ public class SlogoModel {
 	
 	
     // simulation state
+    private List<StraightLine> myLines;
+	private Map<String, CommandCreator> myCommandMap;
+	private Map<String, Integer> myVariableMap;
 	private Turtle myTurtle;
 	private Scanner myTestLine;
 	private Parser myParser;
-	private List<Command> myCommandList;
     /**
      * Create a game of the given size with the given display for its shapes.
      */
     public SlogoModel () {
     	
+		myCommandMap = new HashMap<String, CommandCreator>();
+		myVariableMap = new HashMap<String, Integer>();
+		myLines = new ArrayList<StraightLine>();
 		/*
 		 * Maybe a better way?? 
 		 * Make a Factory file?
 		 */
+		CommandCreator forward = new ForwardCreator();
+		myCommandMap.put("Forward",forward);
+		CommandCreator repeat = new RepeatCreator();
+		myCommandMap.put("Repeat",repeat);
+		CommandCreator make = new MakeCreator();
+		myCommandMap.put("Make",make);
+		CommandCreator sum = new SumCreator();
+		myCommandMap.put("Sum",sum);
+		
 		//myTurtle = new Turtle(canvas.getSize());
 		myTurtle = new Turtle();
-		myParser = new Parser(myTurtle);
+		myParser = new Parser(this);
+    }
+    
+    public Map<String, CommandCreator> getCommandMap(){
+    	return myCommandMap;
     }
     
     
+    public Map<String, Integer> getVariableMap(){
+    	return myVariableMap;
+    }
+
     public Turtle getTurtle(){
     	return myTurtle;
     }
@@ -62,6 +78,9 @@ public class SlogoModel {
      */
     public void paint(Graphics2D pen) {
     	myTurtle.paint(pen);
+    	for (StraightLine l : myLines){
+    		l.paint(pen);
+    	}
     }
 
     /**
@@ -70,10 +89,7 @@ public class SlogoModel {
     public void update (String str) {
         Dimension bounds = Canvas.CANVAS_SIZE;
         myTestLine = new Scanner(str);
-        myCommandList = myParser.executeCommandLine(myTestLine);
-        for(Command c : myCommandList){
-        	c.execute();
-        }
+        	myParser.executeCommandLine(myTestLine);
         }
 }
 
