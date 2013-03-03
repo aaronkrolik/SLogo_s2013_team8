@@ -1,39 +1,24 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JFrame;
-import view.Canvas;
+import view.SlogoGUI;
+import model.SlogoModel;
 
 
-/**
- * Creates window that can be moved, resized, and closed by the user.
- * 
- * @author Robert C. Duvall
- */
 public class Main {
-    // constants
-    public static final Dimension SIZE = new Dimension(800, 600);
-    public static final String TITLE = "Springies!";
-
-
-    private Main () {
-        // does not make sense to construct this class
-    }
-
-    /**
-     * main --- where the program starts
-     */
-    public static void main (String args[]) {
-        // view of user's content
-        Canvas display = new Canvas(SIZE);
-        // container that will work with user's OS
-        JFrame frame = new JFrame(TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // add our user interface components
-        frame.getContentPane().add(display, BorderLayout.CENTER);
-        // display them
-        frame.pack();
-        frame.setVisible(true);
-        // start animation
-        display.start();
-    }
+	
+	public static final String TITLE = "SLOGO";
+	
+	/**
+	 *  Start of the program.
+	 */
+	public static void main (String[] args){
+		// create model and view. Load the model onto the view
+		SlogoModel model = new SlogoModel();
+		SlogoGUI view = new SlogoGUI(model);
+		// Pop up the frame and fill it with content of the GUI
+		JFrame frame = new JFrame(TITLE);
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(view);
+		frame.setVisible(true);
+	}
 }
