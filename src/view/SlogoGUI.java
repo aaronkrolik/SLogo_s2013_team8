@@ -82,10 +82,14 @@ public class SlogoGUI extends JPanel {
 	//	myInputTextField.setText("");
 	}
 	
-	public String getAndResetInputText () {
+	public String getInputText () {
 		String tmp = myInputTextField.getText().toString();
 		myInputTextField.setText("");
 		return tmp;
+	}
+	
+	public void resetTextInput () {
+		
 	}
 
 	private JTextField createInputTextFieldAndSetItsProperties() {
@@ -103,7 +107,7 @@ public class SlogoGUI extends JPanel {
             public void keyPressed (KeyEvent e) {
                 myLastKeyPressed = e.getKeyCode();
                 if (myLastKeyPressed == KeyEvent.VK_ENTER){
-            		String myInput = myInputTextField.getText().toString();
+            		//String myInput = myInputTextField.getText().toString();
                 	myController.update();
                 }
             }
