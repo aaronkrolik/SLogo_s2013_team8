@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import model.SlogoModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-
+import controller.IUpdatable;
 
 public class SlogoGUI extends JPanel {
 
@@ -25,22 +25,30 @@ public class SlogoGUI extends JPanel {
 	private Canvas myCanvas;
 	private SlogoModel myModel;
     private int myLastKeyPressed;
+    private String myInput;
+    private IUpdatable myController;
+    
 
 	/**
 	 * Create the View.
 	 */
-	public SlogoGUI(SlogoModel model) {
+	public SlogoGUI(SlogoModel model, Canvas canvasIn, IUpdatable in) {
+		myController = in;
 		myModel = model;
 		setLayout(null);
 		add(createInputTextFieldAndSetItsProperties());
 		add(createEnterButtonAndSetItsProperties());
 		add(createSeparator());
-		add(createCanvas());
+		add(canvasIn);
 	}
 
 	private Canvas createCanvas() {
 		myCanvas = new Canvas(myModel);
 		return myCanvas;
+	}
+	
+	public String getInputString () {
+		return myInput;
 	}
 
 
@@ -63,16 +71,21 @@ public class SlogoGUI extends JPanel {
 	private void createButtonActionListenerAndSetItsProperties() {
 		takeInputAfterClickingButton = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				update();
+				myController.update();
 			}
 		};
 	}
 	
 	private void update() {
-		String input = myInputTextField.getText().toString();
-		myModel.update(input);
-		myCanvas.repaint();
+		//myModel.update(input);
+	//	myCanvas.repaint();
+	//	myInputTextField.setText("");
+	}
+	
+	public String getAndResetInputText () {
+		String tmp = myInputTextField.getText().toString();
 		myInputTextField.setText("");
+		return tmp;
 	}
 
 	private JTextField createInputTextFieldAndSetItsProperties() {
@@ -90,7 +103,8 @@ public class SlogoGUI extends JPanel {
             public void keyPressed (KeyEvent e) {
                 myLastKeyPressed = e.getKeyCode();
                 if (myLastKeyPressed == KeyEvent.VK_ENTER){
-                	update();
+            		String myInput = myInputTextField.getText().toString();
+                	myController.update();
                 }
             }
             @Override
