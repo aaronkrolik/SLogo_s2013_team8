@@ -16,7 +16,6 @@ public class Vector {
     // "speed" in pixels per second
     private double myMagnitude;
 
-
     /**
      * Create a zero vector, i.e., with no magnitude.
      */
@@ -37,10 +36,8 @@ public class Vector {
      * direction and distance between the two given points.
      */
     public Vector (Point2D source, Point2D target) {
-        double dx = target.getX() - source.getX();
-        double dy = source.getY() - target.getY();
-        setDirection(angleBetween(dx, dy));
-        setMagnitude(distanceBetween(dx, dy));
+        this(angleBetween(target, source),
+             distanceBetween(target, source));
     }
 
     /**
@@ -147,11 +144,9 @@ public class Vector {
         // double a2 = other.getAngle();
         // double m1 = getMagnitude();
         // double m2 = other.getMagnitude();
-        // double speed = Math.sqrt(m1 * m1 + m2 * m2 + 2 * m1 * m2 *
-        // Math.cos(Math.toRadians(a1 - a2)));
-        // double angle = Math.toDegrees(Math.asin(m2 *
-        // Math.sin(Math.toRadians(a2 - a1)) / speed)) + a1;
-        // return new vector(angle, speed);
+        // double mag = Math.sqrt(m1 * m1 + m2 * m2 + 2 * m1 * m2 * Math.cos(Math.toRadians(a1 - a2)));
+        // double dir = Math.toDegrees(Math.asin(m2 * Math.sin(Math.toRadians(a2 - a1)) / mag)) + a1;
+        // return new Vector(dir, mag);
 
         // more readable, although slightly slower
         double dx = getXChange() + other.getXChange();
@@ -182,8 +177,8 @@ public class Vector {
      * Returns the average of this vector with the given other vector.
      */
     public Vector average (Vector other) {
-        return new Vector((getDirection() + other.getDirection()) / 2.0,
-                          (getMagnitude() + other.getMagnitude()) / 2.0);
+        return new Vector((getDirection() + other.getDirection()) / 2,
+                          (getMagnitude() + other.getMagnitude()) / 2);
     }
 
     /**

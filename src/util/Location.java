@@ -44,6 +44,7 @@ public class Location extends Point2D.Double {
     public void reset () {
         setLocation(0, 0);
     }
+
     /**
      * Move this location by given vector.
      * 
