@@ -3,10 +3,12 @@ package model;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+import util.Vector;
 
 import util.Location;
 import util.Pixmap;
-import util.Vector;
 import view.Canvas;
 
 public class Turtle {
@@ -25,9 +27,11 @@ public class Turtle {
 	private double myDirection;
 	private boolean myPenStatus;
 	private boolean myVisibilityStatus;
+    private List<StraightLine> myLines;
 	
 	
 	public Turtle(){
+		myLines = new ArrayList<StraightLine>();
 		int initialX = (Canvas.CANVAS_WIDTH - WIDTH_OF_TURTLE_ICON)/2;
 		int initialY = (Canvas.CANVAS_HEIGHT - HEIGHT_OF_TURTLE_ICON)/2;
 		myDirection = INITIAL_DIRECTION;
@@ -92,7 +96,11 @@ public class Turtle {
     {
     	if(myVisibilityStatus){
     		 myView.paint(pen, myCenter, mySize);
-    	}  
+    	} 
+    	
+    	for (StraightLine l : myLines){
+    		l.paint(pen);
+    	}
     }
 
     /**

@@ -2,6 +2,8 @@ package commands;
 
 import java.util.Scanner;
 
+import util.ParsingInterface;
+
 import model.SlogoModel;
 
 public abstract class CommandCreator {
@@ -12,8 +14,8 @@ public abstract class CommandCreator {
 	
 	public abstract Command createCommand(CommandInput input);
 	
-	public CommandInput createCommandInput(SlogoModel model, Scanner line){
-		CommandInput input = new CommandInput(model, line);
+	public CommandInput createCommandInput(ParsingInterface parser, Scanner line){
+		CommandInput input = new CommandInput(parser, line);
 		return input;
 	}
 
