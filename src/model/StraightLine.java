@@ -10,8 +10,8 @@ public class StraightLine {
 	private Location myEnd;
 
 	public StraightLine(Location start, Location finish) {
-		myStart= start;
-		myEnd = finish;
+		myStart= new Location(start.getX(), start.getY());
+		myEnd = new Location(finish.getX(), finish.getY());
 	}
 	public void paint (Graphics2D pen) {
 		pen.setColor(Color.BLUE);

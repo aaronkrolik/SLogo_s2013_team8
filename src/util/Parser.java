@@ -16,6 +16,8 @@ import commands.MapCommands.MakeCreator;
 import commands.MapCommands.ToCreator;
 import commands.TurtleCommands.BackwardCreator;
 import commands.TurtleCommands.ForwardCreator;
+import commands.TurtleCommands.LeftCreator;
+import commands.TurtleCommands.RightCreator;
 
 
 import model.SlogoModel;
@@ -51,6 +53,10 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		myCommandMap.put("Backward",back);
 		CommandCreator to = new ToCreator();
 		myCommandMap.put("To", to);
+		CommandCreator right = new RightCreator();
+		myCommandMap.put("Right", right);
+		CommandCreator left = new LeftCreator();
+		myCommandMap.put("Left", left);
 		myTurtle = turtle;
 	}
     public Map<String, CommandCreator> getCommandMap(){
