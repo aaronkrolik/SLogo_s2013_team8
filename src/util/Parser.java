@@ -33,6 +33,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	private final static String FORWARD_BRACKET = "\\[";
 	private final static String BACK_BRACKET = "]";
 	private final static String VARIABLE_TAG = ":";
+	private int BracketCount;
 
 	public Parser(Turtle turtle) {
 		myCommandMap = new HashMap<String, CommandCreator>();
@@ -73,14 +74,18 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	}
 
 	public List<Command> executeCommandLine(Scanner line){
+		BracketCount = 0;
 		myReturn = new ArrayList<Command>();
 		while(line.hasNext()){
+			checkBrackets();
 			Command command = getNextCommand(line);
 			myReturn.add(command);
 			while(line.hasNext(BACK_BRACKET)){
+				tallyBrackets(line);
 				line.next();
 			}
 		}
+		checkBrackets();
 		System.out.println(myReturn);
 		return myReturn;
 	}
@@ -104,10 +109,12 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		List<Command> commands = new ArrayList<Command>();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
+				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){		
 					commands.add(getNextCommand(line));
 				}
+				tallyBrackets(line);
 				line.next();
 			}
 			return commands;
@@ -149,10 +156,12 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		List<String> strings = new ArrayList<String>();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
+				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){
 					strings.add(line.next());
 				}
+				tallyBrackets(line);
 				line.next();
 			}
 			return strings;
@@ -163,6 +172,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	
 	public BundledInteger getNextBundledInt(Scanner line){
 		while(line.hasNext(FORWARD_BRACKET)){
+			tallyBrackets(line);
 			line.next();
 		}
 		if (line.hasNextInt()){
@@ -180,7 +190,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			}
 		}
 
-	public boolean HasCommand(Scanner line){
+	private boolean HasCommand(Scanner line){
 		for(Object s : myCommandMap.keySet()){
 			if(line.hasNext((String) s)){
 				return true;
@@ -188,7 +198,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		return false;
 	}
-	public boolean HasVarable(Scanner line){
+	private boolean HasVarable(Scanner line){
 		for(Object s : myVariableMap.keySet()){
 			if(line.hasNext((String) s)){
 				return true;
@@ -212,16 +222,25 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		List<BundledInteger> integers = new ArrayList<BundledInteger>();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
+				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){
 					integers.add(getNextBundledInt(line));
 				}
+				tallyBrackets(line);
 				line.next();
 			}
 			return integers;
 		}
 		System.out.println("CommandList");
 		return null;
+	}
+	private void tallyBrackets(Scanner line){
+		if(line.hasNext(FORWARD_BRACKET)) BracketCount ++;
+		else if(line.hasNext(BACK_BRACKET)) BracketCount --;
+	}
+	private void checkBrackets(){
+		if( BracketCount != 0) System.out.println("Mismatched Brackets!");//EXCEPTION
 	}
 
 }

@@ -12,7 +12,7 @@ public class TowardsCreator extends TurtleCommandCreator {
 
 	@Override
 	public Command createCommand(CommandInput input) {
-		Command command = new SetHeadingCommand((TurtleCommandInput) input);
+		Command command = new TowardsCommand((TurtleCommandInput) input);
 		return command;
 	}
 
