@@ -123,7 +123,7 @@ public class Turtle {
     public void paint (Graphics2D pen)
     {
     	if(myVisibilityStatus){
-    		 myView.paint(pen, myCenter, mySize);
+    		 myView.paint(pen, myCenter, mySize, myDirection);
     	} 
     	
     	for (StraightLine l : myLines){
