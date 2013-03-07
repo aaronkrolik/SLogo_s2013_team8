@@ -1,10 +1,7 @@
 package commands;
 
-<<<<<<< HEAD:src/commands/Command.java
 import java.util.Scanner;
 
-=======
->>>>>>> SLOGO First Merged Draft:src/commands/Command.java
 import model.SlogoModel;
 
 public abstract class Command {
@@ -14,13 +11,6 @@ public abstract class Command {
 		myInput = input;
 	}
 	
-<<<<<<< HEAD:src/commands/Command.java
-=======
-	protected SlogoModel getModel(){
-		return myInput.getModel();
-	}
-	
->>>>>>> SLOGO First Merged Draft:src/commands/Command.java
 	protected CommandInput getInput(){
 	  	return myInput;
 	}

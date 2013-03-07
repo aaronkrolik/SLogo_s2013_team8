@@ -1,17 +1,21 @@
 package commands;
 
+import util.BundledInteger;
+
 public class SumCommand extends Command {
-	private Integer myFirst;
-	private Integer mySecond;
+	private BundledInteger myFirst;
+	private BundledInteger mySecond;
 	
 	public SumCommand(CommandInput input) {
 		super(input);
-		myFirst = super.getInput().getInt();
-		mySecond = super.getInput().getInt();
+		myFirst = input.getBundledInt();
+		mySecond = input.getBundledInt();
 	}
 	@Override
 	public Integer execute() {
-		return myFirst + mySecond ;
+	System.out.println(myFirst.getInteger());
+	System.out.println(mySecond.getInteger());
+		return myFirst.getInteger() + mySecond.getInteger() ;
 	}
 
 }

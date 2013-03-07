@@ -3,40 +3,47 @@ package commands;
 import java.util.List;
 import java.util.Scanner;
 
+import util.BundledInteger;
 import util.Parser;
+import util.ParsingInterface;
 
 import model.SlogoModel;
 
 public class CommandInput {
-	SlogoModel myModel;
+	ParsingInterface myParser;
 	Scanner myLine;
-	public CommandInput(SlogoModel model, Scanner line) {
-		myModel =  model;
+	String myCopy;
+	
+	public CommandInput(ParsingInterface parser, Scanner line) {
+		myParser =  parser;
 		myLine = line;
 	}
-
-	public SlogoModel getModel(){
-		return myModel;
-	}
 	
-	public Scanner getLine(){
+	public Scanner getScanner(){
 		return myLine;
 	}
 	
 	public String getString(){
-		return Parser.getNextString(myLine);
+		return myParser.getNextString(myLine);
 	}
 	
-	public double getDouble(){
-		return Parser.getNextDouble(myLine);
-	}
-	
-	public Integer getInt(){
-		return Parser.getNextInt(myModel, myLine);
+	public BundledInteger getBundledInt(){
+		return myParser.getNextBundledInt(myLine);
 	}
 	
 	public List<Command> getCommandList(){
-		return Parser.getNextCommandList(myModel, myLine);
+		return myParser.getNextCommandList(myLine);
 	}
 	
+	public List<String> getStringList(){
+		return myParser.getNextStringList(myLine);
+	}
+	
+	public List<BundledInteger> getBundledIntList(){
+		return myParser.getNextIntegerList(myLine);
+	}
+	
+	public void Reset(){
+		myLine = new Scanner(myCopy);
+	}
 }
