@@ -3,12 +3,19 @@ package model;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 import util.Vector;
 
 import util.Location;
 import util.Pixmap;
+=======
+
+import util.Location;
+import util.Pixmap;
+import util.Vector;
+>>>>>>> SLOGO First Merged Draft
 import view.Canvas;
 
 public class Turtle {
@@ -18,6 +25,7 @@ public class Turtle {
 	private static final int WIDTH_OF_TURTLE_ICON = 50;
 	private static final int HEIGHT_OF_TURTLE_ICON = 50;
 	private static final Dimension SIZE = new Dimension(WIDTH_OF_TURTLE_ICON,HEIGHT_OF_TURTLE_ICON); 
+<<<<<<< HEAD
     private static final Location TOP_LEFT = new Location(0,0);
     private static final Location TOP_RIGHT = new Location(Canvas.CANVAS_WIDTH, 0);
     private static final Location BOTTOM_LEFT = new Location(0,Canvas.CANVAS_HEIGHT);
@@ -31,17 +39,28 @@ public class Turtle {
 	private Location myLastCenter;
 	private Location myOriginalCenter;
 	
+=======
+	
+
+	private Location myCenter;
+>>>>>>> SLOGO First Merged Draft
     private Dimension mySize;
     private Pixmap myView;
     private Rectangle myBounds;
 	private double myDirection;
 	private boolean myPenStatus;
 	private boolean myVisibilityStatus;
+<<<<<<< HEAD
     private List<StraightLine> myLines;
 
 	
 	public Turtle(){
 		myLines = new ArrayList<StraightLine>();
+=======
+	
+	
+	public Turtle(){
+>>>>>>> SLOGO First Merged Draft
 		int initialX = (Canvas.CANVAS_WIDTH - WIDTH_OF_TURTLE_ICON)/2;
 		int initialY = (Canvas.CANVAS_HEIGHT - HEIGHT_OF_TURTLE_ICON)/2;
 		myDirection = INITIAL_DIRECTION;
@@ -93,6 +112,7 @@ public class Turtle {
 	}
 
     public void forward(double pixels){
+<<<<<<< HEAD
     	WrapAroundMovement(pixels, myDirection);	
 	}
     
@@ -117,6 +137,11 @@ public class Turtle {
     public Integer towards(double x, double y){
     	return setheading((int) myCenter.difference(new Location(x,y)).getDirection());
     }
+=======
+		myCenter.translate(new Vector(myDirection, pixels));
+	}
+    
+>>>>>>> SLOGO First Merged Draft
     /**
      * Display this shape on the screen.
      */
@@ -124,11 +149,15 @@ public class Turtle {
     {
     	if(myVisibilityStatus){
     		 myView.paint(pen, myCenter, mySize);
+<<<<<<< HEAD
     	} 
     	
     	for (StraightLine l : myLines){
     		l.paint(pen);
     	}
+=======
+    	}  
+>>>>>>> SLOGO First Merged Draft
     }
 
     /**
@@ -138,11 +167,14 @@ public class Turtle {
         return myCenter.getX() - mySize.width / 2;
     }
     
+<<<<<<< HEAD
     private void makeLine () {
     	if(myPenStatus){
     	myLines.add(new StraightLine(myLastCenter, myCenter));
     	}
     }
+=======
+>>>>>>> SLOGO First Merged Draft
 
     /**
      * Returns shape's top-most coordinate in pixels.
@@ -150,6 +182,7 @@ public class Turtle {
     public double getTop () {
         return myCenter.getY() - mySize.height / 2;
     }
+<<<<<<< HEAD
     
     private void updateLastCenter(){
     	myLastCenter = new Location(myCenter.getX(),myCenter.getY()); 
@@ -221,4 +254,6 @@ public class Turtle {
 	   while(Angle< 0) Angle += 360;
 	   return Angle;
    }
+=======
+>>>>>>> SLOGO First Merged Draft
 }

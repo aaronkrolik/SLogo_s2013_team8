@@ -10,7 +10,11 @@ import javax.swing.JTextField;
 import model.SlogoModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
+<<<<<<< HEAD
 import controller.IUpdatable;
+=======
+
+>>>>>>> SLOGO First Merged Draft
 
 public class SlogoGUI extends JPanel {
 
@@ -25,31 +29,45 @@ public class SlogoGUI extends JPanel {
 	private Canvas myCanvas;
 	private SlogoModel myModel;
     private int myLastKeyPressed;
+<<<<<<< HEAD
     private String myInput;
     private IUpdatable myController;
     
+=======
+>>>>>>> SLOGO First Merged Draft
 
 	/**
 	 * Create the View.
 	 */
+<<<<<<< HEAD
 	public SlogoGUI(SlogoModel model, Canvas canvasIn, IUpdatable in) {
 		myController = in;
+=======
+	public SlogoGUI(SlogoModel model) {
+>>>>>>> SLOGO First Merged Draft
 		myModel = model;
 		setLayout(null);
 		add(createInputTextFieldAndSetItsProperties());
 		add(createEnterButtonAndSetItsProperties());
 		add(createSeparator());
+<<<<<<< HEAD
 		add(canvasIn);
+=======
+		add(createCanvas());
+>>>>>>> SLOGO First Merged Draft
 	}
 
 	private Canvas createCanvas() {
 		myCanvas = new Canvas(myModel);
 		return myCanvas;
 	}
+<<<<<<< HEAD
 	
 	public String getInputString () {
 		return myInput;
 	}
+=======
+>>>>>>> SLOGO First Merged Draft
 
 
 	private JSeparator createSeparator() {
@@ -71,12 +89,17 @@ public class SlogoGUI extends JPanel {
 	private void createButtonActionListenerAndSetItsProperties() {
 		takeInputAfterClickingButton = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+<<<<<<< HEAD
 				myController.update();
+=======
+				update();
+>>>>>>> SLOGO First Merged Draft
 			}
 		};
 	}
 	
 	private void update() {
+<<<<<<< HEAD
 		//myModel.update(input);
 	//	myCanvas.repaint();
 	//	myInputTextField.setText("");
@@ -90,6 +113,12 @@ public class SlogoGUI extends JPanel {
 	
 	public void resetTextInput () {
 		
+=======
+		String input = myInputTextField.getText().toString();
+		myModel.update(input);
+		myCanvas.repaint();
+		myInputTextField.setText("");
+>>>>>>> SLOGO First Merged Draft
 	}
 
 	private JTextField createInputTextFieldAndSetItsProperties() {
@@ -107,8 +136,12 @@ public class SlogoGUI extends JPanel {
             public void keyPressed (KeyEvent e) {
                 myLastKeyPressed = e.getKeyCode();
                 if (myLastKeyPressed == KeyEvent.VK_ENTER){
+<<<<<<< HEAD
             		//String myInput = myInputTextField.getText().toString();
                 	myController.update();
+=======
+                	update();
+>>>>>>> SLOGO First Merged Draft
                 }
             }
             @Override
