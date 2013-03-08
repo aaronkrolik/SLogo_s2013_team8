@@ -13,60 +13,49 @@ import commands.Command;
 import util.Parser;
 import view.Canvas;
 
-
-
+/**
+ * Houses the Turtle and Parser. Can receive scanner inputs via Controller and
+ * update Turtle based on those inputs
+ * 
+ * @author Jack Matteucci
+ * @author David Liu
+ */
 
 public class SlogoModel {
-//    // bounds and input for game
-//    private Canvas myView;
-//
-//    private static final int KEY_N = KeyEvent.VK_N;
-//	private static final Pixmap HERO_IMAGE = new Pixmap("Mario.png");
-//    private static final String TestLine = "Make Var 20 Forward :Var";
-//    public static final Dimension DEFAULT_SIZE = new Dimension(40, 60);
-	
-	
-    // simulation state
+
 	private Turtle myTurtle;
 	private Scanner myTestLine;
 	private Parser myParser;
 	private List<Command> myCommandList;
-    /**
-     * Create a game of the given size with the given display for its shapes.
-     */
-    public SlogoModel () {
-    	
-		/*
-		 * Maybe a better way?? 
-		 * Make a Factory file?
-		 */
-		//myTurtle = new Turtle(canvas.getSize());
+
+	/**
+	 * Create a game of the given size with the given display for its shapes.
+	 */
+	public SlogoModel() {
 		myTurtle = new Turtle();
 		myParser = new Parser(myTurtle);
-    }
-    
-    
-    public Turtle getTurtle(){
-    	return myTurtle;
-    }
-    /**
-     * Draw all elements of the simulation.
-     */
-    public void paint(Graphics2D pen) {
-    	myTurtle.paint(pen);
-    }
+	}
 
-    /**
-     * Update simulation for this moment, given the time since the last moment.
-     */
-    public void update (String str) {
-        Dimension bounds = Canvas.CANVAS_SIZE;
-        myTestLine = new Scanner(str);
-        myCommandList = myParser.executeCommandLine(myTestLine);
-        for(Command c : myCommandList){
-        	c.execute();
-        }
-        }
+	public Turtle getTurtle() {
+		return myTurtle;
+	}
+
+	/**
+	 * Draw all elements of the simulation.
+	 */
+	public void paint(Graphics2D pen) {
+		myTurtle.paint(pen);
+	}
+
+	/**
+	 * Update simulation for this moment, given the time since the last moment.
+	 */
+	public void update(String str) {
+		Dimension bounds = Canvas.CANVAS_SIZE;
+		myTestLine = new Scanner(str);
+		myCommandList = myParser.executeCommandLine(myTestLine);
+		for (Command c : myCommandList) {
+			c.execute();
+		}
+	}
 }
-
-

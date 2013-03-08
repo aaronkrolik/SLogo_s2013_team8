@@ -1,0 +1,32 @@
+JACK MATTEUCCI, AARON KROLIK, DAVID LIU, and BILL MUENSTERMAN's SPRINGIES README
+
+Names of people who worked on project:  JACK MATTEUCCI, AARON KROLIK, DAVID LIU, and BILL MUENSTERMAN
+
+Started February 22th, Finished March 8th 
+
+Time spent: ~ 50 hours in total
+
+Resources used:
+Regular Compsci Resources
+http://www.cs.duke.edu/courses/cps108/current/assign/03_slogo/
+https://piazza.com/class#spring2013/compsci308001sp13/104
+
+Files Used:
+We modified the Canvas class, Main Class from last code. We also reused the vector class,
+PixMap class, Location class, and Text Class from last project.
+
+Resources Need:  
+None other than the .java files included and the one turtle image
+
+
+Using the program:
+Contains all of the functionality noted in Part 2.
+
+Notes:  There are many interfaces in order to restrict access to certain methods.  We also used
+several rapper classes around lists, but we believe everything is fairly essential
+
+Bugs:
+Everything should work!
+
+
+Suggestions:  Great project!

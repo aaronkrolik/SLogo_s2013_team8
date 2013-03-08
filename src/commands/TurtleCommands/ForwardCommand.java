@@ -1,6 +1,5 @@
 package commands.TurtleCommands;
 
-
 import java.util.Scanner;
 
 import commands.Command;
@@ -10,18 +9,22 @@ import util.BundledInteger;
 import util.ParsingInterface;
 import model.Turtle;
 
+/**
+ * Forward Command
+ * 
+ * @author Jack Matteucci
+ */
+
 public class ForwardCommand extends TurtleCommand {
 	private BundledInteger myDistance;
-	
+
 	public ForwardCommand(TurtleCommandInput input) {
 		super(input);
 		myDistance = input.getBundledInt();
 	}
-	
-	
+
 	public ForwardCommand() {
 	}
-
 
 	@Override
 	public Integer execute() {
@@ -32,7 +35,8 @@ public class ForwardCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line){
-		return new ForwardCommand((TurtleCommandInput) super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) {
+		return new ForwardCommand(
+				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}
 }
