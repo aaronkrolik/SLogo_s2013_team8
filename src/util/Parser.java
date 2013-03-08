@@ -84,7 +84,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 				line.next();
 			}
 		}
-		checkBrackets();
+		checkBrackets(); 
 		System.out.println(myReturn);
 		return myReturn;
 	}
@@ -98,24 +98,23 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 				return command.createCommand(this, line);	
 			}
 		}
-		System.out.println("Command");
-		return null;
+		return null; // BUG BUG Throw Command not found exception
 	}
 	
 
-	public List<Command> getNextCommandList(Scanner line) {
-		List<Command> commands = new ArrayList<Command>();
+	public CommandSequence getNextCommandList(Scanner line) {
+		CommandSequence sequence = new CommandSequence();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
 				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){		
-					commands.add(getNextCommand(line));
+					sequence.getCommandList().add(getNextCommand(line));
 				}
 				tallyBrackets(line);
 				line.next();
 			}
-			return commands;
+			return sequence;
 		}
 		System.out.println("CommandList");
 		return null;
@@ -123,46 +122,41 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	
 	
 
-	//	public static Integer getNextVariable(Model model, Scanner line){	
-	//		if (line.hasNext()){
-	//			String type = line.next();
-	//			System.out.println(type);	
-	//		if(!model.getVariableMap().containsKey(type)){
-	//			System.out.println("NoKey");
-	//			return null;
-	//			}
-	//			else{
-	//				return (Integer) model.getVariableMap().get(type);
-	//			}	
-	//	}
-	//		System.out.println("Command");
-	//		return null;		
-	//		
-	//	}
+		private String putVariable(Scanner line){	
+			String var= getNextString(line);	
+			if(var.charAt(0) == VARIABLE_TAG.charAt(0)){
+				if(!myVariableMap.containsKey(var)){
+					myVariableMap.put(var, 0);
+				}
+				return var;
+			}
+			return null; //BUG BUG THROW EXCEPTION Variable Not found
+		}
 	
 	public String getNextString(Scanner line){
 		if (line.hasNext()){
 			return line.next();
 		}
 		else{
-			return "";
+			return "";  //BUG BUG throw String Not found exception
 		}
 	}
 
 
-	public List<String> getNextStringList(Scanner line) {
+	public StringSequence getNextStringList(Scanner line) {
+		StringSequence sequence = new StringSequence();
 		List<String> strings = new ArrayList<String>();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
 				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){
-					strings.add(line.next());
+					sequence.getStringList().add(line.next());
 				}
 				tallyBrackets(line);
 				line.next();
 			}
-			return strings;
+			return sequence;
 		}
 		System.out.println("CommandList");
 		return null;
@@ -180,11 +174,8 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			if(HasCommand(line)){
 				return new BundledInteger(getNextCommand(line));
 			}
-			String var = line.next();
-			if(!myVariableMap.containsKey(var)){
-				myVariableMap.put(var, 0);
-			}
-			return new BundledInteger(var, myVariableMap); // Bug Bug check if it should be a var
+			String var = putVariable(line);
+			return new BundledInteger(var, myVariableMap); 
 			}
 		}
 
@@ -196,39 +187,20 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		return false;
 	}
-	private boolean HasVarable(Scanner line){
-		for(Object s : myVariableMap.keySet()){
-			if(line.hasNext((String) s)){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private int getVariable(Scanner line){
-		String type = line.next();
-		if(type.charAt(0) == VARIABLE_TAG.charAt(0)){
-			if(myVariableMap.containsKey(type)){
-				return (Integer) myVariableMap.get(type);
-			}
-			return 0;
-		}
-		return 0; //BUGBUG need to throw exception
-	}
 	
-	public List<BundledInteger> getNextIntegerList(Scanner line) {
-		List<BundledInteger> integers = new ArrayList<BundledInteger>();
+	public BundledIntegerSequence getNextBundledIntList(Scanner line) {
+		BundledIntegerSequence sequence = new BundledIntegerSequence();
 		if(line.hasNext()){
 			if(line.hasNext(FORWARD_BRACKET)){
 				tallyBrackets(line);
 				line.next();
 				while(!line.hasNext(BACK_BRACKET)){
-					integers.add(getNextBundledInt(line));
+					sequence.getBundledIntegerList().add(getNextBundledInt(line));
 				}
 				tallyBrackets(line);
 				line.next();
 			}
-			return integers;
+			return sequence;
 		}
 		System.out.println("CommandList");
 		return null;
@@ -238,7 +210,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		else if(line.hasNext(BACK_BRACKET)) BracketCount --;
 	}
 	private void checkBrackets(){
-		if( BracketCount != 0) System.out.println("Mismatched Brackets!");//EXCEPTION
+		if( BracketCount != 0) System.out.println("Mismatched Brackets!"); // BUG BUG, Throw Mismatched brackets exception (can change this method into a boolean)
 	}
 
 }

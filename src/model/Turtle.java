@@ -12,9 +12,9 @@ import util.Pixmap;
 import view.Canvas;
 
 public class Turtle {
-	
-	private static final int INITIAL_DIRECTION = 270;
+
 	private static final Pixmap myPicture = new Pixmap("Turtle.jpg");
+	private static final int INITIAL_DIRECTION = 270;
 	private static final int WIDTH_OF_TURTLE_ICON = 50;
 	private static final int HEIGHT_OF_TURTLE_ICON = 50;
 	private static final Dimension SIZE = new Dimension(WIDTH_OF_TURTLE_ICON,HEIGHT_OF_TURTLE_ICON); 
@@ -26,8 +26,80 @@ public class Turtle {
     private static final double MAX_Y = BOTTOM_RIGHT.getY();
     private static final double MIN_X = 0;
     private static final double MIN_Y = 0;
+	
+    
+    private List<TurtleActioner> myTurtleActioners;
+    Integer TurtleIndex;	
+    
+    public Turtle(){
+    		myTurtleActioners = new ArrayList<TurtleActioner>();
+    		myTurtleActioners.add(new TurtleActioner());
+    		TurtleIndex = 1;
+    	}
+    
+    /**
+     * Resets shape's center.
+     */
+    public void setCenter (double x, double y) {
+    	myTurtleActioners.get(TurtleIndex).setCenter(x, y);
+    }
+    public void setCenter(Location newCenter){
+    	myTurtleActioners.get(TurtleIndex).setCenter(newCenter);
+    }
+	
+    public boolean liftUpPen(){
+    	return myTurtleActioners.get(TurtleIndex).liftUpPen();
+    }
+    
+    public Location currentLocation(){
+    	return myTurtleActioners.get(TurtleIndex).currentLocation();
+    }
+    
+    public boolean putDownPen(){
+    	return myTurtleActioners.get(TurtleIndex).putDownPen();
+    }
+	public boolean IsPenDown(){
+		return myTurtleActioners.get(TurtleIndex).IsPenDown();
+	}
+	public void ToggleVisibility(){
+		myTurtleActioners.get(TurtleIndex).ToggleVisibility();
+	}
 
-	private Location myCenter;
+    public void forward(double pixels){
+    	myTurtleActioners.get(TurtleIndex).forward(pixels);
+	}
+    
+    public void right(double angle){
+    	myTurtleActioners.get(TurtleIndex).right(angle);
+    }
+    
+    public void left(double angle){
+    	myTurtleActioners.get(TurtleIndex).left(angle);
+    }
+    
+    public void backward(double pixels){
+    	myTurtleActioners.get(TurtleIndex).backward(pixels);
+	}
+    
+    public Integer setheading(Integer direction){
+    	return myTurtleActioners.get(TurtleIndex).setheading(direction);
+    }
+    
+    public Integer towards(double x, double y){
+    	return myTurtleActioners.get(TurtleIndex).towards(x,y);
+    }
+    /**
+     * Display this shape on the screen.
+     */
+    public void paint (Graphics2D pen)
+    {
+    	myTurtleActioners.get(TurtleIndex).paint(pen);
+    }
+    
+	
+    private class TurtleActioner {
+    	
+    private Location myCenter;
 	private Location myLastCenter;
 	private Location myOriginalCenter;
 	
@@ -40,7 +112,7 @@ public class Turtle {
     private List<StraightLine> myLines;
 
 	
-	public Turtle(){
+	protected TurtleActioner(){
 		myLines = new ArrayList<StraightLine>();
 		int initialX = (Canvas.CANVAS_WIDTH - WIDTH_OF_TURTLE_ICON)/2;
 		int initialY = (Canvas.CANVAS_HEIGHT - HEIGHT_OF_TURTLE_ICON)/2;
@@ -221,4 +293,8 @@ public class Turtle {
 	   while(Angle< 0) Angle += 360;
 	   return Angle;
    }
+
+    }
+    
 }
+

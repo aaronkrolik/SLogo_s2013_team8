@@ -13,7 +13,7 @@ public class RepeatCommand extends Command {
 	public RepeatCommand(CommandInput input) {
 		super(input);
 		myTimes = input.getBundledInt();
-		myCommandList = input.getCommandList();
+		myCommandList = input.getCommandSequence().getCommandList();
 	}
 
 	public RepeatCommand() {

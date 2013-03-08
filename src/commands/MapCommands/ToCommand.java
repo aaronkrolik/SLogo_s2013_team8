@@ -14,14 +14,15 @@ public class ToCommand extends MapCommand {
 	List<Command> myCommandList;
 	VariableInput myVariableInput;
 	
+	public ToCommand() {
+	}
+	
 	public ToCommand(MapCommandInput input) {
 		super(input);
 		myName =input.getString();
-		myVariableList = input.getStringList();
-		myCommandList = input.getCommandList();
+		myVariableList = input.getStringSequence().getStringList();
+		myCommandList = input.getCommandSequence().getCommandList();
 		myVariableInput = new VariableInput(myName, myVariableList, myCommandList);
-	}
-	public ToCommand() {
 	}
 	
 	@Override

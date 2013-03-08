@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import util.BundledInteger;
+import util.BundledIntegerSequence;
+import util.CommandSequence;
 import util.Parser;
 import util.ParsingInterface;
+import util.StringSequence;
 
 import model.SlogoModel;
 
@@ -31,16 +34,16 @@ public class CommandInput {
 		return myParser.getNextBundledInt(myLine);
 	}
 	
-	public List<Command> getCommandList(){
+	public CommandSequence getCommandSequence(){
 		return myParser.getNextCommandList(myLine);
 	}
 	
-	public List<String> getStringList(){
+	public StringSequence getStringSequence(){
 		return myParser.getNextStringList(myLine);
 	}
 	
-	public List<BundledInteger> getBundledIntList(){
-		return myParser.getNextIntegerList(myLine);
+	public BundledIntegerSequence getBundledIntSequence(){
+		return myParser.getNextBundledIntList(myLine);
 	}
 	
 	public void Reset(){
