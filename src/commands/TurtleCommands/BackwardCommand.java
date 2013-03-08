@@ -1,7 +1,13 @@
 package commands.TurtleCommands;
 
 
+import java.util.Scanner;
+
+import commands.Command;
+import commands.RepeatCommand;
+
 import util.BundledInteger;
+import util.ParsingInterface;
 import model.Turtle;
 
 public class BackwardCommand extends TurtleCommand {
@@ -12,6 +18,9 @@ public class BackwardCommand extends TurtleCommand {
 		myDistance = input.getBundledInt();
 	}
 	
+	public BackwardCommand() {
+	}
+
 	@Override
 	public Integer execute() {
 		Integer distance = myDistance.getInteger();
@@ -20,4 +29,8 @@ public class BackwardCommand extends TurtleCommand {
 		return distance;
 	}
 
+	@Override
+	public Command createCommand(ParsingInterface parser, Scanner line){
+		return new BackwardCommand((TurtleCommandInput) super.createCommandInput(parser, line));
+	}
 }

@@ -1,9 +1,12 @@
 package commands.MapCommands;
 
 import java.util.List;
+import java.util.Scanner;
+
+import util.ParsingInterface;
 
 import commands.Command;
-import commands.CommandCreator;
+import commands.RepeatCommand;
 
 public class ToCommand extends MapCommand {
 	String myName;
@@ -18,11 +21,18 @@ public class ToCommand extends MapCommand {
 		myCommandList = input.getCommandList();
 		myVariableInput = new VariableInput(myName, myVariableList, myCommandList);
 	}
+	public ToCommand() {
+	}
+	
 	@Override
 	public Integer execute() {
-		CommandCreator creator = new VariableCreator(myVariableInput);
-		super.getCommandMap().put(myName, creator);
+		Command command = new VariableCommand(myVariableInput);
+		super.getCommandMap().put(myName, command);
 		return 1;
+	}
+	@Override
+	public Command createCommand(ParsingInterface parser, Scanner line){
+		return new ToCommand((MapCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

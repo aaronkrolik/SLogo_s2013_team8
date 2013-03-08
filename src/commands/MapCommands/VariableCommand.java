@@ -2,16 +2,25 @@ package commands.MapCommands;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 import commands.Command;
+import commands.RepeatCommand;
 
 import util.BundledInteger;
+import util.ParsingInterface;
 
 public class VariableCommand extends MapCommand {
 	List<Command> myCommandList;
 	List<String> myVariableList;
 	List<BundledInteger> myValueList;
+	VariableInput myVariableInput;
 	
+	
+	public VariableCommand(VariableInput vinput){
+		super();
+		myVariableInput = vinput;
+	}
 	
 	public VariableCommand(MapCommandInput input, VariableInput vinput) {
 		super(input);
@@ -37,6 +46,11 @@ public class VariableCommand extends MapCommand {
 				myReturn = c.execute();
 			}
 		return myReturn;
+	}
+	
+	@Override
+	public Command createCommand(ParsingInterface parser, Scanner line){
+		return new VariableCommand((MapCommandInput) super.createCommandInput(parser, line), myVariableInput);
 	}
 
 }

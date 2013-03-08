@@ -1,6 +1,9 @@
 package commands;
 
+import java.util.Scanner;
+
 import util.BundledInteger;
+import util.ParsingInterface;
 
 public class SumCommand extends Command {
 	private BundledInteger myFirst;
@@ -11,6 +14,8 @@ public class SumCommand extends Command {
 		myFirst = input.getBundledInt();
 		mySecond = input.getBundledInt();
 	}
+	public SumCommand() {
+	}
 	@Override
 	public Integer execute() {
 	System.out.println(myFirst.getInteger());
@@ -18,4 +23,8 @@ public class SumCommand extends Command {
 		return myFirst.getInteger() + mySecond.getInteger() ;
 	}
 
+	@Override
+	public Command createCommand(ParsingInterface parser, Scanner line){
+		return new RepeatCommand(super.createCommandInput(parser, line));
+	}
 }

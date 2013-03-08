@@ -10,14 +10,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import commands.Command;
-import commands.CommandCreator;
-import commands.RepeatCreator;
-import commands.SumCreator;
-import commands.MapCommands.MakeCreator;
-import commands.MapCommands.ToCreator;
-import commands.MapCommands.VariableInput;
-import commands.TurtleCommands.BackwardCreator;
-import commands.TurtleCommands.ForwardCreator;
 import util.Parser;
 import view.Canvas;
 

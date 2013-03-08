@@ -7,17 +7,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 import commands.Command;
-import commands.CommandCreator;
 import commands.CommandInput;
-import commands.RepeatCreator;
-import commands.SumCreator;
+import commands.RepeatCommand;
+import commands.SumCommand;
 import commands.MapCommands.MakeCommand;
-import commands.MapCommands.MakeCreator;
-import commands.MapCommands.ToCreator;
-import commands.TurtleCommands.BackwardCreator;
-import commands.TurtleCommands.ForwardCreator;
-import commands.TurtleCommands.LeftCreator;
-import commands.TurtleCommands.RightCreator;
+import commands.MapCommands.MakeCommand;
+import commands.MapCommands.ToCommand;
+import commands.TurtleCommands.BackwardCommand;
+import commands.TurtleCommands.ForwardCommand;
+import commands.TurtleCommands.LeftCommand;
+import commands.TurtleCommands.RightCommand;
 
 
 import model.SlogoModel;
@@ -28,7 +27,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	private Scanner myLine;
 	private Turtle myTurtle;
 	private List<Command> myReturn;
-	private Map<String, CommandCreator> myCommandMap;
+	private Map<String, Command> myCommandMap;
 	private Map<String, Integer> myVariableMap;
 	private final static String FORWARD_BRACKET = "\\[";
 	private final static String BACK_BRACKET = "]";
@@ -36,31 +35,31 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	private int BracketCount;
 
 	public Parser(Turtle turtle) {
-		myCommandMap = new HashMap<String, CommandCreator>();
+		myCommandMap = new HashMap<String, Command>();
 		myVariableMap = new HashMap<String, Integer>();
 		/*
 		 * Maybe a better way?? 
 		 * Make a Factory file?
 		 */
-		CommandCreator forward = new ForwardCreator();
+		Command forward = new ForwardCommand();
 		myCommandMap.put("Forward",forward);
-		CommandCreator repeat = new RepeatCreator();
+		Command repeat = new RepeatCommand();
 		myCommandMap.put("Repeat",repeat);
-		CommandCreator make = new MakeCreator();
+		Command make = new MakeCommand();
 		myCommandMap.put("Make",make);
-		CommandCreator sum = new SumCreator();
+		Command sum = new SumCommand();
 		myCommandMap.put("Sum",sum);
-		CommandCreator back = new BackwardCreator();
+		Command back = new BackwardCommand();
 		myCommandMap.put("Backward",back);
-		CommandCreator to = new ToCreator();
+		Command to = new ToCommand();
 		myCommandMap.put("To", to);
-		CommandCreator right = new RightCreator();
+		Command right = new RightCommand();
 		myCommandMap.put("Right", right);
-		CommandCreator left = new LeftCreator();
+		Command left = new LeftCommand();
 		myCommandMap.put("Left", left);
 		myTurtle = turtle;
 	}
-    public Map<String, CommandCreator> getCommandMap(){
+    public Map<String, Command> getCommandMap(){
     	return myCommandMap;
     }
     
@@ -95,9 +94,8 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			String type = line.next();
 			System.out.println(type);
 			if(myCommandMap.containsKey(type)){
-				CommandCreator creator = (CommandCreator) myCommandMap.get(type);
-				CommandInput input = creator.createCommandInput(this, line);
-				return creator.createCommand(input);	
+				Command command = (Command) myCommandMap.get(type);
+				return command.createCommand(this, line);	
 			}
 		}
 		System.out.println("Command");

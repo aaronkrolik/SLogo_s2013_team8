@@ -4,12 +4,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 import commands.Command;
+import commands.CommandInput;
 
+import util.MapInterface;
+import util.ParsingInterface;
 import util.TurtleInterface;
 
 public abstract class MapCommand extends Command {
 	private Map<String, Integer> myVariableMap;
 	private Map<String, VariableInput> myCommandMap;
+	
+	public MapCommand(){
+	}
 	
 	public MapCommand(MapCommandInput input) {
 		super(input);
@@ -23,6 +29,10 @@ public abstract class MapCommand extends Command {
 	
 	public Map getCommandMap(){
 		return myCommandMap;
+	}
+	@Override
+	public CommandInput createCommandInput(ParsingInterface parser, Scanner line){
+		return new MapCommandInput((MapInterface) parser, line);
 	}
 
 }
