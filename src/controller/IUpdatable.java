@@ -1,7 +1,7 @@
 package controller;
 
 public interface IUpdatable {
-	
-	public void update ();
+
+	public void update();
 
 }

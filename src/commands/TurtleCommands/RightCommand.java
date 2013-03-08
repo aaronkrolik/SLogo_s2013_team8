@@ -1,6 +1,5 @@
 package commands.TurtleCommands;
 
-
 import java.util.Scanner;
 
 import commands.Command;
@@ -10,16 +9,22 @@ import util.BundledInteger;
 import util.ParsingInterface;
 import model.Turtle;
 
+/**
+ * Right Command
+ * 
+ * @author Jack Matteucci
+ */
+
 public class RightCommand extends TurtleCommand {
 	private BundledInteger myAngle;
-	
+
 	public RightCommand(TurtleCommandInput input) {
 		super(input);
 		myAngle = input.getBundledInt();
-	}	
-	public RightCommand() {
 	}
 
+	public RightCommand() {
+	}
 
 	@Override
 	public Integer execute() {
@@ -27,10 +32,11 @@ public class RightCommand extends TurtleCommand {
 		super.getTurtle().right(angle);
 		return angle;
 	}
-	
+
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line){
-		return new RightCommand((TurtleCommandInput) super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) {
+		return new RightCommand((TurtleCommandInput) super.createCommandInput(
+				parser, line));
 	}
 
 }

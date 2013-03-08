@@ -3,6 +3,13 @@ package commands;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Mediates Commands grabbing information from the Parser.  Restricts access to
+ * the Parser, but also provides necessary information Commands via its commands
+ * 
+ * @author Jack Matteucci
+ */
+
 import util.BundledInteger;
 import util.BundledIntegerSequence;
 import util.CommandSequence;
@@ -16,37 +23,45 @@ public class CommandInput {
 	ParsingInterface myParser;
 	Scanner myLine;
 	String myCopy;
-	
+
 	public CommandInput(ParsingInterface parser, Scanner line) {
-		myParser =  parser;
+		myParser = parser;
 		myLine = line;
 	}
-	
-	public Scanner getScanner(){
-		return myLine;
-	}
-	
-	public String getString(){
+
+	/**
+	 * return the next String from a Scanner
+	 */
+	public String getString() {
 		return myParser.getNextString(myLine);
 	}
-	
-	public BundledInteger getBundledInt(){
+
+	/**
+	 * return the next BundledInteger from a Scanner
+	 */
+	public BundledInteger getBundledInt() {
 		return myParser.getNextBundledInt(myLine);
 	}
-	
-	public CommandSequence getCommandSequence(){
+
+	/**
+	 * return the next Command Sequence from a Scanner
+	 */
+	public CommandSequence getCommandSequence() {
 		return myParser.getNextCommandList(myLine);
 	}
-	
-	public StringSequence getStringSequence(){
+
+	/**
+	 * return the next StringSequence from a Scanner
+	 */
+	public StringSequence getStringSequence() {
 		return myParser.getNextStringList(myLine);
 	}
-	
-	public BundledIntegerSequence getBundledIntSequence(){
+
+	/**
+	 * return the next BundledInt Sequence from a Scanner
+	 */
+	public BundledIntegerSequence getBundledIntSequence() {
 		return myParser.getNextBundledIntList(myLine);
 	}
-	
-	public void Reset(){
-		myLine = new Scanner(myCopy);
-	}
+
 }

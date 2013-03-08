@@ -16,7 +16,7 @@ public class SlogoGUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static final int NO_KEY_PRESSED = -1;
-	
+
 	private JTextField myInputTextField;
 	private JButton myEnter;
 	private ActionListener takeInputAfterClickingButton;
@@ -24,10 +24,9 @@ public class SlogoGUI extends JPanel {
 	private JSeparator mySeparator;
 	private Canvas myCanvas;
 	private SlogoModel myModel;
-    private int myLastKeyPressed;
-    private String myInput;
-    private IUpdatable myController;
-    
+	private int myLastKeyPressed;
+	private String myInput;
+	private IUpdatable myController;
 
 	/**
 	 * Create the View.
@@ -46,18 +45,16 @@ public class SlogoGUI extends JPanel {
 		myCanvas = new Canvas(myModel);
 		return myCanvas;
 	}
-	
-	public String getInputString () {
+
+	public String getInputString() {
 		return myInput;
 	}
-
 
 	private JSeparator createSeparator() {
 		mySeparator = new JSeparator();
 		mySeparator.setBounds(0, 536, 800, 12);
 		return mySeparator;
 	}
-
 
 	private JButton createEnterButtonAndSetItsProperties() {
 		myEnter = new JButton("Enter");
@@ -69,27 +66,27 @@ public class SlogoGUI extends JPanel {
 
 	// Action Listener Here
 	private void createButtonActionListenerAndSetItsProperties() {
-		takeInputAfterClickingButton = new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		takeInputAfterClickingButton = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				myController.update();
 			}
 		};
 	}
-	
+
 	private void update() {
-		//myModel.update(input);
-	//	myCanvas.repaint();
-	//	myInputTextField.setText("");
+		// myModel.update(input);
+		// myCanvas.repaint();
+		// myInputTextField.setText("");
 	}
-	
-	public String getInputText () {
+
+	public String getInputText() {
 		String tmp = myInputTextField.getText().toString();
 		myInputTextField.setText("");
 		return tmp;
 	}
-	
-	public void resetTextInput () {
-		
+
+	public void resetTextInput() {
+
 	}
 
 	private JTextField createInputTextFieldAndSetItsProperties() {
@@ -100,24 +97,26 @@ public class SlogoGUI extends JPanel {
 		myInputTextField.addKeyListener(enterKeyListener);
 		return myInputTextField;
 	}
-	
-	private void createKeyEventListener(){
+
+	private void createKeyEventListener() {
 		enterKeyListener = new KeyAdapter() {
-            @Override
-            public void keyPressed (KeyEvent e) {
-                myLastKeyPressed = e.getKeyCode();
-                if (myLastKeyPressed == KeyEvent.VK_ENTER){
-            		//String myInput = myInputTextField.getText().toString();
-                	myController.update();
-                }
-            }
-            @Override
-            public void keyReleased (KeyEvent e) {
-                myLastKeyPressed = NO_KEY_PRESSED;
-            }
+			@Override
+			public void keyPressed(KeyEvent e) {
+				myLastKeyPressed = e.getKeyCode();
+				if (myLastKeyPressed == KeyEvent.VK_ENTER) {
+					// String myInput = myInputTextField.getText().toString();
+					myController.update();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				myLastKeyPressed = NO_KEY_PRESSED;
+			}
 		};
 	}
-	private int getMyLastKeyPressed(){
+
+	private int getMyLastKeyPressed() {
 		return myLastKeyPressed;
 	}
 }
