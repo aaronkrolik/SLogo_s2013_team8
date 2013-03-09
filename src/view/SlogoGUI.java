@@ -85,6 +85,13 @@ public class SlogoGUI extends JPanel {
 		return tmp;
 	}
 
+	public void DisplayException(String message) {
+		myInputTextField.setText(message);
+	}
+	
+	public void DisplayReturn(int message) {
+		myInputTextField.setText(String.valueOf(message));
+	}
 	public void resetTextInput() {
 
 	}

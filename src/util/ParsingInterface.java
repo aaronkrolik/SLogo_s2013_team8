@@ -4,6 +4,8 @@ import java.util.List;
 
 import java.util.Scanner;
 
+import util.Exceptions.ExpectedInput;
+
 import commands.Command;
 
 /**
@@ -14,16 +16,16 @@ import commands.Command;
 
 public interface ParsingInterface {
 
-	public Command getNextCommand(Scanner line);
+	public Command getNextCommand(Scanner line) throws ExpectedInput;
 
-	public CommandSequence getNextCommandList(Scanner line);
+	public CommandSequence getNextCommandList(Scanner line) throws ExpectedInput;
 
-	public BundledInteger getNextBundledInt(Scanner line);
+	public BundledInteger getNextBundledInt(Scanner line) throws ExpectedInput;
 
-	public BundledIntegerSequence getNextBundledIntList(Scanner line);
+	public BundledIntegerSequence getNextBundledIntList(Scanner line) throws ExpectedInput;
 
-	public String getNextString(Scanner line);
+	public String getNextString(Scanner line) throws ExpectedInput;
 
-	public StringSequence getNextStringList(Scanner line);
+	public StringSequence getNextStringList(Scanner line) throws ExpectedInput;
 
 }

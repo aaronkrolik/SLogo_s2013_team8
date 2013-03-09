@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
  * The Sum Command
@@ -14,9 +15,10 @@ public class SumCommand extends Command {
 	private BundledInteger myFirst;
 	private BundledInteger mySecond;
 
-	public SumCommand(CommandInput input) {
+	public SumCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
+		System.out.println(myFirst.getInteger());
 		mySecond = input.getBundledInt();
 	}
 
@@ -31,7 +33,7 @@ public class SumCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new SumCommand(super.createCommandInput(parser, line));
 	}
 }

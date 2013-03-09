@@ -3,6 +3,7 @@ package commands;
 import java.util.Scanner;
 
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 import model.SlogoModel;
 
@@ -29,7 +30,7 @@ public abstract class Command {
 
 	public abstract Integer execute();
 
-	public abstract Command createCommand(ParsingInterface parser, Scanner line);
+	public abstract Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput;
 
 	protected CommandInput createCommandInput(ParsingInterface parser,
 			Scanner line) {

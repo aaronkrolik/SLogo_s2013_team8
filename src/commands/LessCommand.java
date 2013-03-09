@@ -5,9 +5,10 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The Less Command
  * 
  * @author Jack Matteucci
  */
@@ -15,7 +16,7 @@ public class LessCommand extends Command {
 	private BundledInteger myFirst;
 	private BundledInteger mySecond;
 
-	public LessCommand(CommandInput input) {
+	public LessCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 		mySecond = input.getBundledInt();
@@ -26,13 +27,11 @@ public class LessCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myFirst.getInteger());
-		System.out.println(mySecond.getInteger());
 		return (myFirst.getInteger() < mySecond.getInteger()) ? 1 : 0;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new LessCommand(super.createCommandInput(parser, line));
 	}
 }

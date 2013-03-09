@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
  * The Repeat Command
@@ -16,7 +17,7 @@ public class RepeatCommand extends Command {
 	private BundledInteger myTimes;
 	List<Command> myCommandList;
 
-	public RepeatCommand(CommandInput input) {
+	public RepeatCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myTimes = input.getBundledInt();
 		myCommandList = input.getCommandSequence().getCommandList();
@@ -27,8 +28,6 @@ public class RepeatCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myCommandList);
-		System.out.println(myTimes);
 		Integer myReturn = 0;
 		for (int i = 0; i < myTimes.getInteger(); i++) {
 			for (Command c : myCommandList) {
@@ -39,7 +38,7 @@ public class RepeatCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new RepeatCommand(super.createCommandInput(parser, line));
 	}
 

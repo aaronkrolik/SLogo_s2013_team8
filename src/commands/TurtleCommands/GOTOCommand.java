@@ -8,6 +8,7 @@ import commands.RepeatCommand;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 import model.Turtle;
 
 /**
@@ -20,7 +21,7 @@ public class GOTOCommand extends TurtleCommand {
 	BundledInteger myX;
 	BundledInteger myY;
 
-	public GOTOCommand(TurtleCommandInput input) {
+	public GOTOCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		myX  = super.getInput().getBundledInt();
 		myY  = super.getInput().getBundledInt();
@@ -35,7 +36,7 @@ public class GOTOCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new GOTOCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}

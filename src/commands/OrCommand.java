@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The Or Command
  * 
  * @author Jack Matteucci
  */
@@ -16,7 +17,7 @@ public class OrCommand extends Command {
 	private BundledInteger myFirst;
 	private BundledInteger mySecond;
 
-	public OrCommand(CommandInput input) {
+	public OrCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 		mySecond = input.getBundledInt();
@@ -27,13 +28,11 @@ public class OrCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myFirst.getInteger());
-		System.out.println(mySecond.getInteger());
 		return ((myFirst.getInteger() != 0) || ( mySecond.getInteger()!=0) ) ? 1 : 0;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new OrCommand(super.createCommandInput(parser, line));
 	}
 }

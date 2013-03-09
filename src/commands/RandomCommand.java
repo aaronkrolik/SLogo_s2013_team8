@@ -5,10 +5,12 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
+
 import java.util.Random;
 
 /**
- * The Sum Command
+ * The Random Command
  * 
  * @author Jack Matteucci
  */
@@ -16,7 +18,7 @@ public class RandomCommand extends Command {
 	private BundledInteger myFirst;
 	private BundledInteger mySecond;
 
-	public RandomCommand(CommandInput input) {
+	public RandomCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 	}
@@ -26,12 +28,11 @@ public class RandomCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myFirst.getInteger());
 		return myFirst.getInteger() * (int) Math.random();
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new RandomCommand(super.createCommandInput(parser, line));
 	}
 }

@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The If Command
  * 
  * @author Jack Matteucci
  */
@@ -16,7 +17,7 @@ public class IfCommand extends Command {
 	private BundledInteger myFirst;
 	private List<Command> myCommandList;
 
-	public IfCommand(CommandInput input) {
+	public IfCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 		myCommandList = input.getCommandSequence().getCommandList();
@@ -37,8 +38,9 @@ public class IfCommand extends Command {
 		else return 0;
 	}
 
+
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new IfCommand(super.createCommandInput(parser, line));
 	}
 }

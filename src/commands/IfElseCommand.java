@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The IfElse Command
  * 
  * @author Jack Matteucci
  */
@@ -17,7 +18,7 @@ public class IfElseCommand extends Command {
 	private List<Command> myFirstCommandList;
 	private List<Command> mySecondCommandList;
 
-	public IfElseCommand(CommandInput input) {
+	public IfElseCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 		myFirstCommandList = input.getCommandSequence().getCommandList();
@@ -45,7 +46,7 @@ public class IfElseCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new IfCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new IfElseCommand(super.createCommandInput(parser, line));
 	}
 }

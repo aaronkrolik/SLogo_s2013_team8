@@ -49,13 +49,16 @@ public class SlogoModel {
 
 	/**
 	 * Update simulation for this moment, given the time since the last moment.
+	 * @throws Exception 
 	 */
-	public void update(String str) {
+	public int update(String str) throws Exception {
 		Dimension bounds = Canvas.CANVAS_SIZE;
 		myTestLine = new Scanner(str);
 		myCommandList = myParser.executeCommandLine(myTestLine);
+		int myReturn = 0;
 		for (Command c : myCommandList) {
-			c.execute();
+			myReturn = c.execute();
 		}
+		return myReturn;
 	}
 }

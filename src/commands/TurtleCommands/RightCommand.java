@@ -7,6 +7,7 @@ import commands.RepeatCommand;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 import model.Turtle;
 
 /**
@@ -18,7 +19,7 @@ import model.Turtle;
 public class RightCommand extends TurtleCommand {
 	private BundledInteger myAngle;
 
-	public RightCommand(TurtleCommandInput input) {
+	public RightCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		myAngle = input.getBundledInt();
 	}
@@ -34,7 +35,7 @@ public class RightCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new RightCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}

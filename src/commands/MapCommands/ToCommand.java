@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 import commands.Command;
 import commands.RepeatCommand;
@@ -23,7 +24,7 @@ public class ToCommand extends MapCommand {
 	public ToCommand() {
 	}
 
-	public ToCommand(MapCommandInput input) {
+	public ToCommand(MapCommandInput input) throws ExpectedInput {
 		super(input);
 		myName = input.getString();
 		myVariableList = input.getStringSequence().getStringList();
@@ -40,7 +41,7 @@ public class ToCommand extends MapCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new ToCommand((MapCommandInput) super.createCommandInput(parser,
 				line));
 	}
