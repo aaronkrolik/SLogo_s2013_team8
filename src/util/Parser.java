@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import commands.AndCommand;
 import commands.Command;
 import commands.CommandInput;
 import commands.RepeatCommand;
@@ -57,6 +58,28 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		Command left = new LeftCommand();
 		Command setheading = new SetHeadingCommand();
 		Command towards = new TowardsCommand();
+		Command and = new AndCommand();
+		Command diff = new DifferenceCommand();
+		Command equal = new EqualCommand();
+		
+		Command minus = new MinusCommand();
+		Command not = new NotCommand();
+		Command notE = new NotEqualCommand();
+		Command or = new OrCommand();
+		Command product = new ProductCommand();
+		Command quotient = new QuotientCommand();
+		Command mod = new RemainderCommand();
+		
+		myCommandMap.put("MINUS",minus);
+		myCommandMap.put("NOT", not);
+		myCommandMap.put("NOTEQUAL", notE);
+		myCommandMap.put("OR", or);
+		myCommandMap.put("PRODUCT",product);
+		myCommandMap.put("QUOTIENT", quotient);
+		myCommandMap.put("REMAINDER", mod);
+		myCommandMap.put("EQUAL", equal);
+		myCommandMap.put("DIFFERENCE", diff);
+		myCommandMap.put("AND", and);
 		myCommandMap.put("FORWARD", forward);
 		myCommandMap.put("BACK", back);
 		myCommandMap.put("REPEAT", repeat);
