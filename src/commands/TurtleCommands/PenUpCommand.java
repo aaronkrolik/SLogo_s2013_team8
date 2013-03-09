@@ -11,30 +11,30 @@ import util.ParsingInterface;
 import model.Turtle;
 
 /**
- * HideTurtle Command
+ * PenUp Command
  * 
  * @author Jack Matteucci
  */
 
-public class HideTurtleCommand extends TurtleCommand {
+public class PenUpCommand extends TurtleCommand {
 
 
-	public HideTurtleCommand(TurtleCommandInput input) {
+	public PenUpCommand(TurtleCommandInput input) {
 		super(input);
 	}
 
-	public HideTurtleCommand() {
+	public PenUpCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		super.getTurtle().makeInvisible();
+		super.getTurtle().liftUpPen();
 		return 0;
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new HideTurtleCommand((TurtleCommandInput) super.createCommandInput(
+		return new PenUpCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}
 

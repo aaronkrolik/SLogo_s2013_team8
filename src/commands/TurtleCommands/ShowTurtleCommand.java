@@ -12,7 +12,7 @@ import util.ParsingInterface;
 import model.Turtle;
 
 /**
- * Right Command
+ * ShowTurtle Command
  * 
  * @author Jack Matteucci
  */
@@ -20,20 +20,22 @@ import model.Turtle;
 public class ShowTurtleCommand extends TurtleCommand {
 
 
-	
+	public ShowTurtleCommand(TurtleCommandInput input) {
+		super(input);
+	}
 
 	public ShowTurtleCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		super.getTurtle().ToggleVisibility() ;
+		super.getTurtle().makeVisible() ;
 		return 1;
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RightCommand((TurtleCommandInput) super.createCommandInput(
+		return new ShowTurtleCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}
 

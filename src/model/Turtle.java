@@ -51,8 +51,8 @@ public class Turtle {
 	 * Sets the Center of the Selected TurtleActioner
 	 */
 
-	public void setCenter(double x, double y) {
-		myTurtleActioners.get(TurtleIndex).setCenter(x, y);
+	public Integer setCenter(double x, double y) {
+		return myTurtleActioners.get(TurtleIndex).setCenter(x, y);
 	}
 
 	/**
@@ -65,8 +65,8 @@ public class Turtle {
 	/**
 	 * Lifts Up the Pen of the Selected TurtleActioner
 	 */
-	public boolean liftUpPen() {
-		return myTurtleActioners.get(TurtleIndex).liftUpPen();
+	public void liftUpPen() {
+		myTurtleActioners.get(TurtleIndex).liftUpPen();
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class Turtle {
 	/**
 	 * Puts down the pen of the Selected TurtleActioner
 	 */
-	public boolean putDownPen() {
-		return myTurtleActioners.get(TurtleIndex).putDownPen();
+	public void putDownPen() {
+		myTurtleActioners.get(TurtleIndex).putDownPen();
 	}
 
 	/**
@@ -89,15 +89,42 @@ public class Turtle {
 	public boolean IsPenDown() {
 		return myTurtleActioners.get(TurtleIndex).IsPenDown();
 	}
+	
+	
+	public boolean getVisibility(){
+		return myTurtleActioners.get(TurtleIndex).getVisibility();
+	}
+	
+	public Integer home(){
+		return myTurtleActioners.get(TurtleIndex).home();
+	}
+	
+	public Integer clear(){
+		return myTurtleActioners.get(TurtleIndex).clear();
+	}
 
 	/**
 	 * Changes the visibility of the Selected TurtleActioner
 	 */
-	public void ToggleVisibility() {
-		myTurtleActioners.get(TurtleIndex).ToggleVisibility();
+	public void makeVisible() {
+		myTurtleActioners.get(TurtleIndex).makeVisible();
 	}
 	
+	public void makeInvisible() {
+		myTurtleActioners.get(TurtleIndex).makeInvisible();
+	}
 
+	public Integer xcor(){
+		return myTurtleActioners.get(TurtleIndex).xcor();
+	}
+	
+	public Integer ycor(){
+		return myTurtleActioners.get(TurtleIndex).ycor();
+	}
+	
+	public Integer heading(){
+		return myTurtleActioners.get(TurtleIndex).heading();
+	}
 
 	/**
 	 * Moves the Selected TurtleActioner forward
@@ -161,16 +188,15 @@ public class Turtle {
 		private boolean myPenStatus;
 		private boolean myVisibilityStatus;
 		private List<StraightLine> myLines;
+		private int initialX = (Canvas.CANVAS_WIDTH ) / 2;
+		private int initialY = (Canvas.CANVAS_HEIGHT) / 2;
 
 		protected TurtleActioner() {
 			myLines = new ArrayList<StraightLine>();
-			int initialX = (Canvas.CANVAS_WIDTH - WIDTH_OF_TURTLE_ICON) / 2;
-			int initialY = (Canvas.CANVAS_HEIGHT - HEIGHT_OF_TURTLE_ICON) / 2;
 			myDirection = INITIAL_DIRECTION;
 			myCenter = new Location(initialX, initialY);
 			myView = myPicture;
 			mySize = SIZE;
-			resetBounds();
 			myPenStatus = true;
 			myVisibilityStatus = true;
 		}
@@ -178,48 +204,67 @@ public class Turtle {
 		/**
 		 * Returns rectangle that encloses this shape.
 		 */
-		private void resetBounds() {
-			myBounds = new Rectangle((int) getLeft(), (int) getTop(),
-					mySize.width, mySize.height);
-		}
 
 		/**
 		 * Resets shape's center.
 		 */
-		private void setCenter(double x, double y) {
-			myCenter.setLocation(x, y);
-			resetBounds();
+		private Integer setCenter(double x, double y) {
+			ConvertInputCoor(x,y);
+			Location newCenter = new Location(x,y);
+			Integer distance = (int) newCenter.distance(myCenter);
+			myCenter = newCenter;
+			return distance;
+		}
+		
+		private void ConvertInputCoor(double x, double y){
+			x = (int) (x + (Canvas.CANVAS_WIDTH ) / 2); 
+			y = (int) (x + (Canvas.CANVAS_HEIGHT ) / 2); 
+		}
+		
+		private void ConvertOutgoingCoor(double x, double y){
+			x = (int) (x - (Canvas.CANVAS_WIDTH ) / 2); 
+			y = (int) (x - (Canvas.CANVAS_HEIGHT ) / 2); 
 		}
 
 		private void setCenter(Location newCenter) {
 			myCenter = newCenter;
-			resetBounds();
 		}
 
-		private boolean liftUpPen() {
+		private void liftUpPen() {
 			myPenStatus = false;
-			return myPenStatus;
 		}
 
 		private Location currentLocation() {
 			return myCenter;
 		}
 
-		private boolean putDownPen() {
+		private void putDownPen() {
 			myPenStatus = true;
-			return myPenStatus;
 		}
 
 		private boolean IsPenDown() {
 			return myPenStatus;
 		}
 
-		private void ToggleVisibility() {
-			myVisibilityStatus = !myVisibilityStatus;
+		private void makeVisible() {
+			myVisibilityStatus = true;
+		}
+		
+		private void makeInvisible() {
+			myVisibilityStatus = false;
 		}
 		
 		private boolean getVisibility(){
 			return myVisibilityStatus;
+		}
+		
+		private Integer home(){
+			return setCenter(initialX, initialY);
+		}
+		
+		private Integer clear(){
+			myLines.clear();
+			return home();
 		}
 
 		private void forward(double pixels) {
@@ -248,6 +293,22 @@ public class Turtle {
 			return setheading((int) myCenter.difference(new Location(x, y))
 					.getDirection());
 		}
+		
+		private Integer xcor(){
+			int xcor = (int) myCenter.getX();
+			ConvertOutgoingCoor(xcor, 0);
+			return (int) xcor;
+		}
+		
+		private Integer ycor(){
+			int ycor = (int) myCenter.getY();
+			ConvertOutgoingCoor(0, ycor);
+			return (int) ycor;
+		}
+		
+		private Integer heading(){
+			return (int) myDirection;
+		}
 
 		/**
 		 * Display this shape on the screen.
@@ -262,24 +323,11 @@ public class Turtle {
 			}
 		}
 
-		/**
-		 * Returns shape's left-most coordinate in pixels.
-		 */
-		private double getLeft() {
-			return myCenter.getX() - mySize.width / 2;
-		}
 
 		private void makeLine() {
 			if (myPenStatus) {
 				myLines.add(new StraightLine(myLastCenter, myCenter));
 			}
-		}
-
-		/**
-		 * Returns shape's top-most coordinate in pixels.
-		 */
-		private double getTop() {
-			return myCenter.getY() - mySize.height / 2;
 		}
 
 		private void updateLastCenter() {

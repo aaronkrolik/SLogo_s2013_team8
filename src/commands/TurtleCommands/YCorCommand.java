@@ -11,30 +11,29 @@ import util.ParsingInterface;
 import model.Turtle;
 
 /**
- * HideTurtle Command
+ * YCor Command
  * 
  * @author Jack Matteucci
  */
 
-public class HideTurtleCommand extends TurtleCommand {
+public class YCorCommand extends TurtleCommand {
 
 
-	public HideTurtleCommand(TurtleCommandInput input) {
+	public YCorCommand(TurtleCommandInput input) {
 		super(input);
 	}
 
-	public HideTurtleCommand() {
+	public YCorCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		super.getTurtle().makeInvisible();
-		return 0;
+		return super.getTurtle().ycor();
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new HideTurtleCommand((TurtleCommandInput) super.createCommandInput(
+		return new YCorCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}
 
