@@ -96,6 +96,8 @@ public class Turtle {
 	public void ToggleVisibility() {
 		myTurtleActioners.get(TurtleIndex).ToggleVisibility();
 	}
+	
+
 
 	/**
 	 * Moves the Selected TurtleActioner forward
@@ -214,6 +216,10 @@ public class Turtle {
 
 		private void ToggleVisibility() {
 			myVisibilityStatus = !myVisibilityStatus;
+		}
+		
+		private boolean getVisibility(){
+			return myVisibilityStatus;
 		}
 
 		private void forward(double pixels) {
@@ -369,5 +375,7 @@ public class Turtle {
 		}
 
 	}
+
+
 
 }
