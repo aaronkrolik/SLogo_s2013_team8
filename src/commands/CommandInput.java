@@ -16,6 +16,7 @@ import util.CommandSequence;
 import util.Parser;
 import util.ParsingInterface;
 import util.StringSequence;
+import util.Exceptions.ExpectedInput;
 
 import model.SlogoModel;
 
@@ -31,36 +32,37 @@ public class CommandInput {
 
 	/**
 	 * return the next String from a Scanner
+	 * @throws ExpectedInput 
 	 */
-	public String getString() {
+	public String getString() throws ExpectedInput {
 		return myParser.getNextString(myLine);
 	}
 
 	/**
 	 * return the next BundledInteger from a Scanner
 	 */
-	public BundledInteger getBundledInt() {
+	public BundledInteger getBundledInt() throws ExpectedInput {
 		return myParser.getNextBundledInt(myLine);
 	}
 
 	/**
 	 * return the next Command Sequence from a Scanner
 	 */
-	public CommandSequence getCommandSequence() {
+	public CommandSequence getCommandSequence() throws ExpectedInput {
 		return myParser.getNextCommandList(myLine);
 	}
 
 	/**
 	 * return the next StringSequence from a Scanner
 	 */
-	public StringSequence getStringSequence() {
+	public StringSequence getStringSequence() throws ExpectedInput {
 		return myParser.getNextStringList(myLine);
 	}
 
 	/**
 	 * return the next BundledInt Sequence from a Scanner
 	 */
-	public BundledIntegerSequence getBundledIntSequence() {
+	public BundledIntegerSequence getBundledIntSequence() throws ExpectedInput {
 		return myParser.getNextBundledIntList(myLine);
 	}
 

@@ -15,11 +15,14 @@ public class CommandSequence {
 	List<Command> myCommandList;
 
 	public CommandSequence() {
-		List<Command> myCommandList = new ArrayList<Command>();
 	}
 
 	public List<Command> getCommandList() {
 		return myCommandList;
+	}
+	
+	public void setCommandList(List<Command> commands) {
+		myCommandList = commands;
 	}
 
 }

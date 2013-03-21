@@ -1,3 +1,4 @@
+
 package commands;
 
 import java.util.List;
@@ -8,38 +9,38 @@ import util.ParsingInterface;
 import util.Exceptions.ExpectedInput;
 
 /**
- * The Repeat Command
+ * The If Command
  * 
  * @author Jack Matteucci
  */
+public class IfCommand extends Command {
+	private BundledInteger myFirst;
+	private List<Command> myCommandList;
 
-public class RepeatCommand extends Command {
-	private BundledInteger myTimes;
-	List<Command> myCommandList;
-
-	public RepeatCommand(CommandInput input) throws ExpectedInput {
+	public IfCommand(CommandInput input) throws ExpectedInput {
 		super(input);
-		myTimes = input.getBundledInt();
+		myFirst = input.getBundledInt();
 		myCommandList = input.getCommandSequence().getCommandList();
 	}
 
-	public RepeatCommand() {
+	public IfCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		Integer myReturn = 0;
-		for (int i = 0; i < myTimes.getInteger(); i++) {
+		if(myFirst.getInteger()!=0){
+			Integer myReturn = 0;
 			for (Command c : myCommandList) {
 				myReturn = c.execute();
 			}
+			return myReturn;
 		}
-		return myReturn;
+		else return 0;
 	}
+
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+		return new IfCommand(super.createCommandInput(parser, line));
 	}
-
 }

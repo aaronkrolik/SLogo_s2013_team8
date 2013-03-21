@@ -7,6 +7,7 @@ import commands.RepeatCommand;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 import model.Turtle;
 
 /**
@@ -18,7 +19,7 @@ import model.Turtle;
 public class BackwardCommand extends TurtleCommand {
 	private BundledInteger myDistance;
 
-	public BackwardCommand(TurtleCommandInput input) {
+	public BackwardCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		myDistance = input.getBundledInt();
 	}
@@ -35,7 +36,7 @@ public class BackwardCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new BackwardCommand(
 				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}

@@ -86,7 +86,12 @@ public class Controller implements IUpdatable {
 		for (int i = 0; i < myModels.size(); i++) {
 			String tmp = myGUIs.get(i).getInputText();
 			myFiles.get(i).println(tmp);
-			myModels.get(i).update(tmp);
+				try {
+					myGUIs.get(i).DisplayReturn(myModels.get(i).update(tmp));
+				} catch (Exception e) {
+					myGUIs.get(i).DisplayException(e.getMessage());
+					e.printStackTrace();
+				}
 			myCanvases.get(i).repaint();
 		}
 

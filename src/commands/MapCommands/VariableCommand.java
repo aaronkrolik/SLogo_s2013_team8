@@ -10,6 +10,7 @@ import commands.RepeatCommand;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
  * A Variable Command that is to be stored in the Command map
@@ -28,7 +29,7 @@ public class VariableCommand extends MapCommand {
 		myVariableInput = vinput;
 	}
 
-	public VariableCommand(MapCommandInput input, VariableInput vinput) {
+	public VariableCommand(MapCommandInput input, VariableInput vinput) throws ExpectedInput {
 		super(input);
 		myVariableList = vinput.getVariableList();
 		myCommandList = vinput.getCommandList();
@@ -56,7 +57,7 @@ public class VariableCommand extends MapCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new VariableCommand((MapCommandInput) super.createCommandInput(
 				parser, line), myVariableInput);
 	}

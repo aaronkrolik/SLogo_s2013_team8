@@ -6,11 +6,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import util.Exceptions.ExpectedInput;
+import util.Exceptions.MisMatchedBrackets;
+
 import commands.AndCommand;
 import commands.Command;
 import commands.CommandInput;
 import commands.DifferenceCommand;
 import commands.EqualCommand;
+import commands.GreaterCommand;
+import commands.IfCommand;
+import commands.IfElseCommand;
+import commands.LessCommand;
 import commands.MinusCommand;
 import commands.NotCommand;
 import commands.NotEqualCommand;
@@ -24,11 +31,21 @@ import commands.MapCommands.MakeCommand;
 import commands.MapCommands.MakeCommand;
 import commands.MapCommands.ToCommand;
 import commands.TurtleCommands.BackwardCommand;
+import commands.TurtleCommands.ClearCommand;
 import commands.TurtleCommands.ForwardCommand;
+import commands.TurtleCommands.GOTOCommand;
+import commands.TurtleCommands.HeadingCommand;
+import commands.TurtleCommands.HideTurtleCommand;
+import commands.TurtleCommands.HomeCommand;
 import commands.TurtleCommands.LeftCommand;
+import commands.TurtleCommands.PenDownPCommand;
 import commands.TurtleCommands.RightCommand;
 import commands.TurtleCommands.SetHeadingCommand;
+import commands.TurtleCommands.ShowTurtleCommand;
+import commands.TurtleCommands.ShowingCommand;
 import commands.TurtleCommands.TowardsCommand;
+import commands.TurtleCommands.XCorCommand;
+import commands.TurtleCommands.YCorCommand;
 
 import model.SlogoModel;
 import model.Turtle;
@@ -54,9 +71,6 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	public Parser(Turtle turtle) {
 		myCommandMap = new HashMap<String, Command>();
 		myVariableMap = new HashMap<String, Integer>();
-		/*
-		 * Maybe a better way?? Make a Factory file?
-		 */
 		Command forward = new ForwardCommand();
 		Command repeat = new RepeatCommand();
 		Command make = new MakeCommand();
@@ -70,7 +84,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		Command and = new AndCommand();
 		Command diff = new DifferenceCommand();
 		Command equal = new EqualCommand();
-		
+
 		Command minus = new MinusCommand();
 		Command not = new NotCommand();
 		Command notE = new NotEqualCommand();
@@ -78,16 +92,70 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		Command product = new ProductCommand();
 		Command quotient = new QuotientCommand();
 		Command mod = new RemainderCommand();
-		
-		myCommandMap.put("MINUS",minus);
+
+		Command ifcommand = new IfCommand();
+		Command ifelse = new IfElseCommand();
+		Command clear = new ClearCommand();
+		Command home = new HomeCommand();
+		Command go = new GOTOCommand();
+		Command heading = new HeadingCommand();
+
+		Command hide = new HideTurtleCommand();
+		Command show = new ShowTurtleCommand();
+		Command showing = new ShowingCommand();
+		Command pendown = new NotEqualCommand();
+		Command penup = new OrCommand();
+		Command penstatus = new PenDownPCommand();
+		Command xcor = new XCorCommand();
+		Command ycor = new YCorCommand();
+		Command less = new LessCommand();
+		Command greater = new GreaterCommand();
+
+		myCommandMap.put("IF", ifcommand);
+		myCommandMap.put("IFELSE", ifelse);
+		myCommandMap.put("SETXY", go);
+		myCommandMap.put("GOTO", go);
+		myCommandMap.put("PENDOWN", pendown);
+		myCommandMap.put("PD", pendown);
+		myCommandMap.put("PENUP", penup);
+		myCommandMap.put("PU", penup);
+		myCommandMap.put("HIDETURTLE", hide);
+		myCommandMap.put("HT", hide);
+		myCommandMap.put("SHOWTURTLE", show);
+		myCommandMap.put("ST", show);
+		myCommandMap.put("HOME", home);
+		myCommandMap.put("CLEARSCREEN", clear);
+		myCommandMap.put("CS", clear);
+		myCommandMap.put("HEADING", heading);
+		myCommandMap.put("XCOR", xcor);
+		myCommandMap.put("YCOR", ycor);
+		myCommandMap.put("PENDOWN?", pendown);
+		myCommandMap.put("PENDOWNP", pendown);
+		myCommandMap.put("SHOWING?", showing);
+		myCommandMap.put("SHOWINGP", showing);
+		myCommandMap.put("YCOR", ycor);
+
+		myCommandMap.put("MINUS", minus);
+		myCommandMap.put("~", minus);
 		myCommandMap.put("NOT", not);
-		myCommandMap.put("NOTEQUAL", notE);
+		myCommandMap.put("NOTEQUAL?", notE);
+		myCommandMap.put("NOTEQUALP", notE);
 		myCommandMap.put("OR", or);
-		myCommandMap.put("PRODUCT",product);
+		myCommandMap.put("PRODUCT", product);
+		myCommandMap.put("*", product);
 		myCommandMap.put("QUOTIENT", quotient);
+		myCommandMap.put("/", quotient);
 		myCommandMap.put("REMAINDER", mod);
-		myCommandMap.put("EQUAL", equal);
+		myCommandMap.put("%", mod);
+
+		myCommandMap.put("GREATER?", greater);
+		myCommandMap.put("GREATERP", greater);
+		myCommandMap.put("LESS?", less);
+		myCommandMap.put("LESSP", less);
+		myCommandMap.put("EQUAL?", equal);
+		myCommandMap.put("EQUALP", equal);
 		myCommandMap.put("DIFFERENCE", diff);
+		myCommandMap.put("-", diff);
 		myCommandMap.put("AND", and);
 		myCommandMap.put("FORWARD", forward);
 		myCommandMap.put("BACK", back);
@@ -95,7 +163,9 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		myCommandMap.put("MAKE", make);
 		myCommandMap.put("SUM", sum);
 		myCommandMap.put("LEFT", left);
-		myCommandMap.put("RIGTH", right);
+		myCommandMap.put("RIGHT", right);
+		myCommandMap.put("LT", left);
+		myCommandMap.put("RT", right);
 		myCommandMap.put("T0", to);
 		myCommandMap.put("FD", forward);
 		myCommandMap.put("BK", back);
@@ -124,7 +194,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	/**
 	 * The method that parses through a command line, to be called in Model
 	 */
-	public List<Command> executeCommandLine(Scanner line) {
+	public List<Command> executeCommandLine(Scanner line) throws Exception {
 		BracketCount = 0;
 		myReturn = new ArrayList<Command>();
 		while (line.hasNext()) {
@@ -144,47 +214,50 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	/**
 	 * a Parsing method to return the next command from a scanner
 	 */
-	public Command getNextCommand(Scanner line) {
+	public Command getNextCommand(Scanner line) throws ExpectedInput {
 		if (line.hasNext()) {
 			String type = line.next();
 			System.out.println(type);
 			if (myCommandMap.containsKey(type)) {
+				System.out.println("Here");
 				Command command = (Command) myCommandMap.get(type);
 				return command.createCommand(this, line);
 			}
 		}
-		return null; // BUG BUG Throw Command not found exception
+		throw new ExpectedInput("Expected Command");
 	}
 
 	/**
 	 * a Parsing method to return a list of Commands from a Scanner
+	 * 
+	 * @throws ExpectedInput
 	 */
-	public CommandSequence getNextCommandList(Scanner line) {
+	public CommandSequence getNextCommandList(Scanner line)
+			throws ExpectedInput {
 		CommandSequence sequence = new CommandSequence();
-		if (line.hasNext()) {
-			if (line.hasNext(FORWARD_BRACKET)) {
-				tallyBrackets(line);
-				line.next();
-				while (!line.hasNext(BACK_BRACKET)) {
-					sequence.getCommandList().add(getNextCommand(line));
-				}
-				tallyBrackets(line);
-				line.next();
+		List<Command> commands = new ArrayList<Command>();
+		if (line.hasNext(FORWARD_BRACKET)) {
+			tallyBrackets(line);
+			line.next();
+			while (!line.hasNext(BACK_BRACKET)) {
+				commands.add(getNextCommand(line));
 			}
+			sequence.setCommandList(commands);
+			tallyBrackets(line);
+			line.next();
 			return sequence;
 		}
-		System.out.println("CommandList");
-		return null;
+		throw new ExpectedInput("expectd Command List");
 	}
 
 	/**
 	 * a Parsing method to return the next String from a Scanner
 	 */
-	public String getNextString(Scanner line) {
+	public String getNextString(Scanner line) throws ExpectedInput {
 		if (line.hasNext()) {
 			return line.next();
 		} else {
-			return ""; // BUG BUG throw String Not found exception
+			throw new ExpectedInput("Expected String");
 		}
 	}
 
@@ -192,43 +265,40 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	 * a Parsing method to return the next list of Stings from a Scanner
 	 */
 
-	public StringSequence getNextStringList(Scanner line) {
+	public StringSequence getNextStringList(Scanner line) throws ExpectedInput {
 		StringSequence sequence = new StringSequence();
 		List<String> strings = new ArrayList<String>();
-		if (line.hasNext()) {
-			if (line.hasNext(FORWARD_BRACKET)) {
-				tallyBrackets(line);
-				line.next();
-				while (!line.hasNext(BACK_BRACKET)) {
-					sequence.getStringList().add(line.next());
-				}
-				tallyBrackets(line);
-				line.next();
+		if (line.hasNext(FORWARD_BRACKET)) {
+			tallyBrackets(line);
+			line.next();
+			while (!line.hasNext(BACK_BRACKET)) {
+				strings.add(line.next());
 			}
+			tallyBrackets(line);
+			line.next();
+			sequence.setStingList(strings);
 			return sequence;
 		}
-		System.out.println("CommandList");
-		return null;
+		throw new ExpectedInput("expectd String List");
 	}
 
 	/**
 	 * a Parsing method to return the next Bundled Integer from a Scanner
 	 */
 
-	public BundledInteger getNextBundledInt(Scanner line) {
+	public BundledInteger getNextBundledInt(Scanner line) throws ExpectedInput {
 		while (line.hasNext(FORWARD_BRACKET)) {
 			tallyBrackets(line);
 			line.next();
 		}
 		if (line.hasNextInt()) {
 			return new BundledInteger(line.nextInt());
-		} else {
-			if (HasCommand(line)) {
-				return new BundledInteger(getNextCommand(line));
-			}
-			String var = putVariable(line);
-			return new BundledInteger(var, myVariableMap);
 		}
+		if (HasCommand(line)) {
+			return new BundledInteger(getNextCommand(line));
+		}
+		String var = putVariable(line);
+		return new BundledInteger(var, myVariableMap);
 	}
 
 	/**
@@ -236,26 +306,25 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	 * Scanner
 	 */
 
-	public BundledIntegerSequence getNextBundledIntList(Scanner line) {
+	public BundledIntegerSequence getNextBundledIntList(Scanner line)
+			throws ExpectedInput {
 		BundledIntegerSequence sequence = new BundledIntegerSequence();
-		if (line.hasNext()) {
-			if (line.hasNext(FORWARD_BRACKET)) {
-				tallyBrackets(line);
-				line.next();
-				while (!line.hasNext(BACK_BRACKET)) {
-					sequence.getBundledIntegerList().add(
-							getNextBundledInt(line));
-				}
-				tallyBrackets(line);
-				line.next();
+		List<BundledInteger> ints = new ArrayList<BundledInteger>();
+		if (line.hasNext(FORWARD_BRACKET)) {
+			tallyBrackets(line);
+			line.next();
+			while (!line.hasNext(BACK_BRACKET)) {
+				ints.add(getNextBundledInt(line));
 			}
+			tallyBrackets(line);
+			line.next();
+			sequence.setBundledIntegerList(ints);
 			return sequence;
 		}
-		System.out.println("CommandList");
-		return null;
+		throw new ExpectedInput("expectd Int List");
 	}
 
-	private String putVariable(Scanner line) {
+	private String putVariable(Scanner line) throws ExpectedInput {
 		String var = getNextString(line);
 		if (var.charAt(0) == VARIABLE_TAG.charAt(0)) {
 			if (!myVariableMap.containsKey(var)) {
@@ -263,7 +332,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			}
 			return var;
 		}
-		return null; // BUG BUG THROW EXCEPTION Variable Not found
+		throw new ExpectedInput("Expected a Variable");
 	}
 
 	private boolean HasCommand(Scanner line) {
@@ -282,13 +351,9 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			BracketCount--;
 	}
 
-	private void checkBrackets() {
+	private void checkBrackets() throws MisMatchedBrackets {
 		if (BracketCount != 0)
-			System.out.println("Mismatched Brackets!"); // BUG BUG, Throw
-														// Mismatched brackets
-														// exception (can change
-														// this method into a
-														// boolean)
+			throw new MisMatchedBrackets("MisMatched Brackets!");
 	}
 
 }

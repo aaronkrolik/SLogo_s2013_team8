@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
  * The Sum Command
@@ -15,7 +16,7 @@ public class DifferenceCommand extends Command {
 	private BundledInteger myFirst;
 	private BundledInteger mySecond;
 
-	public DifferenceCommand(CommandInput input) {
+	public DifferenceCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 		mySecond = input.getBundledInt();
@@ -26,13 +27,11 @@ public class DifferenceCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myFirst.getInteger());
-		System.out.println(mySecond.getInteger());
 		return myFirst.getInteger() - mySecond.getInteger();
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new DifferenceCommand(super.createCommandInput(parser, line));
 	}
 }

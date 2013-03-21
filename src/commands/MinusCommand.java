@@ -5,17 +5,17 @@ import java.util.Scanner;
 
 import util.BundledInteger;
 import util.ParsingInterface;
+import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The Minus Command
  * 
  * @author Jack Matteucci
  */
 public class MinusCommand extends Command {
 	private BundledInteger myFirst;
-	private BundledInteger mySecond;
 
-	public MinusCommand(CommandInput input) {
+	public MinusCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
 	}
@@ -25,13 +25,11 @@ public class MinusCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		System.out.println(myFirst.getInteger());
-		System.out.println(mySecond.getInteger());
 		return myFirst.getInteger()*-1;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new RepeatCommand(super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+		return new MinusCommand(super.createCommandInput(parser, line));
 	}
 }
