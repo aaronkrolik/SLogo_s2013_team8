@@ -1,0 +1,159 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.tools.JavaFileManager.Location;
+
+import model.Turtle;
+import util.Pixmap;
+import view.Canvas;
+import view.SlogoGUI;
+import model.SlogoModel;
+
+
+public class Main {
+  
+	public static final String TITLE = "SLOGO";
+	
+	public Canvas myCanvas;
+	public Graphics myPen;
+	public JFrame myFrame;
+	public Turtle myTurtle;
+	public Pixmap myBackground;
+	
+	/**
+	 * Create the Menu bar
+	 * @return
+	 */
+	
+	
+	private JMenuBar createMenuBar(){
+		JMenuBar myMenuBar;
+		myMenuBar = new JMenuBar();
+		
+		JMenu windowMenu;
+		JMenuItem windowMenuItem;
+		windowMenu = new JMenu("Main");
+		windowMenu.setMnemonic(KeyEvent.VK_M);
+		myMenuBar.add(windowMenu);
+		windowMenuItem = new JMenuItem("New WorkSpace");
+		
+		JMenu backgroundMenu;
+		JMenuItem backgroundMenuItem;
+		backgroundMenu = new JMenu("Background");
+		backgroundMenu.setMnemonic(KeyEvent.VK_N);
+		myMenuBar.add(backgroundMenu);
+		backgroundMenuItem = new JMenuItem("Change Background");
+		
+		JMenu turtleImageMenu;
+		JMenuItem turtleImageMenuItem;
+		turtleImageMenu = new JMenu("Turtle");
+		turtleImageMenu.setMnemonic(KeyEvent.VK_O);
+		myMenuBar.add(turtleImageMenu);
+		turtleImageMenuItem = new JMenuItem("Change Turtle Image");
+		
+		JMenu penColorMenu;
+		JMenuItem penColorMenuItem;
+		penColorMenu = new JMenu("Pen");
+		penColorMenu.setMnemonic(KeyEvent.VK_O);
+		myMenuBar.add(penColorMenu);
+		penColorMenuItem = new JMenuItem("Change Pen Color");
+		
+		ActionListener newWindow = new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				start();
+			}
+		};
+		ActionListener newBackground = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent a) {
+				setBackground();
+			}
+		};
+		ActionListener newTurtleImage = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent b) {
+				setTurtleImage();
+			}
+		};
+		ActionListener newPenColor = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent c) {
+				setPenColor();
+			}
+		};
+				
+		windowMenuItem.addActionListener(newWindow);
+		windowMenu.add(windowMenuItem);
+		
+		backgroundMenuItem.addActionListener(newBackground);
+		backgroundMenu.add(backgroundMenuItem);
+		
+		turtleImageMenuItem.addActionListener(newTurtleImage);
+		turtleImageMenu.add(turtleImageMenuItem);
+		
+		penColorMenuItem.addActionListener(newPenColor);
+		penColorMenu.add(penColorMenuItem);
+		
+		return myMenuBar;
+	}
+
+	/**
+	 * Create the Frame window and start the program.
+	 */
+	public void start(){
+		SlogoModel model = new SlogoModel();
+		SlogoGUI view = new SlogoGUI(model);
+		myFrame = new JFrame(TITLE);
+		myFrame.setJMenuBar(createMenuBar());
+		myFrame.setBounds(200, 25, 900, 650);
+		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		myFrame.getContentPane().add(view);
+		myFrame.setVisible(true);
+		myCanvas = view.getCanvas();
+		myTurtle = model.getTurtle();
+	}
+	
+	public void setBackground() {
+		Pixmap background = myCanvas.getBackgroundImage();
+		background.setImage("Turtle.jpg");
+	}
+	
+	public Pixmap getBackground() {
+		return myBackground;
+	}
+	
+	public void setTurtleImage() {
+		Graphics pen = myFrame.getGraphics();
+		Graphics2D p = (Graphics2D) pen;
+		Pixmap turtleImage = myTurtle.getImage();
+		turtleImage.setImage("Turtle.jpg");
+		Point2D center = myTurtle.currentLocation();
+		Dimension size = myTurtle.getSize();
+		turtleImage.paint(p, center, size);
+	}
+	
+	public void setPenColor() {
+		Graphics pen = myFrame.getGraphics();
+		pen.setColor(Color.blue);
+	}
+	
+	/**
+	 *  Start of the program.
+	 */
+	public static void main (String[] args){
+		// create model and view. Load the model onto the view
+		Main slogo = new Main();
+		slogo.start();
+	}
+}
