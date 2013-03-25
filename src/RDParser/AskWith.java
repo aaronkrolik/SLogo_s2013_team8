@@ -14,9 +14,9 @@ public class AskWith extends TurtleNode{
 	@Override
 	public Value operation(List<Node> args) {
 		Value ret = null;
-		myTurtle.temptel;
+		
 		for ( int x : myTurtle.idCollections() ){
-			myTurtle.tempTel(x)
+			myTurtle.temperarytell(x);
 			if( args.get(0).execute().getValue() == 1 )
 				ret = args.get(1).execute();
 		}
