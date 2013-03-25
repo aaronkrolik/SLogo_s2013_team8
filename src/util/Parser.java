@@ -166,7 +166,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		myCommandMap.put("RIGHT", right);
 		myCommandMap.put("LT", left);
 		myCommandMap.put("RT", right);
-		myCommandMap.put("T0", to);
+		myCommandMap.put("TO", to);
 		myCommandMap.put("FD", forward);
 		myCommandMap.put("BK", back);
 		myCommandMap.put("SET", make);
@@ -223,6 +223,20 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 				Command command = (Command) myCommandMap.get(type);
 				return command.createCommand(this, line);
 			}
+			System.out.println(type);
+		}
+		throw new ExpectedInput("Expected Command");
+	}
+	
+	public Command getNextCommand(String type, Scanner line) throws ExpectedInput {
+		if (line.hasNext()) {
+			System.out.println(type);
+			if (myCommandMap.containsKey(type)) {
+				System.out.println("Here");
+				Command command = (Command) myCommandMap.get(type);
+				return command.createCommand(this, line);
+			}
+			System.out.println(type);
 		}
 		throw new ExpectedInput("Expected Command");
 	}
@@ -249,6 +263,8 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		throw new ExpectedInput("expectd Command List");
 	}
+	
+	
 
 	/**
 	 * a Parsing method to return the next String from a Scanner
@@ -294,10 +310,13 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		if (line.hasNextInt()) {
 			return new BundledInteger(line.nextInt());
 		}
-		if (HasCommand(line)) {
-			return new BundledInteger(getNextCommand(line));
+		String var = line.next();
+		if (myCommandMap.containsKey(var)) {
+			return new BundledInteger(getNextCommand(var, line));
 		}
-		String var = putVariable(line);
+		if (!myVariableMap.containsKey(var)){
+			myVariableMap.put(":" + var, 0);
+		}
 		return new BundledInteger(var, myVariableMap);
 	}
 
@@ -336,8 +355,17 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	}
 
 	private boolean HasCommand(Scanner line) {
-		for (Object s : myCommandMap.keySet()) {
-			if (line.hasNext((String) s)) {
+		for (String s : myCommandMap.keySet()) {
+			if (line.hasNext(s)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean HasVariable(Scanner line) {
+		for (String s : myVariableMap.keySet()) {
+			if (line.hasNext(s)) {
 				return true;
 			}
 		}
