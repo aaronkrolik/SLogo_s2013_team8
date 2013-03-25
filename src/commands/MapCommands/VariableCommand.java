@@ -23,6 +23,7 @@ public class VariableCommand extends MapCommand {
 	List<String> myVariableList;
 	List<BundledInteger> myValueList;
 	VariableInput myVariableInput;
+	String myName;
 
 	public VariableCommand(VariableInput vinput) {
 		super();
@@ -31,6 +32,7 @@ public class VariableCommand extends MapCommand {
 
 	public VariableCommand(MapCommandInput input, VariableInput vinput) throws ExpectedInput {
 		super(input);
+		myVariableInput = vinput;
 		myVariableList = vinput.getVariableList();
 		myCommandList = vinput.getCommandList();
 		if (myVariableList.size() != 0) {
@@ -51,11 +53,19 @@ public class VariableCommand extends MapCommand {
 		System.out.println(myCommandList);
 		Integer myReturn = 0;
 		for (Command c : myCommandList) {
+			if(c.getName().equals(myVariableInput.getName())){
+			c = new VariableCommand(myVariableInput);
+			}
 			myReturn = c.execute();
 		}
 		return myReturn;
 	}
 
+	@Override
+	public String getName(){
+		return myVariableInput.getName();
+	}
+	
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
 		return new VariableCommand((MapCommandInput) super.createCommandInput(

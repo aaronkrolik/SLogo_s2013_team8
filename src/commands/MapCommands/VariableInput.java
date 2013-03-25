@@ -18,6 +18,9 @@ public class VariableInput {
 	List<String> myVariableList;
 	List<Command> myCommandList;
 
+	
+	public VariableInput() {
+	}
 	public VariableInput(String name, List<String> VariableList,
 			List<Command> CommandList) {
 		myName = name;

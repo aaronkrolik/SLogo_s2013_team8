@@ -27,6 +27,7 @@ public class ToCommand extends MapCommand {
 	public ToCommand(MapCommandInput input) throws ExpectedInput {
 		super(input);
 		myName = input.getString();
+		super.getCommandMap().put(myName, new VariableCommand(new VariableInput()));
 		myVariableList = input.getStringSequence().getStringList();
 		myCommandList = input.getCommandSequence().getCommandList();
 		myVariableInput = new VariableInput(myName, myVariableList,

@@ -1,10 +1,17 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Shape;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import util.Vector;
 
 import util.Location;
@@ -37,14 +44,18 @@ public class Turtle {
 	private static final double MAX_Y = BOTTOM_RIGHT.getY();
 	private static final double MIN_X = 0;
 	private static final double MIN_Y = 0;
+	private Map<Integer, Color> myColorMap;
 
-	private List<TurtleActioner> myTurtleActioners;
-	Integer TurtleIndex;
+	private Map<Integer, TurtleActioner> myTurtleActioners;
+	
+	private List<Integer> myTurtleIndex;
+	private List<Integer> myStoredTurtleIndex;
 
 	public Turtle() {
-		myTurtleActioners = new ArrayList<TurtleActioner>();
-		myTurtleActioners.add(new TurtleActioner());
-		TurtleIndex = 0;
+		myTurtleActioners = new HashMap<Integer, TurtleActioner>();
+		myTurtleIndex = new ArrayList<Integer>();
+		myTurtleIndex.add(0);
+		myTurtleActioners.put(myTurtleIndex.get(0), new TurtleActioner());
 	}
 
 	/**
@@ -52,127 +63,311 @@ public class Turtle {
 	 */
 
 	public Integer setCenter(double x, double y) {
-		return myTurtleActioners.get(TurtleIndex).setCenter(x, y);
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).setCenter(x, y);
+		}
+		return returnvalue;
 	}
 
 	/**
 	 * Sets the Center of the Selected TurtleActioner
 	 */
 	public void setCenter(Location newCenter) {
-		myTurtleActioners.get(TurtleIndex).setCenter(newCenter);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setCenter(newCenter);
+		}
 	}
 
 	/**
 	 * Lifts Up the Pen of the Selected TurtleActioner
 	 */
 	public void liftUpPen() {
-		myTurtleActioners.get(TurtleIndex).liftUpPen();
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).liftUpPen();
+		}
 	}
 
 	/**
 	 * Returns the location of the Selected TurtleActioner
 	 */
-	public Location currentLocation() {
-		return myTurtleActioners.get(TurtleIndex).currentLocation();
+	public List<Location> currentLocation() {
+		List<Location> locations = new ArrayList<Location>();
+		for(Integer index: myTurtleIndex){
+			locations.add(myTurtleActioners.get(index).myCenter);
+		}
+		return locations;
 	}
 
 	/**
 	 * Puts down the pen of the Selected TurtleActioner
 	 */
 	public void putDownPen() {
-		myTurtleActioners.get(TurtleIndex).putDownPen();
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).putDownPen();
+		}
 	}
 
 	/**
 	 * Returns Status of the pen of the Selected TurtleActioner
 	 */
 	public boolean IsPenDown() {
-		return myTurtleActioners.get(TurtleIndex).IsPenDown();
+		boolean returnvalue = false;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).IsPenDown();
+		}
+		return returnvalue;
 	}
 	
 	
 	public boolean getVisibility(){
-		return myTurtleActioners.get(TurtleIndex).getVisibility();
+		boolean returnvalue = false;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).getVisibility();
+		}
+		return returnvalue;
 	}
 	
 	public Integer home(){
-		return myTurtleActioners.get(TurtleIndex).home();
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).home();
+		}
+		return returnvalue;
 	}
 	
 	public Integer clear(){
-		return myTurtleActioners.get(TurtleIndex).clear();
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).clear();
+		}
+		return returnvalue;
 	}
 
 	/**
 	 * Changes the visibility of the Selected TurtleActioner
 	 */
 	public void makeVisible() {
-		myTurtleActioners.get(TurtleIndex).makeVisible();
+		for(Integer index: myTurtleIndex){
+			 myTurtleActioners.get(index).makeVisible();
+		}
 	}
 	
 	public void makeInvisible() {
-		myTurtleActioners.get(TurtleIndex).makeInvisible();
+		for(Integer index: myTurtleIndex){
+			 myTurtleActioners.get(index).makeInvisible();
+		}
 	}
 
 	public Integer xcor(){
-		return myTurtleActioners.get(TurtleIndex).xcor();
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).xcor();
+		}
+		return returnvalue;
 	}
 	
 	public Integer ycor(){
-		return myTurtleActioners.get(TurtleIndex).ycor();
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).ycor();
+		}
+		return returnvalue;
 	}
 	
 	public Integer heading(){
-		return myTurtleActioners.get(TurtleIndex).heading();
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).heading();
+		}
+		return returnvalue;
 	}
 
 	/**
 	 * Moves the Selected TurtleActioner forward
 	 */
 	public void forward(double pixels) {
-		myTurtleActioners.get(TurtleIndex).forward(pixels);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).forward(pixels);
+		}
 	}
 
 	/**
 	 * Turns the Selected TurtleActioner right by certain angle
 	 */
 	public void right(double angle) {
-		myTurtleActioners.get(TurtleIndex).right(angle);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).right(angle);
+		}
 	}
 
 	/**
 	 * Turns the Selected TurtleActioner left by certain angle
 	 */
 	public void left(double angle) {
-		myTurtleActioners.get(TurtleIndex).left(angle);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).left(angle);
+		}
 	}
 
 	/**
 	 * Moves the Selected TurtleActioner backward
 	 */
 	public void backward(double pixels) {
-		myTurtleActioners.get(TurtleIndex).backward(pixels);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).backward(pixels);
+		}
 	}
 
 	/**
 	 * Sets the Selected TurtleActioner heading in a certain direction
 	 */
 	public Integer setheading(Integer direction) {
-		return myTurtleActioners.get(TurtleIndex).setheading(direction);
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).setheading(direction);
+		}
+		return returnvalue;
 	}
 
 	/**
 	 * Sets the Selected TurtleActioner toward a certain coordinate
 	 */
 	public Integer towards(double x, double y) {
-		return myTurtleActioners.get(TurtleIndex).towards(x, y);
+		Integer returnvalue = 0;
+		for(Integer index: myTurtleIndex){
+			returnvalue = myTurtleActioners.get(index).towards(x, y) ;
+		}
+		return returnvalue;
 	}
+	
+	
+	public void setImage(Pixmap pic) {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setImage(pic);
+		}
+	}
+	
+	public void turnOnHighlight() {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).turnOnHighlight();
+		}
+	}
+	
+	public void turnOffHighlight() {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).turnOffHighlight();
+		}
+	}
+
 
 	/**
 	 * Display this shape on the screen.
 	 */
 	public void paint(Graphics2D pen) {
-		myTurtleActioners.get(TurtleIndex).paint(pen);
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).paint(pen);
+		}
+	}
+	
+	private Integer tellmapper(Integer id, Collection<Integer> turtleindexes) {
+			if(!myTurtleActioners.containsKey(id)){
+				myTurtleActioners.put(id, new TurtleActioner());
+			}
+			turtleindexes.add(id);
+		return id;
+	}
+	
+	public Integer tell(Collection<Integer> ids) {
+		myTurtleIndex.clear();
+		Integer returnvalue = 0;
+		for(Integer id : ids){
+			returnvalue = tellmapper(id, myTurtleIndex);
+		}
+		return returnvalue;
+	}
+	
+	public Integer tellodd() {
+		myTurtleIndex.clear();
+		Integer returnvalue = 0;
+		for(Integer id : IdCollection()){
+			if(id%2 == 1){
+				returnvalue = tellmapper(id,myTurtleIndex);
+			}
+		}
+		return returnvalue;
+	}
+	
+	public Integer telleven() {
+		myTurtleIndex.clear();
+		Integer returnvalue = 0;
+		for(Integer id : IdCollection()){
+			if(id%2 == 0){
+				returnvalue = tellmapper(id, myTurtleIndex);
+		}
+		}
+		return returnvalue;
+	}
+	
+	public void temperarytell(Collection<Integer> ids) {
+		myStoredTurtleIndex.clear();
+		for(Integer id : myTurtleIndex){
+			tellmapper(id, myStoredTurtleIndex);
+		}
+		for(Integer id : ids){
+			tellmapper(id, myTurtleIndex);
+		}
+	}
+	
+	/**
+	 * Convenience method
+	 */
+	public void temperarytell(Integer id) {
+		myStoredTurtleIndex.clear();
+		for(Integer i : myTurtleIndex){
+			tellmapper(i, myStoredTurtleIndex);
+		}
+			tellmapper(id, myTurtleIndex);
+	}
+	
+	public Collection<Integer> IdCollection() {
+		return myTurtleActioners.keySet();
+	}
+	
+	public void setprevioustell() {
+		myTurtleIndex.clear();
+		for(Integer id : myStoredTurtleIndex){
+			tellmapper(id, myTurtleIndex);
+		}
+	}
+	
+	public void stamp(){
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).stamp();
+		}
+	}
+	public void clearstamps(){
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).clearstamps();
+		}
+	}
+	
+	public void setpencolor(Color color){
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setpencolor(color);
+		}
+	}
+	
+	public void setpensize(int size){
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setpensize(size);
+		}
+	}
+	
+	public void setshape(Shape shape){
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setshape(shape);
+		}
 	}
 
 	private class TurtleActioner {
@@ -180,6 +375,7 @@ public class Turtle {
 		private Location myCenter;
 		private Location myLastCenter;
 		private Location myOriginalCenter;
+		private List<Location> myStamps;
 
 		private Dimension mySize;
 		private Pixmap myView;
@@ -190,15 +386,23 @@ public class Turtle {
 		private List<StraightLine> myLines;
 		private int initialX = (Canvas.CANVAS_WIDTH ) / 2;
 		private int initialY = (Canvas.CANVAS_HEIGHT) / 2;
+		private int myPenSize;
+		private Color myPenColor;
+		private Shape myShape;
+		private boolean highlight;
 
-		protected TurtleActioner() {
+		private TurtleActioner() {
 			myLines = new ArrayList<StraightLine>();
+			myStamps = new ArrayList<Location>();
 			myDirection = INITIAL_DIRECTION;
 			myCenter = new Location(initialX, initialY);
 			myView = myPicture;
 			mySize = SIZE;
 			myPenStatus = true;
 			myVisibilityStatus = true;
+			myPenSize = 1;
+			myPenColor = Color.BLACK;
+			highlight = false;
 		}
 
 		/**
@@ -309,6 +513,25 @@ public class Turtle {
 		private Integer heading(){
 			return (int) myDirection;
 		}
+		
+		private void stamp(){
+			myStamps.add(new Location(myCenter.getX(), myCenter.getY()));
+		}
+		private void clearstamps(){
+			myStamps.clear();
+		}
+		
+		private void setpencolor(Color color){
+			myPenColor = color;
+		}
+		
+		private void setpensize(int pixels){
+			myPenSize = pixels;
+		}
+		
+		private void setshape(Shape shape){
+			myShape = shape;
+		}
 
 		/**
 		 * Display this shape on the screen.
@@ -317,16 +540,26 @@ public class Turtle {
 			if (myVisibilityStatus) {
 				myView.paint(pen, myCenter, mySize, myDirection);
 			}
+			if(highlight){
+				pen.setColor(Color.RED);
+				pen.drawRect((int) myCenter.getX() - WIDTH_OF_TURTLE_ICON/2,
+							(int)myCenter.getY()- HEIGHT_OF_TURTLE_ICON/2, 
+							 WIDTH_OF_TURTLE_ICON, 
+							HEIGHT_OF_TURTLE_ICON);
+			}
 
 			for (StraightLine l : myLines) {
 				l.paint(pen);
+			}
+			for (Location l : myStamps) {
+				myView.paint(pen, l, mySize, myDirection);
 			}
 		}
 
 
 		private void makeLine() {
 			if (myPenStatus) {
-				myLines.add(new StraightLine(myLastCenter, myCenter));
+				myLines.add(new StraightLine(myLastCenter, myCenter, myPenColor, myPenSize));
 			}
 		}
 
@@ -420,6 +653,16 @@ public class Turtle {
 			while (Angle < 0)
 				Angle += 360;
 			return Angle;
+		}
+		
+		private void setImage(Pixmap pic){
+			myView = pic;
+		}
+		private void turnOnHighlight(){
+			highlight = true;
+		}
+		private void turnOffHighlight(){
+			highlight = false;
 		}
 
 	}
