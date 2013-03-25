@@ -5,17 +5,28 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import model.Turtle;
+
 public abstract class RDParser {
 	private Map<String, String> Grammar;
+	private Turtle turtle;
 
 	public RDParser() {
 		Grammar = new LinkedHashMap<String, String>();
 		setGrammar();
 	}
 
+	RDParser(Turtle turtleIn){
+		this();
+		turtle = turtleIn;
+		
+	}
+	
 	public RDParser(Map<String, String> in) {
 		Grammar = in;
 	}
+	
+	
 
 	private void setGrammar() {
 		Grammar = subGrammar();
@@ -79,6 +90,12 @@ public abstract class RDParser {
 		}
 		else if (in.equals("If")){
 			return new If();
+		}
+		else if (in.equals("Forward")){
+			return new Forward(turtle);
+		}
+		else if (in.equals("Repeat")){
+			return new Repeat();
 		}
 		try  
 		  {  
