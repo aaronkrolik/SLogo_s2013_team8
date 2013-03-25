@@ -10,7 +10,7 @@ public class TestParser {
 		Map<Integer, String> map = new LinkedHashMap<Integer, String>();
 		
 		//String testStr = "If + 1 1 Make foo + + 50 60 70";
-		String testStr = "[ + 50 50 ]";
+		String testStr = "Repeat 3 [ + 50 50 ]";
 		Scanner testScanner = new Scanner(testStr);
 		RDParser parser = new RDParserSLogo();
 		Node root = parser.parse(testScanner);
@@ -18,7 +18,7 @@ public class TestParser {
 		System.out.println(x.getValue());
 		parser.printGrammar();
 		return;
-		
+
 	}
 
 }

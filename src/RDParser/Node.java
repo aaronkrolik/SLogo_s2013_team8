@@ -25,6 +25,7 @@ public abstract class Node implements IExecute, IOperation{
 	}
 	
 	public int getChildrenNumber(){
+	
 		return myChildren.size();
 	}
 	

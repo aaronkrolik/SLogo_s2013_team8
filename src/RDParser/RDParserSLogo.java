@@ -3,11 +3,18 @@ package RDParser;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Turtle;
+
 public class RDParserSLogo extends RDParser{
 	
-	public RDParserSLogo(){
-		super();
+	public RDParserSLogo(Turtle turtle){
+		super(turtle);
 	}
+	
+	public RDParserSLogo(){
+		this(new Turtle());
+	}
+	
 	
 	public RDParserSLogo(Map<String, String> in){
 		super(in);

@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+import RDParser.Node;
+import RDParser.RDParser;
+import RDParser.RDParserSLogo;
+
 import commands.Command;
 import util.Parser;
 import view.Canvas;
@@ -25,7 +29,8 @@ public class SlogoModel {
 
 	private Turtle myTurtle;
 	private Scanner myTestLine;
-	private Parser myParser;
+	//private Parser myParser;
+	private RDParser myParser;
 	private List<Command> myCommandList;
 
 	/**
@@ -33,7 +38,7 @@ public class SlogoModel {
 	 */
 	public SlogoModel() {
 		myTurtle = new Turtle();
-		myParser = new Parser(myTurtle);
+		myParser = new RDParserSLogo(myTurtle);
 	}
 
 	public Turtle getTurtle() {
@@ -54,11 +59,7 @@ public class SlogoModel {
 	public int update(String str) throws Exception {
 		Dimension bounds = Canvas.CANVAS_SIZE;
 		myTestLine = new Scanner(str);
-		myCommandList = myParser.executeCommandLine(myTestLine);
-		int myReturn = 0;
-		for (Command c : myCommandList) {
-			myReturn = c.execute();
-		}
-		return myReturn;
+		Node root = myParser.parse(myTestLine);
+		return root.execute().getValue();
 	}
 }
