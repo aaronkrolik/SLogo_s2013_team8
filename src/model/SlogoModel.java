@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 import commands.Command;
+import util.ColorController;
 import util.Parser;
+import util.ShapeController;
 import view.Canvas;
 
 /**
@@ -28,6 +30,8 @@ public class SlogoModel {
 	private Scanner myTestLine;
 	private Parser myParser;
 	private List<Command> myCommandList;
+	private ColorController myColorController;
+	private ShapeController myShapeController;
 
 	/**
 	 * Create a game of the given size with the given display for its shapes.
@@ -35,6 +39,8 @@ public class SlogoModel {
 	public SlogoModel() {
 		myTurtle = new Turtle();
 		myParser = new Parser(myTurtle);
+		myColorController = new ColorController();
+		myShapeController = new ShapeController();
 	}
 
 	public Turtle getTurtle() {
