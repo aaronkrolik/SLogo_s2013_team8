@@ -240,6 +240,26 @@ public class Turtle {
 		}
 		return returnvalue;
 	}
+	
+	
+	public void setImage(Pixmap pic) {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).setImage(pic);
+		}
+	}
+	
+	public void turnOnHighlight() {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).turnOnHighlight();
+		}
+	}
+	
+	public void turnOffHighlight() {
+		for(Integer index: myTurtleIndex){
+			myTurtleActioners.get(index).turnOffHighlight();
+		}
+	}
+
 
 	/**
 	 * Display this shape on the screen.
@@ -369,6 +389,7 @@ public class Turtle {
 		private int myPenSize;
 		private Color myPenColor;
 		private Shape myShape;
+		private boolean highlight;
 
 		private TurtleActioner() {
 			myLines = new ArrayList<StraightLine>();
@@ -381,6 +402,7 @@ public class Turtle {
 			myVisibilityStatus = true;
 			myPenSize = 1;
 			myPenColor = Color.BLACK;
+			highlight = false;
 		}
 
 		/**
@@ -518,6 +540,13 @@ public class Turtle {
 			if (myVisibilityStatus) {
 				myView.paint(pen, myCenter, mySize, myDirection);
 			}
+			if(highlight){
+				pen.setColor(Color.RED);
+				pen.drawRect((int) myCenter.getX() - WIDTH_OF_TURTLE_ICON/2,
+							(int)myCenter.getY()- HEIGHT_OF_TURTLE_ICON/2, 
+							 WIDTH_OF_TURTLE_ICON, 
+							HEIGHT_OF_TURTLE_ICON);
+			}
 
 			for (StraightLine l : myLines) {
 				l.paint(pen);
@@ -624,6 +653,16 @@ public class Turtle {
 			while (Angle < 0)
 				Angle += 360;
 			return Angle;
+		}
+		
+		private void setImage(Pixmap pic){
+			myView = pic;
+		}
+		private void turnOnHighlight(){
+			highlight = true;
+		}
+		private void turnOffHighlight(){
+			highlight = false;
 		}
 
 	}

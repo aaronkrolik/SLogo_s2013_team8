@@ -41,15 +41,15 @@ public class Controller implements IUpdatable {
 		System.out.println();
 
 		SlogoModel tempModel = newModel();
-		Canvas tempCanvas = newCanvas(tempModel);
-		SlogoGUI tempGUI = newGUI(tempModel, tempCanvas);
-	//	PrintWriter tempPW = newPW("SLOGO_"
+		//Canvas tempCanvas = newCanvas(tempModel);
+		SlogoGUI tempGUI = newGUI(tempModel);
+		//	PrintWriter tempPW = newPW("SLOGO_"
 		//		+ myDateFormat.format(myCal.getTime()) + ".txt");
 
 		myModels.add(tempModel);
-		myCanvases.add(tempCanvas);
+		//myCanvases.add(tempCanvas);
 		myGUIs.add(tempGUI);
-	//	myFiles.add(tempPW);
+		//	myFiles.add(tempPW);
 
 		JFrame frame = new JFrame("SLOGO");
 		frame.setBounds(100, 100, 800, 600);
@@ -74,8 +74,8 @@ public class Controller implements IUpdatable {
 		return new SlogoModel();
 	}
 
-	private SlogoGUI newGUI(SlogoModel in, Canvas inCanvas) {
-		return new SlogoGUI(in, inCanvas, this);
+	private SlogoGUI newGUI(SlogoModel in) {
+		return new SlogoGUI(in, this);
 	}
 
 	private Canvas newCanvas(SlogoModel in) {
@@ -86,12 +86,12 @@ public class Controller implements IUpdatable {
 		for (int i = 0; i < myModels.size(); i++) {
 			String tmp = myGUIs.get(i).getInputText();
 			//myFiles.get(i).println(tmp);
-				try {
-					myGUIs.get(i).DisplayReturn(myModels.get(i).update(tmp));
-				} catch (Exception e) {
-					myGUIs.get(i).DisplayException(e.getMessage());
-					e.printStackTrace();
-				}
+			try {
+				myGUIs.get(i).DisplayReturn(myModels.get(i).update(tmp));
+			} catch (Exception e) {
+				//myGUIs.get(i).DisplayException(e.getMessage());
+				e.printStackTrace();
+			}
 			myCanvases.get(i).repaint();
 		}
 
