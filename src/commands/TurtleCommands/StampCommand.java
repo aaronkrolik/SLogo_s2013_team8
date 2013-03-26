@@ -11,7 +11,7 @@ import util.Exceptions.ExpectedInput;
 import model.Turtle;
 
 /**
- * Backward Command
+ * Stamp Command
  * 
  * @author Jack Matteucci
  */

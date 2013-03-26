@@ -158,6 +158,17 @@ public class Turtle {
 			 myTurtleActioners.get(index).makeVisible();
 		}
 	}
+	/**
+	 * 
+	 * @return last idx of turtle, otherwise 0
+	 */
+	public Integer getTurtleID() {
+		int ret = 0;
+		for (Integer i : myTurtleIndex){
+			ret = i;
+		}
+		return ret;
+	}
 	
 	public void makeInvisible() {
 		for(Integer index: myTurtleIndex){
