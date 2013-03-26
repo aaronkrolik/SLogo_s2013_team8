@@ -119,7 +119,10 @@ public class Turtle {
 		return returnvalue;
 	}
 	
-	
+	/**
+	 * checks turtle's visibility
+	 * @return is turtle visible?
+	 */
 	public boolean getVisibility(){
 		boolean returnvalue = false;
 		for(Integer index: myTurtleIndex){
@@ -127,7 +130,10 @@ public class Turtle {
 		}
 		return returnvalue;
 	}
-	
+	/**
+	 * get turtle
+	 * @return last turtle's home coordinate otherwise 0
+	 */
 	public Integer home(){
 		Integer returnvalue = 0;
 		for(Integer index: myTurtleIndex){
@@ -241,19 +247,27 @@ public class Turtle {
 		return returnvalue;
 	}
 	
-	
+	/**
+	 * Set image for turtles
+	 * @param pic to set
+	 */
 	public void setImage(Pixmap pic) {
 		for(Integer index: myTurtleIndex){
 			myTurtleActioners.get(index).setImage(pic);
 		}
 	}
 	
+	/**
+	 * turn on highlight line
+	 */
 	public void turnOnHighlight() {
 		for(Integer index: myTurtleIndex){
 			myTurtleActioners.get(index).turnOnHighlight();
 		}
 	}
-	
+	/**
+	 * turn off highlight line
+	 */	
 	public void turnOffHighlight() {
 		for(Integer index: myTurtleIndex){
 			myTurtleActioners.get(index).turnOffHighlight();
@@ -265,7 +279,7 @@ public class Turtle {
 	 * Display this shape on the screen.
 	 */
 	public void paint(Graphics2D pen) {
-		for(Integer index: myTurtleIndex){
+		for(Integer index: myTurtleActioners.keySet()){
 			myTurtleActioners.get(index).paint(pen);
 		}
 	}
@@ -278,6 +292,11 @@ public class Turtle {
 		return id;
 	}
 	
+	/**
+	 * set active turtles
+	 * @param ids the indices of turtles to be active
+	 * @return confirmation of last turtle
+	 */
 	public Integer tell(Collection<Integer> ids) {
 		myTurtleIndex.clear();
 		Integer returnvalue = 0;
@@ -287,6 +306,10 @@ public class Turtle {
 		return returnvalue;
 	}
 	
+	/**
+	 * make turtles with odd indices active
+	 * @return confirmation of last turtle active
+	 */
 	public Integer tellodd() {
 		myTurtleIndex.clear();
 		Integer returnvalue = 0;
@@ -298,6 +321,10 @@ public class Turtle {
 		return returnvalue;
 	}
 	
+	/**
+	 * make even turtles active
+	 * @return confirmation of last turtle active
+	 */
 	public Integer telleven() {
 		myTurtleIndex.clear();
 		Integer returnvalue = 0;
@@ -309,6 +336,10 @@ public class Turtle {
 		return returnvalue;
 	}
 	
+	/**
+	 * temp tell specific turtles to be active
+	 * @param ids are the indicies of turtles to activate
+	 */
 	public void temperarytell(Collection<Integer> ids) {
 		myStoredTurtleIndex.clear();
 		for(Integer id : myTurtleIndex){
@@ -330,10 +361,17 @@ public class Turtle {
 			tellmapper(id, myTurtleIndex);
 	}
 	
+	/**
+	 * 
+	 * @return indices of all turtles
+	 */
 	public Collection<Integer> IdCollection() {
 		return myTurtleActioners.keySet();
 	}
-	
+	 
+	/**
+	 * sets active turtles to previously active turtles
+	 */
 	public void setprevioustell() {
 		myTurtleIndex.clear();
 		for(Integer id : myStoredTurtleIndex){
@@ -341,11 +379,13 @@ public class Turtle {
 		}
 	}
 	
+	
 	public void stamp(){
 		for(Integer index: myTurtleIndex){
 			myTurtleActioners.get(index).stamp();
 		}
 	}
+	
 	public void clearstamps(){
 		for(Integer index: myTurtleIndex){
 			myTurtleActioners.get(index).clearstamps();
@@ -420,11 +460,21 @@ public class Turtle {
 			return distance;
 		}
 		
+		/**
+		 * adjusts coordinates to account for canvas width
+		 * @param x (double) x coordinate
+		 * @param y (double) y coordinate
+		 */
 		private void ConvertInputCoor(double x, double y){
 			x = (int) (x + (Canvas.CANVAS_WIDTH ) / 2); 
 			y = (int) (x + (Canvas.CANVAS_HEIGHT ) / 2); 
 		}
 		
+		/**
+		 * adjusts coordinates to account for canvas width
+		 * @param x (double) x coordinate
+		 * @param y (double) y coordinate
+		 */
 		private void ConvertOutgoingCoor(double x, double y){
 			x = (int) (x - (Canvas.CANVAS_WIDTH ) / 2); 
 			y = (int) (x - (Canvas.CANVAS_HEIGHT ) / 2); 
@@ -438,6 +488,10 @@ public class Turtle {
 			myPenStatus = false;
 		}
 
+		/**
+		 * get turtle's center coordinate
+		 * @return turtle's center
+		 */
 		private Location currentLocation() {
 			return myCenter;
 		}
@@ -446,6 +500,10 @@ public class Turtle {
 			myPenStatus = true;
 		}
 
+		/**
+		 * get status of pen
+		 * @return pen status (is pen down?)
+		 */
 		private boolean IsPenDown() {
 			return myPenStatus;
 		}
@@ -462,9 +520,14 @@ public class Turtle {
 			return myVisibilityStatus;
 		}
 		
+		/**
+		 * reset turtle to home
+		 * @return 
+		 */
 		private Integer home(){
 			return setCenter(initialX, initialY);
 		}
+		
 		
 		private Integer clear(){
 			myLines.clear();
