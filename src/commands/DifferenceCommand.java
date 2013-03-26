@@ -8,7 +8,7 @@ import util.ParsingInterface;
 import util.Exceptions.ExpectedInput;
 
 /**
- * The Sum Command
+ * The Difference Command
  * 
  * @author Jack Matteucci
  */

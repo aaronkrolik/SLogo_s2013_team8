@@ -13,7 +13,7 @@ import view.Canvas;
 import model.Turtle;
 
 /**
- * PenDown Command
+ * Set Background command
  * 
  * @author Jack Matteucci
  */

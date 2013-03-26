@@ -13,7 +13,7 @@ import util.Exceptions.ExpectedInput;
 import model.Turtle;
 
 /**
- * Backward Command
+ * Tell Odd command
  * 
  * @author Jack Matteucci
  */
