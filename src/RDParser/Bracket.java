@@ -2,8 +2,7 @@ package RDParser;
 
 import java.util.List;
 
-public class Bracket extends Node{
-
+public class Bracket extends Node {
 
 	@Override
 	protected boolean checkBounds(int length) {

@@ -27,7 +27,7 @@ public class ColorCommandInput extends CommandInput {
 	public ColorController getColors() {
 		return myColors;
 	}
-	
+
 	public Canvas getCanvas() {
 		return myCanvas;
 	}

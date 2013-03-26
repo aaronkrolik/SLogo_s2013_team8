@@ -1,4 +1,3 @@
-
 package commands.ColorCommands;
 
 import java.awt.Color;
@@ -41,9 +40,10 @@ public class SetBackGroundCommand extends ColorCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new SetBackGroundCommand((ColorCommandInput) super.createCommandInput(
-				parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new SetBackGroundCommand(
+				(ColorCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

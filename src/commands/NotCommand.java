@@ -1,5 +1,3 @@
-
-
 package commands;
 
 import java.util.Scanner;
@@ -20,7 +18,7 @@ public class NotCommand extends Command {
 	public NotCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
-		
+
 	}
 
 	public NotCommand() {
@@ -33,7 +31,8 @@ public class NotCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new NotCommand(super.createCommandInput(parser, line));
 	}
 }

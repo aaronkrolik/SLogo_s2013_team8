@@ -36,7 +36,8 @@ public class BackwardCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new BackwardCommand(
 				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}

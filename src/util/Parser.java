@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
 import util.Exceptions.ExpectedInput;
 import util.Exceptions.MisMatchedBrackets;
 
@@ -91,9 +90,10 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		return myTurtle;
 	}
 
-	public ColorController getColors(){
+	public ColorController getColors() {
 		return myColorController;
 	}
+
 	/**
 	 * The method that parses through a command line, to be called in Model
 	 */
@@ -131,8 +131,9 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		throw new ExpectedInput("Expected Command");
 	}
-	
-	public Command getNextCommand(String type, Scanner line) throws ExpectedInput {
+
+	public Command getNextCommand(String type, Scanner line)
+			throws ExpectedInput {
 		if (line.hasNext()) {
 			type.toLowerCase();
 			System.out.println(type);
@@ -151,8 +152,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	 * 
 	 * @throws ExpectedInput
 	 */
-	public List<Command> getNextCommandList(Scanner line)
-			throws ExpectedInput {
+	public List<Command> getNextCommandList(Scanner line) throws ExpectedInput {
 
 		List<Command> commands = new ArrayList<Command>();
 		if (line.hasNext(FORWARD_BRACKET)) {
@@ -167,8 +167,6 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		throw new ExpectedInput("expectd Command List");
 	}
-	
-	
 
 	/**
 	 * a Parsing method to return the next String from a Scanner
@@ -216,7 +214,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		if (myCommandMap.containsKey(var)) {
 			return new BundledInteger(getNextCommand(var, line));
 		}
-		if (!myVariableMap.containsKey(var)){
+		if (!myVariableMap.containsKey(var)) {
 			myVariableMap.put(":" + var, 0);
 		}
 		return new BundledInteger(var, myVariableMap);
@@ -234,7 +232,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			tallyBrackets(line);
 			line.next();
 			while (!line.hasNext(BACK_BRACKET)) {
-				BundledInteger  a = getNextBundledInt(line);
+				BundledInteger a = getNextBundledInt(line);
 				System.out.println("Printing out the integer" + a.getInteger());
 				ints.add(a);
 			}
@@ -264,7 +262,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		}
 		return false;
 	}
-	
+
 	private boolean HasVariable(Scanner line) {
 		for (String s : myVariableMap.keySet()) {
 			if (line.hasNext(s)) {

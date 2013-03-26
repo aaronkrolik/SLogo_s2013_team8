@@ -38,7 +38,8 @@ public class MakeCommand extends MapCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new MakeCommand((MapCommandInput) super.createCommandInput(
 				parser, line));
 	}

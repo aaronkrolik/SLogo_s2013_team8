@@ -20,7 +20,7 @@ public class StringSequence {
 	public List<String> getStringList() {
 		return myStringList;
 	}
-	
+
 	public void setStingList(List<String> strings) {
 		myStringList = strings;
 	}

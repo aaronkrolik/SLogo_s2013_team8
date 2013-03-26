@@ -32,7 +32,8 @@ public class CommandInput {
 
 	/**
 	 * return the next String from a Scanner
-	 * @throws ExpectedInput 
+	 * 
+	 * @throws ExpectedInput
 	 */
 	public String getString() throws ExpectedInput {
 		return myParser.getNextString(myLine);

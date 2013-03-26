@@ -21,6 +21,7 @@ import model.Turtle;
 public class TellCommand extends TurtleCommand {
 
 	private List<BundledInteger> myids;
+
 	public TellCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		myids = input.getBundledIntList();
@@ -33,8 +34,8 @@ public class TellCommand extends TurtleCommand {
 	public Integer execute() {
 		List<Integer> ids = new ArrayList<Integer>();
 
-		for(BundledInteger i : myids){
-			System.out.println(i.getInteger()+" foo");
+		for (BundledInteger i : myids) {
+			System.out.println(i.getInteger() + " foo");
 			ids.add(i.getInteger());
 		}
 		super.getTurtle().tell(ids);
@@ -42,8 +43,9 @@ public class TellCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new TellCommand(
-				(TurtleCommandInput) super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new TellCommand((TurtleCommandInput) super.createCommandInput(
+				parser, line));
 	}
 }

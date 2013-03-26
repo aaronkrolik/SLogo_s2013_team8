@@ -19,13 +19,13 @@ public abstract class BinaryNode extends Node {
 		}
 		return false;
 	}
-	
-	protected boolean checkBounds(int in){
-		return (in<=2);
+
+	protected boolean checkBounds(int in) {
+		return (in <= 2);
 	}
 
 	abstract boolean checkChild0(Node in);
-	abstract boolean checkChild1(Node in);
 
+	abstract boolean checkChild1(Node in);
 
 }

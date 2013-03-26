@@ -1,4 +1,3 @@
-
 package commands.ColorCommands;
 
 import java.awt.Color;
@@ -27,16 +26,15 @@ public class SetPaletteCommand extends ColorCommand {
 	BundledInteger r;
 	BundledInteger g;
 	BundledInteger b;
-	
 
 	public SetPaletteCommand(ColorCommandInput input) throws ExpectedInput {
 		super(input);
 		myCanvas = input.getCanvas();
 		index = input.getBundledInt();
-		r= input.getBundledInt();
+		r = input.getBundledInt();
 		g = input.getBundledInt();
 		b = input.getBundledInt();
-		
+
 	}
 
 	public SetPaletteCommand() {
@@ -44,14 +42,19 @@ public class SetPaletteCommand extends ColorCommand {
 
 	@Override
 	public Integer execute() {
-		super.getColors().getMap().put(index.getInteger(), ColorController.RGBtoColor(r.getInteger(), g.getInteger(), b.getInteger()));
+		super.getColors()
+				.getMap()
+				.put(index.getInteger(),
+						ColorController.RGBtoColor(r.getInteger(),
+								g.getInteger(), b.getInteger()));
 		return index.getInteger();
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new SetPaletteCommand((ColorCommandInput) super.createCommandInput(
-				parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new SetPaletteCommand(
+				(ColorCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

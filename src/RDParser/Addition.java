@@ -2,12 +2,12 @@ package RDParser;
 
 import java.util.List;
 
-public class Addition extends BinaryNode{
+public class Addition extends BinaryNode {
 
 	@Override
 	public Value operation(List<Node> args) {
 		int temp = 0;
-		for(Node x : args){
+		for (Node x : args) {
 			Value tempVal = x.execute();
 			temp += tempVal.getValue();
 		}
@@ -18,13 +18,12 @@ public class Addition extends BinaryNode{
 	protected boolean checkChild(int idx, Node in) {
 		return true;
 	}
-	
-	protected boolean checkBounds(int in){
-		return in<=2;
+
+	protected boolean checkBounds(int in) {
+		return in <= 2;
 	}
-	
-	
-	public String toString(){
+
+	public String toString() {
 		return "Addition";
 	}
 

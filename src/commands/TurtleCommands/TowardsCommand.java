@@ -37,7 +37,8 @@ public class TowardsCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new TowardsCommand(
 				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}

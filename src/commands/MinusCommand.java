@@ -1,4 +1,3 @@
-
 package commands;
 
 import java.util.Scanner;
@@ -25,11 +24,12 @@ public class MinusCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		return myFirst.getInteger()*-1;
+		return myFirst.getInteger() * -1;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new MinusCommand(super.createCommandInput(parser, line));
 	}
 }

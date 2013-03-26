@@ -30,10 +30,12 @@ public abstract class Command {
 
 	public abstract Integer execute();
 
-	public String getName(){
+	public String getName() {
 		return "command";
 	}
-	public abstract Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput;
+
+	public abstract Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput;
 
 	protected CommandInput createCommandInput(ParsingInterface parser,
 			Scanner line) {

@@ -3,10 +3,9 @@ package RDParser;
 import java.util.List;
 import model.Turtle;
 
-public abstract class TurtleNode extends Node{
+public abstract class TurtleNode extends Node {
 
-	
-	public TurtleNode(){
+	public TurtleNode() {
 		super();
 	}
 
@@ -14,8 +13,8 @@ public abstract class TurtleNode extends Node{
 	public boolean isLeaf() {
 		return false;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return "turtleNode";
 	}
 
@@ -29,6 +28,5 @@ public abstract class TurtleNode extends Node{
 	protected boolean checkChild(int length, Node in) {
 		return true;
 	}
-	
 
 }

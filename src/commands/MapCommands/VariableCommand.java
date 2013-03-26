@@ -30,7 +30,8 @@ public class VariableCommand extends MapCommand {
 		myVariableInput = vinput;
 	}
 
-	public VariableCommand(MapCommandInput input, VariableInput vinput) throws ExpectedInput {
+	public VariableCommand(MapCommandInput input, VariableInput vinput)
+			throws ExpectedInput {
 		super(input);
 		myVariableInput = vinput;
 		myVariableList = vinput.getVariableList();
@@ -53,8 +54,8 @@ public class VariableCommand extends MapCommand {
 		System.out.println(myCommandList);
 		Integer myReturn = 0;
 		for (Command c : myCommandList) {
-			if(c.getName().equals(myVariableInput.getName())){
-			c = new VariableCommand(myVariableInput);
+			if (c.getName().equals(myVariableInput.getName())) {
+				c = new VariableCommand(myVariableInput);
 			}
 			myReturn = c.execute();
 		}
@@ -62,12 +63,13 @@ public class VariableCommand extends MapCommand {
 	}
 
 	@Override
-	public String getName(){
+	public String getName() {
 		return myVariableInput.getName();
 	}
-	
+
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new VariableCommand((MapCommandInput) super.createCommandInput(
 				parser, line), myVariableInput);
 	}

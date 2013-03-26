@@ -33,7 +33,8 @@ public class SumCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new SumCommand(super.createCommandInput(parser, line));
 	}
 }

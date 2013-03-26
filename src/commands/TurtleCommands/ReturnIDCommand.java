@@ -1,7 +1,5 @@
 package commands.TurtleCommands;
 
-
-
 import java.util.Scanner;
 
 import commands.Command;
@@ -19,7 +17,6 @@ import model.Turtle;
 
 public class ReturnIDCommand extends TurtleCommand {
 
-
 	public ReturnIDCommand(TurtleCommandInput input) {
 		super(input);
 	}
@@ -34,8 +31,8 @@ public class ReturnIDCommand extends TurtleCommand {
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new ReturnIDCommand((TurtleCommandInput) super.createCommandInput(
-				parser, line));
+		return new ReturnIDCommand(
+				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

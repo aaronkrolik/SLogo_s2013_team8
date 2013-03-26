@@ -22,6 +22,7 @@ public class AskCommand extends TurtleCommand {
 
 	List<BundledInteger> myids;
 	List<Command> myCommands;
+
 	public AskCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		List<BundledInteger> myids = input.getBundledIntList();
@@ -34,21 +35,22 @@ public class AskCommand extends TurtleCommand {
 	@Override
 	public Integer execute() {
 		List<Integer> ids = new ArrayList<Integer>();
-		for(BundledInteger i : myids){
+		for (BundledInteger i : myids) {
 			ids.add(i.getInteger());
 		}
 		Integer myReturn = 0;
 		super.getTurtle().temperarytell(ids);
-			for (Command c : myCommands) {
-				myReturn = c.execute();
-			}
+		for (Command c : myCommands) {
+			myReturn = c.execute();
+		}
 		super.getTurtle().setprevioustell();
 		return myReturn;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new AskCommand(
-				(TurtleCommandInput) super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new AskCommand((TurtleCommandInput) super.createCommandInput(
+				parser, line));
 	}
 }

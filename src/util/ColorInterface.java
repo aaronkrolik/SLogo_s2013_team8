@@ -12,6 +12,6 @@ import model.Turtle;
 public interface ColorInterface extends ParsingInterface {
 
 	public ColorController getColors();
-	
+
 	public Canvas getCanvas();
 }

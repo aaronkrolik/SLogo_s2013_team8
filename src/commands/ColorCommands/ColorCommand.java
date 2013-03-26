@@ -37,7 +37,7 @@ public abstract class ColorCommand extends Command {
 	protected Canvas getCanvas() {
 		return myCanvas;
 	}
-	
+
 	@Override
 	protected CommandInput createCommandInput(ParsingInterface parser,
 			Scanner line) {

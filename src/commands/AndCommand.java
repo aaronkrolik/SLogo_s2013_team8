@@ -1,5 +1,3 @@
-
-
 package commands;
 
 import java.util.Scanner;
@@ -28,11 +26,13 @@ public class AndCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		return ((myFirst.getInteger() != 0) && ( mySecond.getInteger()!=0) ) ? 1 : 0;
+		return ((myFirst.getInteger() != 0) && (mySecond.getInteger() != 0)) ? 1
+				: 0;
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new AndCommand(super.createCommandInput(parser, line));
 	}
 }

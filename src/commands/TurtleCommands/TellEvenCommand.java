@@ -34,7 +34,8 @@ public class TellEvenCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new TellEvenCommand(
 				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}

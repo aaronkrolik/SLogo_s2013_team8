@@ -3,10 +3,10 @@ package RDParser;
 import java.util.List;
 import java.util.Map;
 
-public class Make extends BinaryNode{
+public class Make extends BinaryNode {
 	Map<String, Node> grammar;
-	
-	public Make (Map<String, Node> map){
+
+	public Make(Map<String, Node> map) {
 		super("MAKE");
 		grammar = map;
 	}

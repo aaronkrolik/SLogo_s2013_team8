@@ -27,7 +27,8 @@ public class ToCommand extends MapCommand {
 	public ToCommand(MapCommandInput input) throws ExpectedInput {
 		super(input);
 		myName = input.getString();
-		super.getCommandMap().put(myName, new VariableCommand(new VariableInput()));
+		super.getCommandMap().put(myName,
+				new VariableCommand(new VariableInput()));
 		myVariableList = input.getStringList();
 		myCommandList = input.getCommandList();
 		myVariableInput = new VariableInput(myName, myVariableList,
@@ -42,7 +43,8 @@ public class ToCommand extends MapCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new ToCommand((MapCommandInput) super.createCommandInput(parser,
 				line));
 	}

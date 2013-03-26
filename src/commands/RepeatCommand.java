@@ -38,7 +38,8 @@ public class RepeatCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new RepeatCommand(super.createCommandInput(parser, line));
 	}
 

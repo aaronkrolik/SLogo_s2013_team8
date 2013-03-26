@@ -20,7 +20,7 @@ public class CommandSequence {
 	public List<Command> getCommandList() {
 		return myCommandList;
 	}
-	
+
 	public void setCommandList(List<Command> commands) {
 		myCommandList = commands;
 	}

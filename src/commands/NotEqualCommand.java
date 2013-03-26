@@ -1,4 +1,3 @@
-
 package commands;
 
 import java.util.Scanner;
@@ -31,7 +30,8 @@ public class NotEqualCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new NotEqualCommand(super.createCommandInput(parser, line));
 	}
 }

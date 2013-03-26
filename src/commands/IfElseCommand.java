@@ -1,4 +1,3 @@
-
 package commands;
 
 import java.util.List;
@@ -31,13 +30,12 @@ public class IfElseCommand extends Command {
 	@Override
 	public Integer execute() {
 		Integer myReturn = 0;
-		if(myFirst.getInteger()!=0){
+		if (myFirst.getInteger() != 0) {
 			for (Command c : myFirstCommandList) {
 				myReturn = c.execute();
 			}
 			return myReturn;
-		}
-		else{
+		} else {
 			for (Command c : mySecondCommandList) {
 				myReturn = c.execute();
 			}
@@ -46,7 +44,8 @@ public class IfElseCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new IfElseCommand(super.createCommandInput(parser, line));
 	}
 }

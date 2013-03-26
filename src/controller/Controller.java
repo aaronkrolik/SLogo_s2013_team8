@@ -41,14 +41,14 @@ public class Controller implements IUpdatable {
 		System.out.println();
 
 		SlogoModel tempModel = newModel();
-		//Canvas tempCanvas = newCanvas(tempModel);
+		// Canvas tempCanvas = newCanvas(tempModel);
 		SlogoGUI tempGUI = newGUI(tempModel);
-		//	PrintWriter tempPW = newPW("SLOGO_"
-		//		+ myDateFormat.format(myCal.getTime()) + ".txt");
+		// PrintWriter tempPW = newPW("SLOGO_"
+		// + myDateFormat.format(myCal.getTime()) + ".txt");
 		myModels.add(tempModel);
-		//myCanvases.add(tempCanvas);
+		// myCanvases.add(tempCanvas);
 		myGUIs.add(tempGUI);
-		//	myFiles.add(tempPW);
+		// myFiles.add(tempPW);
 
 	}
 
@@ -78,7 +78,7 @@ public class Controller implements IUpdatable {
 	public void update() {
 		for (int i = 0; i < myModels.size(); i++) {
 			String tmp = myGUIs.get(i).getInputText();
-			//myFiles.get(i).println(tmp);
+			// myFiles.get(i).println(tmp);
 			try {
 				myGUIs.get(i).DisplayReturn(myModels.get(i).update(tmp));
 			} catch (Exception e) {

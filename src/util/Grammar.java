@@ -45,11 +45,12 @@ import java.util.ResourceBundle;
 public class Grammar {
 	private Map<String, Command> myCommandMap;
 	private static ResourceBundle myResources;
-    private static final String DEFAULT_RESOURCE_PACKAGE = "util.resources.";
-    
+	private static final String DEFAULT_RESOURCE_PACKAGE = "util.resources.";
+
 	public Grammar(String language) {
-		
-        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE
+				+ language);
 		myCommandMap = new HashMap<String, Command>();
 		Command forward = new ForwardCommand();
 		Command repeat = new RepeatCommand();
@@ -96,46 +97,63 @@ public class Grammar {
 		myCommandMap.put(myResources.getString("Ifelse").toLowerCase(), ifelse);
 		myCommandMap.put(myResources.getString("Setxy").toLowerCase(), go);
 		myCommandMap.put(myResources.getString("Goto").toLowerCase(), go);
-		myCommandMap.put(myResources.getString("Pendown").toLowerCase(), pendown);
+		myCommandMap.put(myResources.getString("Pendown").toLowerCase(),
+				pendown);
 		myCommandMap.put(myResources.getString("PD").toLowerCase(), pendown);
 		myCommandMap.put(myResources.getString("PenUp").toLowerCase(), penup);
 		myCommandMap.put(myResources.getString("PU").toLowerCase(), penup);
-		myCommandMap.put(myResources.getString("HIDETURTLE").toLowerCase(), hide);
+		myCommandMap.put(myResources.getString("HIDETURTLE").toLowerCase(),
+				hide);
 		myCommandMap.put(myResources.getString("HT").toLowerCase(), hide);
-		myCommandMap.put(myResources.getString("SHOWTURTLE").toLowerCase(), show);
+		myCommandMap.put(myResources.getString("SHOWTURTLE").toLowerCase(),
+				show);
 		myCommandMap.put(myResources.getString("ST").toLowerCase(), show);
 		myCommandMap.put(myResources.getString("HOME").toLowerCase(), home);
-		myCommandMap.put(myResources.getString("CLEARSCREEN").toLowerCase(), clear);
+		myCommandMap.put(myResources.getString("CLEARSCREEN").toLowerCase(),
+				clear);
 		myCommandMap.put(myResources.getString("CS").toLowerCase(), clear);
-		myCommandMap.put(myResources.getString("HEADING").toLowerCase(), heading);
+		myCommandMap.put(myResources.getString("HEADING").toLowerCase(),
+				heading);
 		myCommandMap.put(myResources.getString("XCOR").toLowerCase(), xcor);
 		myCommandMap.put(myResources.getString("YCOR").toLowerCase(), ycor);
-		myCommandMap.put(myResources.getString("PENDOWN?").toLowerCase(), pendown);
-		myCommandMap.put(myResources.getString("PENDOWNP").toLowerCase(), pendown);
-		myCommandMap.put(myResources.getString("SHOWING?").toLowerCase(), showing);
-		myCommandMap.put(myResources.getString("SHOWINGP").toLowerCase(), showing);
+		myCommandMap.put(myResources.getString("PENDOWN?").toLowerCase(),
+				pendown);
+		myCommandMap.put(myResources.getString("PENDOWNP").toLowerCase(),
+				pendown);
+		myCommandMap.put(myResources.getString("SHOWING?").toLowerCase(),
+				showing);
+		myCommandMap.put(myResources.getString("SHOWINGP").toLowerCase(),
+				showing);
 		myCommandMap.put(myResources.getString("MINUS").toLowerCase(), minus);
 		myCommandMap.put(myResources.getString("~").toLowerCase(), minus);
 		myCommandMap.put(myResources.getString("NOT").toLowerCase(), not);
-		myCommandMap.put(myResources.getString("NOTEQUAL?").toLowerCase(), notE);
-		myCommandMap.put(myResources.getString("NOTEQUALP").toLowerCase(), notE);
+		myCommandMap
+				.put(myResources.getString("NOTEQUAL?").toLowerCase(), notE);
+		myCommandMap
+				.put(myResources.getString("NOTEQUALP").toLowerCase(), notE);
 		myCommandMap.put(myResources.getString("OR").toLowerCase(), or);
-		myCommandMap.put(myResources.getString("PRODUCT").toLowerCase(), product);
+		myCommandMap.put(myResources.getString("PRODUCT").toLowerCase(),
+				product);
 		myCommandMap.put(myResources.getString("*").toLowerCase(), product);
-		myCommandMap.put(myResources.getString("QUOTIENT").toLowerCase(), quotient);
+		myCommandMap.put(myResources.getString("QUOTIENT").toLowerCase(),
+				quotient);
 		myCommandMap.put(myResources.getString("/").toLowerCase(), quotient);
 		myCommandMap.put(myResources.getString("REMAINDER").toLowerCase(), mod);
 		myCommandMap.put(myResources.getString("%").toLowerCase(), mod);
-		myCommandMap.put(myResources.getString("GREATER?").toLowerCase(), greater);
-		myCommandMap.put(myResources.getString("GREATERP").toLowerCase(), greater);
+		myCommandMap.put(myResources.getString("GREATER?").toLowerCase(),
+				greater);
+		myCommandMap.put(myResources.getString("GREATERP").toLowerCase(),
+				greater);
 		myCommandMap.put(myResources.getString("LESS?").toLowerCase(), less);
 		myCommandMap.put(myResources.getString("LESSP").toLowerCase(), less);
 		myCommandMap.put(myResources.getString("EQUAL?").toLowerCase(), equal);
 		myCommandMap.put(myResources.getString("EQUALP").toLowerCase(), equal);
-		myCommandMap.put(myResources.getString("DIFFERENCE").toLowerCase(), diff);
+		myCommandMap.put(myResources.getString("DIFFERENCE").toLowerCase(),
+				diff);
 		myCommandMap.put(myResources.getString("-").toLowerCase(), diff);
 		myCommandMap.put(myResources.getString("AND").toLowerCase(), and);
-		myCommandMap.put(myResources.getString("FORWARD").toLowerCase(), forward);
+		myCommandMap.put(myResources.getString("FORWARD").toLowerCase(),
+				forward);
 		myCommandMap.put(myResources.getString("BACK").toLowerCase(), back);
 		myCommandMap.put(myResources.getString("MAKE").toLowerCase(), make);
 		myCommandMap.put(myResources.getString("SUM").toLowerCase(), sum);
@@ -149,10 +167,13 @@ public class Grammar {
 		myCommandMap.put(myResources.getString("+").toLowerCase(), sum);
 		myCommandMap.put(myResources.getString("LT").toLowerCase(), left);
 		myCommandMap.put(myResources.getString("RT").toLowerCase(), right);
-		myCommandMap.put(myResources.getString("SETHEADING").toLowerCase(), setheading);
-		myCommandMap.put(myResources.getString("SETH").toLowerCase(), setheading);
-		myCommandMap.put(myResources.getString("TOWARDS").toLowerCase(), towards);
-		
+		myCommandMap.put(myResources.getString("SETHEADING").toLowerCase(),
+				setheading);
+		myCommandMap.put(myResources.getString("SETH").toLowerCase(),
+				setheading);
+		myCommandMap.put(myResources.getString("TOWARDS").toLowerCase(),
+				towards);
+
 		myCommandMap.put("PU", penup);
 		myCommandMap.put("HIDETURTLE", hide);
 		myCommandMap.put("HT", hide);
@@ -212,8 +233,8 @@ public class Grammar {
 		myCommandMap.put("TOWARDS", towards);
 		myCommandMap.put("tell", tell);
 	}
-	
-	public Map<String, Command> getMap(){
+
+	public Map<String, Command> getMap() {
 		return myCommandMap;
 	}
 

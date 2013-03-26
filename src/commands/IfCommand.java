@@ -1,4 +1,3 @@
-
 package commands;
 
 import java.util.List;
@@ -28,19 +27,19 @@ public class IfCommand extends Command {
 
 	@Override
 	public Integer execute() {
-		if(myFirst.getInteger()!=0){
+		if (myFirst.getInteger() != 0) {
 			Integer myReturn = 0;
 			for (Command c : myCommandList) {
 				myReturn = c.execute();
 			}
 			return myReturn;
-		}
-		else return 0;
+		} else
+			return 0;
 	}
 
-
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new IfCommand(super.createCommandInput(parser, line));
 	}
 }

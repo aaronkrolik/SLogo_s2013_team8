@@ -4,27 +4,26 @@ import java.util.List;
 
 public class Leaf extends Node {
 	private Value myValue;
-	
-	public String toString(){
+
+	public String toString() {
 		return Integer.toString(myValue.getValue());
 	}
-	
-	public Leaf(int intIn, String strIn){
+
+	public Leaf(int intIn, String strIn) {
 		myValue = new Value(intIn, strIn);
 	}
-	
-	public Leaf(int intIn){
+
+	public Leaf(int intIn) {
 		this(intIn, "NULL");
 	}
-	
-	public Leaf(String strIn){
+
+	public Leaf(String strIn) {
 		this(-1, strIn);
 	}
-	
-	public Leaf(){
+
+	public Leaf() {
 		this(-1, "NULL");
 	}
-
 
 	@Override
 	public boolean isLeaf() {
@@ -45,6 +44,5 @@ public class Leaf extends Node {
 	public Value operation(List<Node> args) {
 		return myValue;
 	}
-	
 
 }

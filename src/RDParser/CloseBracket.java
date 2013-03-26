@@ -1,6 +1,5 @@
 package RDParser;
 
-public class CloseBracket extends Leaf{
-	
+public class CloseBracket extends Leaf {
 
 }

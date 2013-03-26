@@ -19,8 +19,8 @@ public class BundledIntegerSequence {
 	public List<BundledInteger> getBundledIntegerList() {
 		return myBundledIntegerList;
 	}
-	
-	public void setBundledIntegerList(List<BundledInteger> list ) {
+
+	public void setBundledIntegerList(List<BundledInteger> list) {
 		myBundledIntegerList = list;
 	}
 

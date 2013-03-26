@@ -1,4 +1,3 @@
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -23,8 +22,8 @@ public class GOTOCommand extends TurtleCommand {
 
 	public GOTOCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
-		myX  = super.getInput().getBundledInt();
-		myY  = super.getInput().getBundledInt();
+		myX = super.getInput().getBundledInt();
+		myY = super.getInput().getBundledInt();
 	}
 
 	public GOTOCommand() {
@@ -36,7 +35,8 @@ public class GOTOCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new GOTOCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}

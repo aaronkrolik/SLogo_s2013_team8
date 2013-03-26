@@ -32,8 +32,9 @@ public class StampCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new StampCommand(
-				(TurtleCommandInput) super.createCommandInput(parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new StampCommand((TurtleCommandInput) super.createCommandInput(
+				parser, line));
 	}
 }

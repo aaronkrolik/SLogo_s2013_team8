@@ -1,5 +1,3 @@
-
-
 package commands;
 
 import java.util.Scanner;
@@ -32,7 +30,8 @@ public class EqualCommand extends Command {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new EqualCommand(super.createCommandInput(parser, line));
 	}
 }

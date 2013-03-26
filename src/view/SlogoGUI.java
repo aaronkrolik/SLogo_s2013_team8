@@ -40,10 +40,8 @@ import controller.Controller;
 
 import util.Pixmap;
 
-
 public class SlogoGUI extends JFrame {
 
-	
 	/**
 	 * Constants
 	 */
@@ -52,7 +50,6 @@ public class SlogoGUI extends JFrame {
 	private static final int NO_KEY_PRESSED = -1;
 	private static final String NEW_LINE_CHARACTER = "\n";
 
-	
 	/**
 	 * Instance variables
 	 */
@@ -69,8 +66,6 @@ public class SlogoGUI extends JFrame {
 	private Controller myController;
 	private int myLastKeyPressed;
 	private boolean readInFromHistory = false;
-
-
 
 	/**
 	 * Create the View.
@@ -93,17 +88,16 @@ public class SlogoGUI extends JFrame {
 		setVisible(true);
 	}
 
-
-
-
 	/**
 	 * Create the Text Area to display command history
+	 * 
 	 * @return
 	 */
-	private JScrollPane createListForCommandHistory(){
-		listContent =  new DefaultListModel();
+	private JScrollPane createListForCommandHistory() {
+		listContent = new DefaultListModel();
 		myCommandList = new JList(listContent);
-		myCommandList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		myCommandList
+				.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		myCommandList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		myCommandList.setVisibleRowCount(-1);
 		myCommandList.addMouseListener(new MouseAdapter() {
@@ -115,16 +109,15 @@ public class SlogoGUI extends JFrame {
 			}
 		});
 		JScrollPane listScroller = new JScrollPane(myCommandList);
-		listScroller.setBounds(663, 5,235, 525);
+		listScroller.setBounds(663, 5, 235, 525);
 		listScroller.setAlignmentX(LEFT_ALIGNMENT);
 		return listScroller;
 	}
 
-
-
 	/**
-	 * Create Canvas: for drawing turtle and lines. 
-	 * Canvas is DIY, based on the Java Swing Canvas JComponent
+	 * Create Canvas: for drawing turtle and lines. Canvas is DIY, based on the
+	 * Java Swing Canvas JComponent
+	 * 
 	 * @return
 	 */
 	private Canvas createCanvas() {
@@ -132,8 +125,8 @@ public class SlogoGUI extends JFrame {
 		return myCanvas;
 	}
 
-	public String getInputText(){
-		if (readInFromHistory){
+	public String getInputText() {
+		if (readInFromHistory) {
 			return (String) myCommandList.getSelectedValue();
 		}
 		return myInputTextField.getText().toString();
@@ -141,6 +134,7 @@ public class SlogoGUI extends JFrame {
 
 	/**
 	 * Create the Separator
+	 * 
 	 * @return
 	 */
 	private JSeparator createSeparator() {
@@ -149,10 +143,9 @@ public class SlogoGUI extends JFrame {
 		return mySeparator;
 	}
 
-
-
 	/**
 	 * Create the enter button and add action listener.
+	 * 
 	 * @return
 	 */
 	private JButton createEnterButtonAndSetItsProperties() {
@@ -167,8 +160,8 @@ public class SlogoGUI extends JFrame {
 	 * Create the action listener for the enter button
 	 */
 	private void createButtonActionListenerAndSetItsProperties() {
-		takeInputAfterClickingButton = new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		takeInputAfterClickingButton = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				String commandHistory = myInputTextField.getText().toString();
 				listContent.addElement(commandHistory);
 				myController.update();
@@ -177,20 +170,20 @@ public class SlogoGUI extends JFrame {
 		};
 	}
 
-	public void DisplayException(){
-		myInputTextField.setText("Invalid Command input. Please provide a valid command!!");
+	public void DisplayException() {
+		myInputTextField
+				.setText("Invalid Command input. Please provide a valid command!!");
 	}
-	public void DisplayReturn(int input){
+
+	public void DisplayReturn(int input) {
 		myCanvas.repaint();
 		myInputTextField.setText("");
 		listContent.addElement(input);
 	}
 
-
-
-
 	/**
 	 * Create the text field for command input and add the action Listener
+	 * 
 	 * @return
 	 */
 	private JTextField createInputTextFieldAndSetItsProperties() {
@@ -202,46 +195,44 @@ public class SlogoGUI extends JFrame {
 		return myInputTextField;
 	}
 
-
-
 	/**
-	 * Key listener: listen to "ENTER".
-	 * For the text area
+	 * Key listener: listen to "ENTER". For the text area
 	 */
-	private void createKeyEventListener(){
+	private void createKeyEventListener() {
 		enterKeyListener = new KeyAdapter() {
 			@Override
-			public void keyPressed (KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				myLastKeyPressed = e.getKeyCode();
-				if (myLastKeyPressed == KeyEvent.VK_ENTER){
-					String commandHistory = myInputTextField.getText().toString();
+				if (myLastKeyPressed == KeyEvent.VK_ENTER) {
+					String commandHistory = myInputTextField.getText()
+							.toString();
 					listContent.addElement(commandHistory);
 					myController.update();
 				}
 			}
+
 			@Override
-			public void keyReleased (KeyEvent e) {
+			public void keyReleased(KeyEvent e) {
 				myLastKeyPressed = NO_KEY_PRESSED;
 			}
 		};
 	}
 
-
 	/**
-	 * Get the latest key pressed
-	 * Convenience method 
+	 * Get the latest key pressed Convenience method
+	 * 
 	 * @return
 	 */
-	private int getMyLastKeyPressed(){
+	private int getMyLastKeyPressed() {
 		return myLastKeyPressed;
 	}
 
-
 	/**
 	 * Create the Menu bar
+	 * 
 	 * @return
 	 */
-	private JMenuBar createMenuBar(){
+	private JMenuBar createMenuBar() {
 		JMenuBar myMenuBar;
 		JMenu myMenu;
 
@@ -250,7 +241,7 @@ public class SlogoGUI extends JFrame {
 		myMenuBar.add(myMenu);
 		myMenu = createPenMenu();
 		myMenuBar.add(myMenu);
-		//Help Section
+		// Help Section
 		myMenu = createHelpMenu();
 		myMenuBar.add(myMenu);
 
@@ -263,8 +254,8 @@ public class SlogoGUI extends JFrame {
 		return myMenuBar;
 	}
 
-	private ActionListener createTurtleImageButtons(final String name){
-		ActionListener a = new ActionListener(){
+	private ActionListener createTurtleImageButtons(final String name) {
+		ActionListener a = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String newName = name + ".jpg";
@@ -275,7 +266,8 @@ public class SlogoGUI extends JFrame {
 		};
 		return a;
 	}
-	private JMenu createTurtleMenu(){
+
+	private JMenu createTurtleMenu() {
 		JMenuItem myMenuItem;
 		ButtonGroup turtleImageGroup = new ButtonGroup();
 		JMenu turtleMenu = new JMenu("Turtle");
@@ -294,27 +286,24 @@ public class SlogoGUI extends JFrame {
 		createTurtleImage(turtleImageGroup, turtleImageMenu, name);
 
 		final JMenuItem highlight = new JCheckBoxMenuItem("Highlight");
-		
-		highlight.addItemListener(new ItemListener(){
+
+		highlight.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(highlight.isSelected()){
+				if (highlight.isSelected()) {
 					myModel.getTurtle().turnOnHighlight();
 					myCanvas.repaint();
 				}
-				if(!highlight.isSelected()){
+				if (!highlight.isSelected()) {
 					myModel.getTurtle().turnOffHighlight();
 					myCanvas.repaint();
 				}
-			}	
+			}
 		});
-		
-		
+
 		turtleMenu.add(highlight);
 		return turtleMenu;
 	}
-
-
 
 	private void createTurtleImage(ButtonGroup turtleImageGroup,
 			JMenu turtleImageMenu, String name) {
@@ -325,8 +314,7 @@ public class SlogoGUI extends JFrame {
 		turtleImageGroup.add(myMenuItem);
 	}
 
-
-	private JMenu createBackgroundMenu(){
+	private JMenu createBackgroundMenu() {
 		JMenu myMenu, subMenu;
 		JMenuItem myMenuItem;
 		myMenu = new JMenu("Background");
@@ -334,7 +322,7 @@ public class SlogoGUI extends JFrame {
 		ButtonGroup colorGroup = new ButtonGroup();
 
 		myMenuItem = new JRadioButtonMenuItem("White");
-		myMenuItem.addActionListener(new ActionListener(){
+		myMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				myCanvas.setColor(Color.WHITE);
@@ -345,7 +333,7 @@ public class SlogoGUI extends JFrame {
 		colorGroup.add(myMenuItem);
 		subMenu.add(myMenuItem);
 		myMenuItem = new JRadioButtonMenuItem("Red");
-		myMenuItem.addActionListener(new ActionListener(){
+		myMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				myCanvas.setColor(Color.RED);
@@ -357,7 +345,7 @@ public class SlogoGUI extends JFrame {
 		subMenu.add(myMenuItem);
 
 		myMenuItem = new JRadioButtonMenuItem("Blue");
-		myMenuItem.addActionListener(new ActionListener(){
+		myMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				myCanvas.setColor(Color.BLUE);
@@ -378,22 +366,22 @@ public class SlogoGUI extends JFrame {
 		myMenu = new JMenu("Help");
 		// Grid:
 		final JCheckBoxMenuItem gridCheckBox = new JCheckBoxMenuItem("Grid");
-		gridCheckBox.addItemListener(new ItemListener(){
+		gridCheckBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(gridCheckBox.isSelected()){
+				if (gridCheckBox.isSelected()) {
 					myCanvas.turnOnGrid();
 				}
-				if(!gridCheckBox.isSelected()){
+				if (!gridCheckBox.isSelected()) {
 					myCanvas.turnOffGrid();
 					myCanvas.repaint();
 				}
-			}	
+			}
 		});
 		myMenu.add(gridCheckBox);
 
 		myMenuItem = new JMenuItem("Help Page");
-		ActionListener helpPage = new ActionListener(){
+		ActionListener helpPage = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				openHelpPage();
@@ -403,7 +391,6 @@ public class SlogoGUI extends JFrame {
 		myMenu.add(myMenuItem);
 		return myMenu;
 	}
-
 
 	private JMenu createPenMenu() {
 		JMenu myMenu;
@@ -421,7 +408,6 @@ public class SlogoGUI extends JFrame {
 		myMenuItem = new JRadioButtonMenuItem("Up");
 		penStateGroup.add(myMenuItem);
 		myMenu.add(myMenuItem);
-
 
 		// Pen Style
 		ButtonGroup penStyleGroup = new ButtonGroup();
@@ -441,9 +427,7 @@ public class SlogoGUI extends JFrame {
 		penStyle.add(myMenuItem);
 		myMenu.add(penStyle);
 
-
-
-		//Thickness
+		// Thickness
 		ButtonGroup penThicknessGroup = new ButtonGroup();
 		penThickness = new JMenu("Thickness");
 
@@ -482,8 +466,6 @@ public class SlogoGUI extends JFrame {
 		return myMenu;
 	}
 
-
-
 	private JMenu createMainMenu() {
 		JMenu myMenu;
 		JMenuItem myMenuItem;
@@ -491,7 +473,7 @@ public class SlogoGUI extends JFrame {
 		myMenu.setMnemonic(KeyEvent.VK_M);
 		myMenuItem = new JMenuItem("New WorkSpace");
 
-		ActionListener newWindow = new ActionListener(){
+		ActionListener newWindow = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SlogoModel model = new SlogoModel();
@@ -503,8 +485,7 @@ public class SlogoGUI extends JFrame {
 		return myMenu;
 	}
 
-
-	public void openHelpPage(){
+	public void openHelpPage() {
 		String url = "http://www.cs.duke.edu/courses/cps108/current/assign/03_slogo/commands.php";
 		try {
 			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));

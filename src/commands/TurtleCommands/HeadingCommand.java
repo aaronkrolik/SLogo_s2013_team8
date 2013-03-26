@@ -1,4 +1,3 @@
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -18,7 +17,6 @@ import model.Turtle;
 
 public class HeadingCommand extends TurtleCommand {
 
-
 	public HeadingCommand(TurtleCommandInput input) {
 		super(input);
 	}
@@ -33,8 +31,8 @@ public class HeadingCommand extends TurtleCommand {
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new HeadingCommand((TurtleCommandInput) super.createCommandInput(
-				parser, line));
+		return new HeadingCommand(
+				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

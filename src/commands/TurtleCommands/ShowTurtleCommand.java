@@ -1,5 +1,3 @@
-
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -19,7 +17,6 @@ import model.Turtle;
 
 public class ShowTurtleCommand extends TurtleCommand {
 
-
 	public ShowTurtleCommand(TurtleCommandInput input) {
 		super(input);
 	}
@@ -29,14 +26,14 @@ public class ShowTurtleCommand extends TurtleCommand {
 
 	@Override
 	public Integer execute() {
-		super.getTurtle().makeVisible() ;
+		super.getTurtle().makeVisible();
 		return 1;
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new ShowTurtleCommand((TurtleCommandInput) super.createCommandInput(
-				parser, line));
+		return new ShowTurtleCommand(
+				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

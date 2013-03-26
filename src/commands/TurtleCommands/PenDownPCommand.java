@@ -1,4 +1,3 @@
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -18,7 +17,6 @@ import model.Turtle;
 
 public class PenDownPCommand extends TurtleCommand {
 
-
 	public PenDownPCommand(TurtleCommandInput input) {
 		super(input);
 	}
@@ -28,14 +26,15 @@ public class PenDownPCommand extends TurtleCommand {
 
 	@Override
 	public Integer execute() {
-		if(super.getTurtle().IsPenDown()) return 1;
+		if (super.getTurtle().IsPenDown())
+			return 1;
 		return 0;
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) {
-		return new PenDownPCommand((TurtleCommandInput) super.createCommandInput(
-				parser, line));
+		return new PenDownPCommand(
+				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

@@ -1,4 +1,3 @@
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -43,9 +42,10 @@ public class SetBackGroundCommand extends ColorCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new SetBackGroundCommand((ColorCommandInput) super.createCommandInput(
-				parser, line));
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
+		return new SetBackGroundCommand(
+				(ColorCommandInput) super.createCommandInput(parser, line));
 	}
 
 }

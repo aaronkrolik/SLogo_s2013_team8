@@ -19,9 +19,9 @@ import model.Turtle;
 public class SetHeadingCommand extends TurtleCommand {
 	private BundledInteger myAngle;
 
-	public SetHeadingCommand(){
+	public SetHeadingCommand() {
 	}
-	
+
 	public SetHeadingCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
 		myAngle = input.getBundledInt();
@@ -34,7 +34,8 @@ public class SetHeadingCommand extends TurtleCommand {
 	}
 
 	@Override
-	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
+	public Command createCommand(ParsingInterface parser, Scanner line)
+			throws ExpectedInput {
 		return new SetHeadingCommand(
 				(TurtleCommandInput) super.createCommandInput(parser, line));
 	}

@@ -2,7 +2,7 @@ package RDParser;
 
 import java.util.List;
 
-public class OpenBracket extends Node{
+public class OpenBracket extends Node {
 	private boolean notComplete = true;
 
 	@Override
@@ -26,7 +26,5 @@ public class OpenBracket extends Node{
 			notComplete = false;
 		return true;
 	}
-
-	
 
 }

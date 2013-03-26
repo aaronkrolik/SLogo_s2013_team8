@@ -22,7 +22,8 @@ public interface ParsingInterface {
 
 	public BundledInteger getNextBundledInt(Scanner line) throws ExpectedInput;
 
-	public List<BundledInteger> getNextBundledIntList(Scanner line) throws ExpectedInput;
+	public List<BundledInteger> getNextBundledIntList(Scanner line)
+			throws ExpectedInput;
 
 	public String getNextString(Scanner line) throws ExpectedInput;
 

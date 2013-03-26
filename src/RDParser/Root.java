@@ -2,7 +2,7 @@ package RDParser;
 
 import java.util.List;
 
-public class Root extends Node{
+public class Root extends Node {
 
 	@Override
 	public Value operation(List<Node> args) {
@@ -16,7 +16,7 @@ public class Root extends Node{
 
 	@Override
 	protected boolean checkBounds(int length) {
-		return (length<=1);
+		return (length <= 1);
 	}
 
 	@Override

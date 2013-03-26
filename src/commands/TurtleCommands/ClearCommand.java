@@ -1,4 +1,3 @@
-
 package commands.TurtleCommands;
 
 import java.util.Scanner;
@@ -17,7 +16,6 @@ import model.Turtle;
  */
 
 public class ClearCommand extends TurtleCommand {
-
 
 	public ClearCommand(TurtleCommandInput input) {
 		super(input);

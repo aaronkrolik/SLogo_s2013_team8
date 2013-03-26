@@ -16,18 +16,17 @@ public class Value {
 	public Value(String name) {
 		this(-1, name);
 	}
-	
+
 	public Value() {
 		this(-1, "NULL");
 	}
-	
-	public int getValue(){
+
+	public int getValue() {
 		return myValue;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return myName;
 	}
-
 
 }
