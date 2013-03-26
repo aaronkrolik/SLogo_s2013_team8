@@ -76,6 +76,7 @@ public abstract class RDParser {
 	}
 
 	private Node generateNode(String in){
+		in.toLowerCase();
 		if(in.equals("+")){
 			return new Addition();
 		}
@@ -85,16 +86,16 @@ public abstract class RDParser {
 		else if(in.equals("]")){
 			return new CloseBracket();
 		}
-		else if(in.equals("Make")){
+		else if(in.equals("make")){
 			return new Make(Grammar);
 		}
-		else if (in.equals("If")){
+		else if (in.equals("if")){
 			return new If();
 		}
-		else if (in.equals("Forward")){
+		else if (in.equals("forward")){
 			return new Forward(turtle);
 		}
-		else if (in.equals("Repeat")){
+		else if (in.equals("repeat")){
 			return new Repeat();
 		}
 		try  

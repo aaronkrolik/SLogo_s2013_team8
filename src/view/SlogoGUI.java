@@ -43,6 +43,7 @@ import util.Pixmap;
 
 public class SlogoGUI extends JFrame {
 
+	
 	/**
 	 * Constants
 	 */
@@ -51,6 +52,7 @@ public class SlogoGUI extends JFrame {
 	private static final int NO_KEY_PRESSED = -1;
 	private static final String NEW_LINE_CHARACTER = "\n";
 
+	
 	/**
 	 * Instance variables
 	 */
@@ -66,6 +68,7 @@ public class SlogoGUI extends JFrame {
 	private SlogoModel myModel;
 	private Controller myController;
 	private int myLastKeyPressed;
+	private boolean readInFromHistory = false;
 
 
 
@@ -74,6 +77,7 @@ public class SlogoGUI extends JFrame {
 	 */
 	public SlogoGUI(SlogoModel model, Controller control) {
 		myModel = model;
+		myModel.setCanvas(myCanvas);
 		myController = control;
 		myContentPane = (JPanel) getContentPane();
 
@@ -91,19 +95,6 @@ public class SlogoGUI extends JFrame {
 
 
 
-	//	/**
-	//	 * Create the Text Area to display command history
-	//	 * @return
-	//	 */
-	//	private JScrollPane createTextAreaForCommandHistory(){
-	//		myTextArea = new JTextArea(5,10);
-	//		myTextArea.setBounds(663, 5,235, 525);
-	//		myTextArea.setEditable(false);
-	//		JScrollPane scrollPane = new JScrollPane(myTextArea);
-	//		scrollPane.setBounds(663, 5,235, 525);
-	//		return scrollPane;
-	//	}
-	//	
 
 	/**
 	 * Create the Text Area to display command history
@@ -118,9 +109,8 @@ public class SlogoGUI extends JFrame {
 		myCommandList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-					//TODO: add function here
-					String s = (String) myCommandList.getSelectedValue();
-//					update(s);
+					readInFromHistory = true;
+					myController.update();
 				}
 			}
 		});
@@ -143,6 +133,9 @@ public class SlogoGUI extends JFrame {
 	}
 
 	public String getInputText(){
+		if (readInFromHistory){
+			return (String) myCommandList.getSelectedValue();
+		}
 		return myInputTextField.getText().toString();
 	}
 
@@ -176,8 +169,11 @@ public class SlogoGUI extends JFrame {
 	private void createButtonActionListenerAndSetItsProperties() {
 		takeInputAfterClickingButton = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-//				update();
+				String commandHistory = myInputTextField.getText().toString();
+				listContent.addElement(commandHistory);
+				myController.update();
 			}
+
 		};
 	}
 
@@ -188,22 +184,6 @@ public class SlogoGUI extends JFrame {
 		listContent.addElement(input);
 	}
 
-//	/**
-//	 * Update method:
-//	 * 	push the textField input to the Model and update the Canvas
-//	 */
-//	private void update() {
-//		String input = myInputTextField.getText().toString();
-//		myModel.update(input);
-//		myCanvas.repaint();
-//		myInputTextField.setText("");
-//		listContent.addElement(input);
-//	}
-//
-//	private void update(String input) {
-//		myModel.update(input);
-//		myCanvas.repaint();
-//	}
 
 
 
@@ -232,6 +212,8 @@ public class SlogoGUI extends JFrame {
 			public void keyPressed (KeyEvent e) {
 				myLastKeyPressed = e.getKeyCode();
 				if (myLastKeyPressed == KeyEvent.VK_ENTER){
+					String commandHistory = myInputTextField.getText().toString();
+					listContent.addElement(commandHistory);
 					myController.update();
 				}
 			}
@@ -439,7 +421,7 @@ public class SlogoGUI extends JFrame {
 		myMenu.add(myMenuItem);
 
 
-		// Pen Style 
+		// Pen Style
 		ButtonGroup penStyleGroup = new ButtonGroup();
 		penStyle = new JMenu("Line Style");
 
@@ -505,13 +487,11 @@ public class SlogoGUI extends JFrame {
 		JMenuItem myMenuItem;
 		myMenu = new JMenu("Main");
 		myMenu.setMnemonic(KeyEvent.VK_M);
-
 		myMenuItem = new JMenuItem("New WorkSpace");
 
 		ActionListener newWindow = new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
 				SlogoModel model = new SlogoModel();
 				SlogoGUI view = new SlogoGUI(model, myController);
 			}

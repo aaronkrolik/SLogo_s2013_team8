@@ -45,7 +45,6 @@ public class Controller implements IUpdatable {
 		SlogoGUI tempGUI = newGUI(tempModel);
 		//	PrintWriter tempPW = newPW("SLOGO_"
 		//		+ myDateFormat.format(myCal.getTime()) + ".txt");
-
 		myModels.add(tempModel);
 		//myCanvases.add(tempCanvas);
 		myGUIs.add(tempGUI);

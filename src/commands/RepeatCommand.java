@@ -20,7 +20,7 @@ public class RepeatCommand extends Command {
 	public RepeatCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myTimes = input.getBundledInt();
-		myCommandList = input.getCommandSequence().getCommandList();
+		myCommandList = input.getCommandList();
 	}
 
 	public RepeatCommand() {

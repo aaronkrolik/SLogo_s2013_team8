@@ -20,7 +20,7 @@ public class IfCommand extends Command {
 	public IfCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
-		myCommandList = input.getCommandSequence().getCommandList();
+		myCommandList = input.getCommandList();
 	}
 
 	public IfCommand() {

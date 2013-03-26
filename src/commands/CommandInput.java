@@ -48,21 +48,21 @@ public class CommandInput {
 	/**
 	 * return the next Command Sequence from a Scanner
 	 */
-	public CommandSequence getCommandSequence() throws ExpectedInput {
+	public List<Command> getCommandList() throws ExpectedInput {
 		return myParser.getNextCommandList(myLine);
 	}
 
 	/**
 	 * return the next StringSequence from a Scanner
 	 */
-	public StringSequence getStringSequence() throws ExpectedInput {
+	public List<String> getStringList() throws ExpectedInput {
 		return myParser.getNextStringList(myLine);
 	}
 
 	/**
 	 * return the next BundledInt Sequence from a Scanner
 	 */
-	public BundledIntegerSequence getBundledIntSequence() throws ExpectedInput {
+	public List<BundledInteger> getBundledIntList() throws ExpectedInput {
 		return myParser.getNextBundledIntList(myLine);
 	}
 

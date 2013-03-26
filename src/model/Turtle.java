@@ -265,7 +265,7 @@ public class Turtle {
 	 * Display this shape on the screen.
 	 */
 	public void paint(Graphics2D pen) {
-		for(Integer index: myTurtleIndex){
+		for(Integer index: myTurtleActioners.keySet()){
 			myTurtleActioners.get(index).paint(pen);
 		}
 	}

@@ -20,10 +20,10 @@ import model.Turtle;
 
 public class TellCommand extends TurtleCommand {
 
-	List<BundledInteger> myids;
+	private List<BundledInteger> myids;
 	public TellCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
-		List<BundledInteger> myids = input.getBundledIntSequence().getBundledIntegerList();
+		myids = input.getBundledIntList();
 	}
 
 	public TellCommand() {
@@ -32,7 +32,9 @@ public class TellCommand extends TurtleCommand {
 	@Override
 	public Integer execute() {
 		List<Integer> ids = new ArrayList<Integer>();
+
 		for(BundledInteger i : myids){
+			System.out.println(i.getInteger()+" foo");
 			ids.add(i.getInteger());
 		}
 		super.getTurtle().tell(ids);
