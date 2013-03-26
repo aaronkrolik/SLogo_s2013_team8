@@ -50,12 +50,6 @@ public class Controller implements IUpdatable {
 		myGUIs.add(tempGUI);
 		//	myFiles.add(tempPW);
 
-		JFrame frame = new JFrame("SLOGO");
-		frame.setBounds(100, 100, 800, 600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(tempGUI);
-		frame.setVisible(true);
-
 	}
 
 	private PrintWriter newPW(String fileNameIn) {
@@ -88,7 +82,7 @@ public class Controller implements IUpdatable {
 			try {
 				myGUIs.get(i).DisplayReturn(myModels.get(i).update(tmp));
 			} catch (Exception e) {
-				//myGUIs.get(i).DisplayException(e.getMessage());
+				myGUIs.get(i).DisplayException();
 				e.printStackTrace();
 			}
 			myCanvases.get(i).repaint();

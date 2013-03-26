@@ -10,7 +10,7 @@ import view.Canvas;
  * @author Jack Matteucci
  */
 
-public interface CanvasInterface extends ParsingInterface {
+public interface CanvasInterface extends ColorInterface {
 
 	public Canvas getCanvas();
 

@@ -177,7 +177,9 @@ public class SlogoGUI extends JFrame {
 		};
 	}
 
-
+	public void DisplayException(){
+		myInputTextField.setText("Invalid Command input. Please provide a valid command!!");
+	}
 	public void DisplayReturn(int input){
 		myCanvas.repaint();
 		myInputTextField.setText("");

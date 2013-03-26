@@ -48,7 +48,7 @@ public class SlogoModel {
 		myColorController = new ColorController();
 		myShapeController = new ShapeController();
 		//myParser = new Parser(myTurtle);
-		myParser = new Parser(myTurtle);
+		myParser = new Parser(myTurtle, myColorController);
 	}
 	
 	public void setCanvas(Canvas canvas){

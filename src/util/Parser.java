@@ -62,6 +62,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 
 	private Scanner myLine;
 	private Turtle myTurtle;
+	private ColorController myColorController;
 	private List<Command> myReturn;
 	private Map<String, Command> myCommandMap;
 	private Map<String, Integer> myVariableMap;
@@ -70,11 +71,15 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	private final static String VARIABLE_TAG = ":";
 	private int BracketCount;
 
-	public Parser(Turtle turtle) {
-		Grammar grammar = new Grammar("English");
-		myCommandMap = grammar.getMap();
+	public Parser(Turtle turtle, ColorController colors) {
+		//Grammar grammar = new Grammar("English");
+		Command forward = new ForwardCommand();
+		Command repeat = new RepeatCommand();
+		myCommandMap = new HashMap<String, Command>();
+		myCommandMap.put("fd", forward);
 		myVariableMap = new HashMap<String, Integer>();
 		myTurtle = turtle;
+		myColorController = colors;
 	}
 
 	public Map<String, Command> getCommandMap() {
@@ -89,6 +94,9 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		return myTurtle;
 	}
 
+	public ColorController getColors(){
+		return myColorController;
+	}
 	/**
 	 * The method that parses through a command line, to be called in Model
 	 */
@@ -237,7 +245,7 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			line.next();
 			return ints;
 		}
-		throw new ExpectedInput("expectd Int List");
+		throw new ExpectedInput("expected Int List");
 	}
 
 	private String putVariable(Scanner line) throws ExpectedInput {
