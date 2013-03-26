@@ -13,6 +13,7 @@ public class BundledIntegerSequence {
 	List<BundledInteger> myBundledIntegerList;
 
 	public BundledIntegerSequence() {
+		myBundledIntegerList = new ArrayList<BundledInteger>();
 	}
 
 	public List<BundledInteger> getBundledIntegerList() {

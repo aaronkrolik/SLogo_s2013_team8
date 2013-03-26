@@ -21,8 +21,8 @@ public class IfElseCommand extends Command {
 	public IfElseCommand(CommandInput input) throws ExpectedInput {
 		super(input);
 		myFirst = input.getBundledInt();
-		myFirstCommandList = input.getCommandSequence().getCommandList();
-		mySecondCommandList = input.getCommandSequence().getCommandList();
+		myFirstCommandList = input.getCommandList();
+		mySecondCommandList = input.getCommandList();
 	}
 
 	public IfElseCommand() {

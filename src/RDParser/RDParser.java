@@ -85,6 +85,7 @@ public abstract class RDParser {
 	}
 
 	private Node generateNode(String in){
+		return null;
 //		if(in.equals("+")){
 //			return new Addition();
 //		}
@@ -106,18 +107,39 @@ public abstract class RDParser {
 //		else if (in.equals("Repeat")){
 //			return new Repeat();
 //		}
-		if (Grammar.containsKey(in)){
-			return Grammar.get(in);
-		}
-		try  
-		  {  
-			return new Leaf(Integer.parseInt(in));  
-		  }  
-		  catch(NumberFormatException nfe)  
-		  {  
-		    return new Leaf(in);  
-		  }  
-		
+//		if (Grammar.containsKey(in)){
+//			return Grammar.get(in);
+//		in.toLowerCase();
+//		if(in.equals("+")){
+//			return new Addition();
+//		}
+//		else if(in.equals("[")){
+//			return new OpenBracket();
+//		}
+//		else if(in.equals("]")){
+//			return new CloseBracket();
+//		}
+//		else if(in.equals("make")){
+//			return new Make(Grammar);
+//		}
+//		else if (in.equals("if")){
+//			return new If();
+//		}
+//		else if (in.equals("forward")){
+//			return new Forward(turtle);
+//		}
+//		else if (in.equals("repeat")){
+//			return new Repeat();
+//		}
+//		try  
+//		  {  
+//			return new Leaf(Integer.parseInt(in));  
+//		  }  
+//		  catch(NumberFormatException nfe)  
+//		  {  
+//		    return new Leaf(in);  
+//		  }  
+//		
 	}
 	
 	public void printGrammar(){

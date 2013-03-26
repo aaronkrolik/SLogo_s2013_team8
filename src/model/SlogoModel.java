@@ -15,8 +15,11 @@ import RDParser.RDParser;
 import RDParser.RDParserSLogo;
 
 import commands.Command;
+import util.ColorController;
 import util.Parser;
+import util.ShapeController;
 import view.Canvas;
+import view.SlogoGUI;
 
 /**
  * Houses the Turtle and Parser. Can receive scanner inputs via Controller and
@@ -31,15 +34,25 @@ public class SlogoModel {
 	private Turtle myTurtle;
 	private Scanner myTestLine;
 	//private Parser myParser;
-	private RDParser myParser;
+	private Parser myParser;
 	private List<Command> myCommandList;
+	private ColorController myColorController;
+	private ShapeController myShapeController;
+	private Canvas myCanvas; 
 
 	/**
 	 * Create a game of the given size with the given display for its shapes.
 	 */
 	public SlogoModel() {
 		myTurtle = new Turtle();
-		myParser = new RDParserSLogo(myTurtle);
+		myColorController = new ColorController();
+		myShapeController = new ShapeController();
+		//myParser = new Parser(myTurtle);
+		myParser = new Parser(myTurtle);
+	}
+	
+	public void setCanvas(Canvas canvas){
+		myCanvas = canvas;
 	}
 
 	public Turtle getTurtle() {
@@ -58,9 +71,18 @@ public class SlogoModel {
 	 * @throws Exception 
 	 */
 	public int update(String str) throws Exception {
+		int ret = 0;
 		Dimension bounds = Canvas.CANVAS_SIZE;
 		myTestLine = new Scanner(str);
-		Node root = myParser.parse(myTestLine);
-		return root.execute().getValue();
+        myCommandList = myParser.executeCommandLine(myTestLine);
+        for(Command c : myCommandList){
+        	ret = c.execute();
+        }
+        
+	return ret;
 	}
+		//Node root = myParser.parse(myTestLine);
+		//return root.execute().getValue();
+	
+
 }

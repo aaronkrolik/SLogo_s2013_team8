@@ -16,7 +16,7 @@ public class RDParserSLogo extends RDParser{
 	}
 	
 	
-	public RDParserSLogo(Map<String, NOde> in){
+	public RDParserSLogo(Map<String, Node> in){
 		super(in);
 	}
 	

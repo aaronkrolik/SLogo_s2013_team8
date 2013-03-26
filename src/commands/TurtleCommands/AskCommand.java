@@ -24,8 +24,8 @@ public class AskCommand extends TurtleCommand {
 	List<Command> myCommands;
 	public AskCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
-		List<BundledInteger> myids = input.getBundledIntSequence().getBundledIntegerList();
-		List<Command> myCommands = input.getCommandSequence().getCommandList();
+		List<BundledInteger> myids = input.getBundledIntList();
+		List<Command> myCommands = input.getCommandList();
 	}
 
 	public AskCommand() {

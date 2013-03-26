@@ -37,7 +37,7 @@ public class VariableCommand extends MapCommand {
 		myCommandList = vinput.getCommandList();
 		if (myVariableList.size() != 0) {
 			Iterator<String> iter = myVariableList.iterator();
-			myValueList = input.getBundledIntSequence().getBundledIntegerList();
+			myValueList = input.getBundledIntList();
 			if (myValueList.size() != 0) {
 				for (BundledInteger i : myValueList) {
 					System.out.println(i.getInteger());
