@@ -72,11 +72,8 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 	private int BracketCount;
 
 	public Parser(Turtle turtle, ColorController colors) {
-		//Grammar grammar = new Grammar("English");
-		Command forward = new ForwardCommand();
-		Command repeat = new RepeatCommand();
-		myCommandMap = new HashMap<String, Command>();
-		myCommandMap.put("fd", forward);
+		Grammar grammar = new Grammar("English");
+		myCommandMap = grammar.getMap();
 		myVariableMap = new HashMap<String, Integer>();
 		myTurtle = turtle;
 		myColorController = colors;
