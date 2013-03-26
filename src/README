@@ -6,6 +6,12 @@ Started February 22th, Finished March 8th
 
 Time spent: ~ 50 hours in total
 
+Description of the program:
+-GUI:
+  Bill Muensterman and David Liu worked on the GUI part.
+  The SlogoGUI class is the major element of the GUI. It is essentially a JFrame, with a MenuBar, a Canvas, a TextField, 
+  a Button, and a List.
+
 Resources used:
 Regular Compsci Resources
 http://www.cs.duke.edu/courses/cps108/current/assign/03_slogo/
