@@ -16,14 +16,13 @@ public class RDParserSLogo extends RDParser{
 	}
 	
 	
-	public RDParserSLogo(Map<String, String> in){
+	public RDParserSLogo(Map<String, Node> in){
 		super(in);
 	}
 	
 	@Override
-	protected Map<String, String> subGrammar() {
-		Map<String, String> grammar = new HashMap<String, String>();
-		grammar.put("FORWARD", "FORWARD");
+	protected Map<String, Node> subGrammar() {
+		Map<String, Node> grammar = new HashMap<String, Node>();
 		return grammar;
 	}
 

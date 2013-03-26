@@ -44,8 +44,8 @@ import java.util.ResourceBundle;
 
 public class Grammar {
 	private Map<String, Command> myCommandMap;
-	private ResourceBundle myResources;
-    private static final String DEFAULT_RESOURCE_PACKAGE = "util/resources.";
+	private static ResourceBundle myResources;
+    private static final String DEFAULT_RESOURCE_PACKAGE = "util.resources.";
     
 	public Grammar(String language) {
 		

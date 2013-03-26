@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Make extends BinaryNode{
-	Map<String, String> grammar;
+	Map<String, Node> grammar;
 	
-	public Make (Map<String, String> map){
+	public Make (Map<String, Node> map){
 		super("MAKE");
 		grammar = map;
 	}
@@ -15,7 +15,7 @@ public class Make extends BinaryNode{
 	public Value operation(List<Node> args) {
 		Value k = args.get(0).execute();
 		Value v = args.get(1).execute();
-		grammar.put(k.getName(), Integer.toString(v.getValue()));
+		grammar.put(k.getName(), args.get(1));
 		return v;
 	}
 
