@@ -490,7 +490,6 @@ public class SlogoGUI extends JFrame {
 		try {
 			java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

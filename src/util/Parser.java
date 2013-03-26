@@ -110,7 +110,6 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 			}
 		}
 		checkBrackets();
-		System.out.println(myReturn);
 		return myReturn;
 	}
 
@@ -121,13 +120,10 @@ public class Parser implements ParsingInterface, TurtleInterface, MapInterface {
 		if (line.hasNext()) {
 			String type = line.next();
 			type.toLowerCase();
-			System.out.println(type);
 			if (myCommandMap.containsKey(type)) {
-				System.out.println("Here");
 				Command command = (Command) myCommandMap.get(type);
 				return command.createCommand(this, line);
 			}
-			System.out.println(type);
 		}
 		throw new ExpectedInput("Expected Command");
 	}

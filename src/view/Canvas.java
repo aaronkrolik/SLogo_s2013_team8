@@ -16,6 +16,14 @@ import util.Pixmap;
 
 import model.SlogoModel;
 
+/**
+ * Canvas sets up the background on which the turtle moves. Canvas is
+ * responsible for the background color and for turning on and off the grid.
+ * 
+ * @author David Liu and Bill Muensterman
+ * 
+ */
+
 public class Canvas extends JComponent {
 
 	public static final int CANVAS_WIDTH = 660;
@@ -32,6 +40,8 @@ public class Canvas extends JComponent {
 
 	/**
 	 * Create a panel so that it knows its size
+	 * 
+	 * @param model
 	 */
 	public Canvas(SlogoModel model) {
 		// set size (a bit of a pain)
@@ -50,32 +60,39 @@ public class Canvas extends JComponent {
 	 * 
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
+
+	/**
+	 * Create a rectangle the color of the background to fill the view. Paint
+	 * grid lines if they are turned on.
+	 */
 	@Override
 	public void paintComponent(Graphics pen) {
 		System.out.println("in Canavs");
 		pen.setColor(myBackgroundColor);
 		pen.fillRect(5, 5, CANVAS_WIDTH, CANVAS_HEIGHT);
-		// Graphics2D p = (Graphics2D) pen;
-		// Point2D center = new Point(getSize().width / 2, getSize().height /
-		// 2);
-		// myBackground.paint(p, center, getSize());
 		if (gridOn)
 			myGrid.paint((Graphics2D) pen);
 		myModel.paint((Graphics2D) pen);
 
 	}
 
+	/**
+	 * Turn grid on
+	 */
 	public void turnOnGrid() {
 		gridOn = true;
 		repaint();
 	}
 
+	/**
+	 * Turn grid off
+	 */
 	public void turnOffGrid() {
 		gridOn = false;
 		repaint();
 	}
 
-	/*
+	/**
 	 * Return dimensional information about the Canvas
 	 */
 	public int width() {
@@ -90,26 +107,18 @@ public class Canvas extends JComponent {
 		return CANVAS_SIZE;
 	}
 
+	/**
+	 * Return the color of the background
+	 */
 	public Color myBackgroundColor() {
 		return myBackgroundColor;
 	}
 
-	// This method is used in conjunction with the Main method setBackground.
-	// Reflection is used to convert strings to colors.
-	// Eclipse added the Exceptions automatically.
-	// public void setBackgroundColor(String nameOfColor)
-	// throws NoSuchFieldException, SecurityException,
-	// ClassNotFoundException, IllegalArgumentException,
-	// IllegalAccessException {
-	//
-	// Field field = Class.forName("java.awt.Color").getField(nameOfColor);
-	//
-	// myBackgroundColor = (Color) field.get(null);
-	// String stringiding = myBackgroundColor.toString();
-	// //System.out.println(stringiding);
-	// // System.out.println(colorFromName.toString());
-	// }
-
+	/**
+	 * Change the color of the background
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color) {
 		myBackgroundColor = color;
 	}
