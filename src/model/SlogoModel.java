@@ -44,7 +44,7 @@ public class SlogoModel {
 	 * Create a game of the given size with the given display for its shapes.
 	 */
 	public SlogoModel() {
-		myTurtle = new Turtle();
+		myTurtle = new Turtle(myColorController);
 		myColorController = new ColorController();
 		myShapeController = new ShapeController();
 		//myParser = new Parser(myTurtle);

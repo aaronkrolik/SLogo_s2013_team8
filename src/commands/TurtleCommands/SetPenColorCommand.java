@@ -1,12 +1,12 @@
 
-package commands.ColorCommands;
+package commands.TurtleCommands;
 
 import java.awt.Color;
 import java.util.Scanner;
 
 import commands.Command;
 import commands.RepeatCommand;
-import commands.TurtleCommands.TurtleCommandInput;
+import commands.ColorCommands.ColorCommandInput;
 
 import util.BundledInteger;
 import util.ParsingInterface;
@@ -20,29 +20,27 @@ import model.Turtle;
  * @author Jack Matteucci
  */
 
-public class SetBackGroundCommand extends ColorCommand {
-	Canvas myCanvas;
+public class SetPenColorCommand extends TurtleCommand {
 	BundledInteger index;
 
-	public SetBackGroundCommand(ColorCommandInput input) throws ExpectedInput {
+	public SetPenColorCommand(TurtleCommandInput input) throws ExpectedInput {
 		super(input);
-		myCanvas = input.getCanvas();
 		index = input.getBundledInt();
+		
 	}
 
-	public SetBackGroundCommand() {
+	public SetPenColorCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		Color color = super.getColors().get(index.getInteger());
-		myCanvas.setBackground(color);
+		super.getTurtle().setpencolor(index.getInteger());
 		return index.getInteger();
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new SetBackGroundCommand((ColorCommandInput) super.createCommandInput(
+		return new SetPenColorCommand((TurtleCommandInput) super.createCommandInput(
 				parser, line));
 	}
 

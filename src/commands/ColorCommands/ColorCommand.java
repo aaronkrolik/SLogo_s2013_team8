@@ -6,6 +6,7 @@ import util.ColorController;
 import util.ColorInterface;
 import util.ParsingInterface;
 import util.TurtleInterface;
+import view.Canvas;
 import commands.Command;
 import commands.CommandInput;
 
@@ -19,6 +20,7 @@ import model.Turtle;
 
 public abstract class ColorCommand extends Command {
 	private ColorController myColorController;
+	private Canvas myCanvas;
 
 	public ColorCommand() {
 	}
@@ -32,6 +34,10 @@ public abstract class ColorCommand extends Command {
 		return myColorController;
 	}
 
+	protected Canvas getCanvas() {
+		return myCanvas;
+	}
+	
 	@Override
 	protected CommandInput createCommandInput(ParsingInterface parser,
 			Scanner line) {

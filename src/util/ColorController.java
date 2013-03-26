@@ -9,6 +9,9 @@ public class ColorController {
 	Map<Integer, Color> myMap;
 	public ColorController() {
 		myMap = new HashMap<Integer, Color>();
+		myMap.put(0, Color.BLACK);
+		myMap.put(1, Color.BLUE);
+		myMap.put(2, Color.RED);
 	}
 	
 	public Map<Integer, Color> getMap(){

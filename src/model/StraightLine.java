@@ -17,11 +17,10 @@ public class StraightLine {
 	private Color myColor;
 	private int mySize;
 
-	public StraightLine(Location start, Location finish, Color color, int size) {
+	public StraightLine(Location start, Location finish, Color color) {
 		myStart = new Location(start.getX(), start.getY());
 		myEnd = new Location(finish.getX(), finish.getY());
 		myColor = color;
-		mySize = size;
 	}
 
 	public void paint(Graphics2D pen) {

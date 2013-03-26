@@ -1,5 +1,6 @@
 package util;
 
+import view.Canvas;
 import model.Turtle;
 
 /**
@@ -11,4 +12,6 @@ import model.Turtle;
 public interface ColorInterface extends ParsingInterface {
 
 	public ColorController getColors();
+	
+	public Canvas getCanvas();
 }

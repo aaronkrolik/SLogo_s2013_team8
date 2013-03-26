@@ -14,6 +14,7 @@ import java.util.Set;
 
 import util.Vector;
 
+import util.ColorController;
 import util.Location;
 import util.Pixmap;
 import view.Canvas;
@@ -44,20 +45,22 @@ public class Turtle {
 	private static final double MAX_Y = BOTTOM_RIGHT.getY();
 	private static final double MIN_X = 0;
 	private static final double MIN_Y = 0;
-	private Map<Integer, Color> myColorMap;
+	private ColorController myColors;
 
 	private Map<Integer, TurtleActioner> myTurtleActioners;
 	
 	private List<Integer> myTurtleIndex;
 	private List<Integer> myStoredTurtleIndex;
 
-	public Turtle() {
+	public Turtle(ColorController colors) {
 		myTurtleActioners = new HashMap<Integer, TurtleActioner>();
 		myTurtleIndex = new ArrayList<Integer>();
 		myTurtleIndex.add(0);
-		myTurtleActioners.put(myTurtleIndex.get(0), new TurtleActioner());
+		myTurtleActioners.put(myTurtleIndex.get(0), new TurtleActioner(colors));
+		myColors = colors;
 	}
-
+	
+	
 	/**
 	 * Sets the Center of the Selected TurtleActioner
 	 */
@@ -78,7 +81,7 @@ public class Turtle {
 			myTurtleActioners.get(index).setCenter(newCenter);
 		}
 	}
-
+	
 	/**
 	 * Lifts Up the Pen of the Selected TurtleActioner
 	 */
@@ -286,7 +289,7 @@ public class Turtle {
 	
 	private Integer tellmapper(Integer id, Collection<Integer> turtleindexes) {
 			if(!myTurtleActioners.containsKey(id)){
-				myTurtleActioners.put(id, new TurtleActioner());
+				myTurtleActioners.put(id, new TurtleActioner(myColors));
 			}
 			turtleindexes.add(id);
 		return id;
@@ -392,22 +395,19 @@ public class Turtle {
 		}
 	}
 	
-	public void setpencolor(Color color){
+	public void setpencolor(int ind){
 		for(Integer index: myTurtleIndex){
-			myTurtleActioners.get(index).setpencolor(color);
+			myTurtleActioners.get(index).setpencolor(ind);
 		}
 	}
 	
-	public void setpensize(int size){
-		for(Integer index: myTurtleIndex){
-			myTurtleActioners.get(index).setpensize(size);
-		}
-	}
 	
-	public void setshape(Shape shape){
-		for(Integer index: myTurtleIndex){
-			myTurtleActioners.get(index).setshape(shape);
-		}
+	
+	/**
+	 * Returns ColorController
+	 */
+	protected ColorController getColorController(){
+		return myColors;
 	}
 
 	private class TurtleActioner {
@@ -426,12 +426,12 @@ public class Turtle {
 		private List<StraightLine> myLines;
 		private int initialX = (Canvas.CANVAS_WIDTH ) / 2;
 		private int initialY = (Canvas.CANVAS_HEIGHT) / 2;
-		private int myPenSize;
-		private Color myPenColor;
+		private int myPenColor;
 		private Shape myShape;
 		private boolean highlight;
+		private ColorController myColors;
 
-		private TurtleActioner() {
+		private TurtleActioner(ColorController colors) {
 			myLines = new ArrayList<StraightLine>();
 			myStamps = new ArrayList<Location>();
 			myDirection = INITIAL_DIRECTION;
@@ -440,9 +440,9 @@ public class Turtle {
 			mySize = SIZE;
 			myPenStatus = true;
 			myVisibilityStatus = true;
-			myPenSize = 1;
-			myPenColor = Color.BLACK;
+			myPenColor = 1;
 			highlight = false;
+			myColors = colors;
 		}
 
 		/**
@@ -584,16 +584,9 @@ public class Turtle {
 			myStamps.clear();
 		}
 		
-		private void setpencolor(Color color){
-			myPenColor = color;
-		}
-		
-		private void setpensize(int pixels){
-			myPenSize = pixels;
-		}
-		
-		private void setshape(Shape shape){
-			myShape = shape;
+		private void setpencolor(int index){
+			
+			myPenColor = index;
 		}
 
 		/**
@@ -622,7 +615,7 @@ public class Turtle {
 
 		private void makeLine() {
 			if (myPenStatus) {
-				myLines.add(new StraightLine(myLastCenter, myCenter, myPenColor, myPenSize));
+				myLines.add(new StraightLine(myLastCenter, myCenter, myColors.get(myPenColor)));
 			}
 		}
 

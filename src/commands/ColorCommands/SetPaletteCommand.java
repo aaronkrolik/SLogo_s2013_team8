@@ -9,6 +9,7 @@ import commands.RepeatCommand;
 import commands.TurtleCommands.TurtleCommandInput;
 
 import util.BundledInteger;
+import util.ColorController;
 import util.ParsingInterface;
 import util.Exceptions.ExpectedInput;
 import view.Canvas;
@@ -20,29 +21,36 @@ import model.Turtle;
  * @author Jack Matteucci
  */
 
-public class SetBackGroundCommand extends ColorCommand {
+public class SetPaletteCommand extends ColorCommand {
 	Canvas myCanvas;
 	BundledInteger index;
+	BundledInteger r;
+	BundledInteger g;
+	BundledInteger b;
+	
 
-	public SetBackGroundCommand(ColorCommandInput input) throws ExpectedInput {
+	public SetPaletteCommand(ColorCommandInput input) throws ExpectedInput {
 		super(input);
 		myCanvas = input.getCanvas();
 		index = input.getBundledInt();
+		r= input.getBundledInt();
+		g = input.getBundledInt();
+		b = input.getBundledInt();
+		
 	}
 
-	public SetBackGroundCommand() {
+	public SetPaletteCommand() {
 	}
 
 	@Override
 	public Integer execute() {
-		Color color = super.getColors().get(index.getInteger());
-		myCanvas.setBackground(color);
+		super.getColors().getMap().put(index.getInteger(), ColorController.RGBtoColor(r.getInteger(), g.getInteger(), b.getInteger()));
 		return index.getInteger();
 	}
 
 	@Override
 	public Command createCommand(ParsingInterface parser, Scanner line) throws ExpectedInput {
-		return new SetBackGroundCommand((ColorCommandInput) super.createCommandInput(
+		return new SetPaletteCommand((ColorCommandInput) super.createCommandInput(
 				parser, line));
 	}
 
