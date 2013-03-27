@@ -1,0 +1,43 @@
+JACK MATTEUCCI, AARON KROLIK, DAVID LIU, and BILL MUENSTERMAN's SPRINGIES README
+
+Names of people who worked on project:  JACK MATTEUCCI, AARON KROLIK, DAVID LIU, and BILL MUENSTERMAN
+
+Started February 22th, Finished March 8th 
+
+Time spent: ~ 80 hours in total
+
+Description of the program:
+-GUI:
+  Bill Muensterman and David Liu worked on the GUI part.
+  The SlogoGUI class is the major element of the GUI. It is essentially a JFrame, with a MenuBar, a Canvas, a TextField, 
+  a Button, and a List.
+-Model/Parser
+ Jack Matteucci and Aaron Krolik worked on the Model/turtle/parser.  
+Resources used:
+Regular Compsci Resources
+http://www.cs.duke.edu/courses/cps108/current/assign/03_slogo/
+https://piazza.com/class#spring2013/compsci308001sp13/104
+
+Files Used:
+We modified the Canvas class, Main Class from last code. We also reused the vector class,
+PixMap class, Location class, and Text Class from last project.
+
+Resources Need:  
+None other than the .java files included and the images in the image file.
+
+
+Using the program:
+Contains all of the functionality noted in Part 2.  We were not able to implement some of the specs
+noted in part 3, such as the commands askwith, define, for and the new version of repeat.  We also
+were not able to implement recursion or scope.
+Parser is in util.
+
+Notes:  There are many interfaces in order to restrict access to certain methods.  We also have a
+recursive desent parser that we were not able to finally implement, but would have contributed to
+better design/extendability.
+
+Bugs:
+Everything should work except the functionality we were not able to implement.
+
+
+Suggestions:  Hard but great project!
